@@ -1,0 +1,578 @@
+{
+    "board_pins octopus_11_tmc2209": {
+        "aliases": "\n\nx_step_pin=PF13,   x_dir_pin=PF12,   x_enable_pin=PF14,   x_uart_pin=PC4,   x_diag_pin=PG6,   x_endstop_pin=PG6,\ny_step_pin=PG0,   y_dir_pin=PG1,   y_enable_pin=PF15,   y_uart_pin=PD11,   y_diag_pin=PG9,   y_endstop_pin=PG9,\nz0_step_pin=PC13,  z0_dir_pin=PF0,  z0_enable_pin=PF1,  z0_uart_pin=PE4,  z0_diag_pin=null,\tz_endstop_pin=PG10,\nz1_step_pin=PE2,  z1_dir_pin=PE3,  z1_enable_pin=PD4,  z1_uart_pin=PE1,  z1_diag_pin=null,\nz2_step_pin=PE6,  z2_dir_pin=PA14,  z2_enable_pin=PE0,  z2_uart_pin=PD3,  z2_diag_pin=null,\nz3_step_pin=PF9,\tz3_dir_pin=PF10,\tz3_enable_pin=PG2,\tz3_uart_pin=PF2, z3_diag_pin=null,\ne_step_pin=PF11,   e_dir_pin=PG3,   e_enable_pin=PG5,   e_uart_pin=PC6,   e_diag_pin=null,   e_heater_pin=PA2,  e_sensor_pin=PF4,\nstepper_spi_mosi_pin=PA7,  stepper_spi_miso_pin=PA6,  stepper_spi_sclk_pin=PA5,\n\nadxl345_cs_pin=PA15,\n\nbltouch_sensor_pin=PB7,  bltouch_control_pin=PB6,\nprobe_pin=PB7,\n\nfan_part_cooling_pin=PA8,\nfan_toolhead_cooling_pin=PE5,\nfan_controller_board_pin=PD12,\n\nheater_bed_heating_pin=PA1,\nheater_bed_sensor_pin=PF3,\n\n\n\nEXP1_1=PE8, EXP1_3=PE9, EXP1_5=PE12, EXP1_7=PE14, EXP1_9=<GND>,\nEXP1_2=PE7, EXP1_4=PE10, EXP1_6=PE13, EXP1_8=PE15, EXP1_10=<5V>,\n\nEXP2_1=PA6, EXP2_3=PB1, EXP2_5=PB2, EXP2_7=PC15,  EXP2_9=<GND>,\nEXP2_2=PA5, EXP2_4=PA4, EXP2_6=PA7, EXP2_8=<RST>, EXP2_10=PC5,"
+    },
+    "mcu": {
+        "serial": "/dev/btt-octopus-11"
+    },
+    "temperature_sensor Octopus": {
+        "sensor_type": "temperature_mcu",
+        "min_temp": "0",
+        "max_temp": "100"
+    },
+    "adxl345": {
+        "spi_bus": "spi3",
+        "cs_pin": "adxl345_cs_pin"
+    },
+    "idle_timeout": {
+        "gcode": "\n{% if printer.webhooks.state|lower == 'ready' %}\n{% if printer.pause_resume.is_paused|lower == 'false' %}\nM117 Idle timeout reached\nTURN_OFF_HEATERS\nM84\n{% endif %}\n{% endif %}",
+        "timeout": "7200"
+    },
+    "temperature_sensor raspberry_pi": {
+        "sensor_type": "temperature_host"
+    },
+    "skew_correction": {},
+    "input_shaper": {},
+    "virtual_sdcard": {
+        "path": "~/printer_data/gcodes"
+    },
+    "display_status": {},
+    "pause_resume": {},
+    "force_move": {
+        "enable_force_move": "True"
+    },
+    "respond": {},
+    "heater_bed": {
+        "heater_pin": "heater_bed_heating_pin",
+        "sensor_pin": "heater_bed_sensor_pin",
+        "sensor_type": "Generic 3950",
+        "min_temp": "0",
+        "max_temp": "120",
+        "pwm_cycle_time": "0.02",
+        "control": "pid",
+        "pid_kp": "66.542",
+        "pid_ki": "3.191",
+        "pid_kd": "346.849"
+    },
+    "fan": {
+        "pin": "fan_part_cooling_pin",
+        "shutdown_speed": "1.0"
+    },
+    "heater_fan toolhead_cooling_fan": {
+        "pin": "fan_toolhead_cooling_pin",
+        "fan_speed": "1"
+    },
+    "controller_fan controller_fan": {
+        "pin": "fan_controller_board_pin"
+    },
+    "printer": {
+        "kinematics": "corexy",
+        "max_velocity": "1000",
+        "max_accel": "15000",
+        "minimum_cruise_ratio": "0.5",
+        "max_z_velocity": "20",
+        "max_z_accel": "150",
+        "square_corner_velocity": "5"
+    },
+    "ratos_homing": {
+        "axes": "xyz",
+        "z_hop": "15",
+        "z_hop_speed": "15",
+        "gcode": "\n{% set x_homed = 'x' in printer.toolhead.homed_axes %}\n{% set y_homed = 'y' in printer.toolhead.homed_axes %}\n{% set safe_home_x = printer[\"gcode_macro RatOS\"].safe_home_x %}\n{% set safe_home_y = printer[\"gcode_macro RatOS\"].safe_home_y %}\n{% if safe_home_x is not defined or safe_home_x|lower == 'middle' %}\n{% set safe_home_x = printer.toolhead.axis_maximum.x / 2 %}\n{% endif %}\n{% if safe_home_y is not defined or safe_home_y|lower == 'middle' %}\n{% set safe_home_y = printer.toolhead.axis_maximum.y / 2 %}\n{% endif %}\n{% set z_probe = printer[\"gcode_macro RatOS\"].z_probe|lower %}\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n{% set z_speed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\n{% set z_hop = printer.configfile.config.ratos_homing.z_hop|float %}\n{% set z_hop_speed = printer.configfile.config.ratos_homing.z_hop_speed|float * 60 %}\n{% set homing_x = printer[\"gcode_macro RatOS\"].homing_x|lower %}\n{% set homing_y = printer[\"gcode_macro RatOS\"].homing_y|lower %}\n{% set homing = printer[\"gcode_macro RatOS\"].homing|lower %}\n{% set prev_stop_on_error = printer[\"gcode_macro RatOS\"].stowable_probe_stop_on_error %}\n\n\nSET_GCODE_VARIABLE MACRO=RatOS VARIABLE=stowable_probe_stop_on_error VALUE=True\n\nM400\nG90\n\n{% if params.X is defined or params.Y is not defined and params.Z is not defined %}\nRESPOND MSG=\"Homing X\"\n{% if homing_x == 'endstop' or homing == 'endstops' %}\nG28 X\n{% elif homing_x == 'sensorless' or homing == 'sensorless' %}\nHOME_X_SENSORLESS\n{% else %}\n{ action_emergency_stop(\"expected RatOS variable_homing_x to be 'sensorless' 'endstop' or variable_homing to be 'sensorless' or 'endstops' but found {} and {}\".format(homing_x, homing)) }\n{% endif %}\n{% set x_homed = True %}\nG0 X{safe_home_x} F{speed}\nM400\n{% endif %}\n\n{% if params.Y is defined or params.X is not defined and params.Z is not defined %}\nRESPOND MSG=\"Homing Y\"\n{% if homing_y == 'endstop' or homing == 'endstops' %}\nG28 Y\n{% elif homing_y == 'sensorless' or homing == 'sensorless' %}\nHOME_Y_SENSORLESS\n{% else %}\n{ action_emergency_stop(\"expected RatOS variable_homing_y to be 'sensorless' 'endstop' or variable_homing to be 'sensorless' or 'endstops' but found {} and {}\".format(homing_y, homing)) }\n{% endif %}\n{% set y_homed = True %}\nG0 Y{safe_home_y} F{speed}\nM400\n{% endif %}\n\n{% if params.Z is defined or params.Y is not defined and params.X is not defined %}\nRESPOND MSG=\"Homing Z\"\n{% if x_homed == False or y_homed == False %}\nM118 X and Y must be homed before homing Z\n{ action_emergency_stop(\"X and Y must be homed before homing Z\") }\n{% else %}\n{% if z_probe == \"stowable\" %}\nDEPLOY_PROBE\nG0 X{safe_home_x} Y{safe_home_y} F{speed}\nG28 Z\nG0 Z{z_hop} F{z_hop_speed}\nSTOW_PROBE\n{% else %}\nG0 X{safe_home_x} Y{safe_home_y} F{speed}\nG28 Z\nG0 Z{z_hop} F{z_hop_speed}\n{% endif %}\n{% endif %}\n{% endif %}\n\n\nSET_GCODE_VARIABLE MACRO=RatOS VARIABLE=stowable_probe_stop_on_error VALUE={prev_stop_on_error}"
+    },
+    "gcode_macro HOME_X_SENSORLESS": {
+        "gcode": "\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n{% set x_driver = printer[\"gcode_macro RatOS\"].driver_type_x|lower ~ \" stepper_x\" %}\n{% set y_driver = printer[\"gcode_macro RatOS\"].driver_type_y|lower ~ \" stepper_y\" %}\n{% set safe_home_x = printer[\"gcode_macro RatOS\"].safe_home_x %}\n{% if safe_home_x is not defined or safe_home_x|lower == 'middle' %}\n{% set safe_home_x = printer.toolhead.axis_maximum.x / 2 %}\n{% endif %}\nM204 S1000\nSET_TMC_CURRENT STEPPER=stepper_x CURRENT={printer[\"gcode_macro RatOS\"].sensorless_x_current}\nSET_TMC_CURRENT STEPPER=stepper_y CURRENT={printer[\"gcode_macro RatOS\"].sensorless_x_current}\nG4 P300\nG28 X\nSET_TMC_CURRENT STEPPER=stepper_x CURRENT={printer.configfile.config[x_driver].run_current}\nSET_TMC_CURRENT STEPPER=stepper_y CURRENT={printer.configfile.config[y_driver].run_current}\nG4 P300\n\nM204 S{printer.configfile.config.printer.max_accel}"
+    },
+    "gcode_macro HOME_Y_SENSORLESS": {
+        "gcode": "\n{% set safe_home_y = printer[\"gcode_macro RatOS\"].safe_home_y %}\n{% set x_driver = printer[\"gcode_macro RatOS\"].driver_type_x|lower ~ \" stepper_x\" %}\n{% set y_driver = printer[\"gcode_macro RatOS\"].driver_type_y|lower ~ \" stepper_y\" %}\n{% if safe_home_y is not defined or safe_home_y|lower == 'middle' %}\n{% set safe_home_y = printer.toolhead.axis_maximum.y / 2 %}\n{% endif %}\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\nM204 S1000\nSET_TMC_CURRENT STEPPER=stepper_x CURRENT={printer[\"gcode_macro RatOS\"].sensorless_y_current}\nSET_TMC_CURRENT STEPPER=stepper_y CURRENT={printer[\"gcode_macro RatOS\"].sensorless_y_current}\nG4 P300\nG28 Y\nSET_TMC_CURRENT STEPPER=stepper_x CURRENT={printer.configfile.config[x_driver].run_current}\nSET_TMC_CURRENT STEPPER=stepper_y CURRENT={printer.configfile.config[y_driver].run_current}\nG4 P300\n\nM204 S{printer.configfile.config.printer.max_accel}"
+    },
+    "gcode_macro MAYBE_HOME": {
+        "description": "Only home unhomed axis",
+        "variable_is_kinematic_position_overriden": "False",
+        "gcode": "\n{% if printer[\"gcode_macro MAYBE_HOME\"].is_kinematic_position_overriden|lower == 'true' %}\nRESPOND MSG=\"SET_CENTER_KINEMATIC_POSITION has been abused. Homing all axes. Please refrain from using SET_CENTER_KINEMATIC_POSITION outside of debugging purposes.\"\nG28\nSET_GCODE_VARIABLE MACRO=MAYBE_HOME VARIABLE=is_kinematic_position_overriden VALUE=False\n{% else %}\n{% set axes = '' %}\n{% set isHomed = true %}\n{% set axesToHome = '' %}\n{% if params.X is defined %}\n{% set axes = axes ~ 'X ' %}\n{% if 'x' not in printer.toolhead.homed_axes %}\n{% set isHomed = false %}\n{% set axesToHome = axesToHome ~ 'X ' %}\n{% endif %}\n{% endif %}\n{% if params.Y is defined %}\n{% set axes = axes ~ 'Y ' %}\n{% if 'y' not in printer.toolhead.homed_axes %}\n{% set isHomed = false %}\n{% set axesToHome = axesToHome ~ 'Y ' %}\n{% endif %}\n{% endif %}\n{% if params.Z is defined %}\n{% set axes = axes ~ 'Z ' %}\n{% if 'z' not in printer.toolhead.homed_axes %}\n{% set isHomed = false %}\n{% set axesToHome = axesToHome ~ 'Z ' %}\n{% endif %}\n{% endif %}\n{% if params.X is not defined and params.Y is not defined and params.Z is not defined %}\n{% set axes = '' %}\n{% if 'x' not in printer.toolhead.homed_axes %}\n{% set isHomed = false %}\n{% set axesToHome = axesToHome ~ 'X ' %}\n{% endif %}\n{% if 'y' not in printer.toolhead.homed_axes %}\n{% set isHomed = false %}\n{% set axesToHome = axesToHome ~ 'Y ' %}\n{% endif %}\n{% if 'z' not in printer.toolhead.homed_axes %}\n{% set isHomed = false %}\n{% set axesToHome = axesToHome ~ 'Z ' %}\n{% endif %}\n{% endif %}\n{% if isHomed is false %}\nM117 Homing {axesToHome}\nRESPOND MSG=\"Homing {axesToHome}\"\nG28 {axesToHome}\n{% else %}\nRESPOND MSG=\"All requested axes already homed, skipping..\"\n{% endif %}\n{% endif %}"
+    },
+    "gcode_macro ECHO_RATOS_VARS": {
+        "description": "Echo RatOS variables to the console.",
+        "gcode": "\n{% for var, value in printer[\"gcode_macro RatOS\"].items() %}\n{action_respond_info(var ~ \": \" ~ value)}\n{% endfor %}"
+    },
+    "gcode_macro RatOS": {
+        "description": "RatOS variable storage macro, will echo variables to the console when run.",
+        "variable_relative_extrusion": "False",
+        "variable_force_absolute_position": "False",
+        "variable_preheat_extruder": "True",
+        "variable_preheat_extruder_temp": "150",
+        "variable_calibrate_bed_mesh": "False",
+        "variable_nozzle_priming": "\"primeblob\"",
+        "variable_nozzle_prime_start_x": "\"max\"",
+        "variable_nozzle_prime_start_y": "\"min\"",
+        "variable_nozzle_prime_direction": "\"auto\"",
+        "variable_nozzle_prime_bridge_fan": "102",
+        "variable_filament_unload_length": "130",
+        "variable_filament_unload_speed": "5",
+        "variable_filament_load_length": "100",
+        "variable_filament_load_speed": "10",
+        "variable_start_print_park_in": "\"back\"",
+        "variable_start_print_park_z_height": "50",
+        "variable_start_print_heat_chamber_bed_temp": "115",
+        "variable_end_print_park_in": "\"back\"",
+        "variable_pause_print_park_in": "\"back\"",
+        "variable_macro_travel_speed": "300",
+        "variable_macro_z_speed": "15",
+        "variable_end_print_park_z_hop": "20",
+        "variable_homing": "\"sensorless\"",
+        "variable_sensorless_x_current": "0.6",
+        "variable_sensorless_y_current": "0.9",
+        "variable_z_probe": "\"static\"",
+        "variable_safe_home_x": "\"middle\"",
+        "variable_safe_home_y": "\"middle\"",
+        "variable_stowable_probe_stop_on_error": "False",
+        "variable_driver_type_x": "\"tmc2209\"",
+        "variable_driver_type_y": "\"tmc2209\"",
+        "variable_adaptive_mesh": "False",
+        "variable_probe_for_priming_result": "None",
+        "variable_adaptive_prime_offset_threshold": "-1.0",
+        "gcode": "\nECHO_RATOS_VARS"
+    },
+    "gcode_macro PAUSE": {
+        "description": "Pauses the printer",
+        "rename_existing": "PAUSE_BASE",
+        "variable_extrude": "1.5",
+        "gcode": "\nSAVE_GCODE_STATE NAME=PAUSE_state\n\n{% set E = printer[\"gcode_macro PAUSE\"].extrude|float %}\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n{% set z_speed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\n\n{% set max_z = printer.toolhead.axis_maximum.z|float %}\n{% set act_z = printer.toolhead.position.z|float %}\n{% if act_z < (max_z - 20.0) %}\n{% set z_safe = 20.0 %}\n{% else %}\n{% set z_safe = max_z - act_z %}\n{% endif %}\nPAUSE_BASE\nG91\n\n{% if printer.extruder.can_extrude|lower == 'true' %}\nG1 E-{E} F2100\n{% else %}\n{action_respond_info(\"Extruder not hot enough\")}\n{% endif %}\n\n{% if \"xyz\" in printer.toolhead.homed_axes %}\nG1 Z{z_safe} F{z_speed}\n_PARK LOCATION={printer[\"gcode_macro RatOS\"].pause_print_park_in} X={printer[\"gcode_macro RatOS\"].pause_print_park_x}\n{% else %}\n{action_respond_info(\"Printer not homed\")}\n{% endif %}"
+    },
+    "gcode_macro RESUME": {
+        "description": "Resumes the print if the printer is paused.",
+        "rename_existing": "RESUME_BASE",
+        "gcode": "\n{% set E = printer[\"gcode_macro PAUSE\"].extrude|float %}\n\n{% if printer.extruder.can_extrude|lower == 'true' %}\nG91\nG1 E{E} F2100\nG90\n{% else %}\n{action_respond_info(\"Extruder not hot enough\")}\n{% endif %}\nRESTORE_GCODE_STATE NAME=PAUSE_state MOVE=1 MOVE_SPEED={printer[\"gcode_macro RatOS\"].macro_travel_speed|float}\nRESUME_BASE"
+    },
+    "gcode_macro CANCEL_PRINT": {
+        "description": "Cancels the printer",
+        "rename_existing": "CANCEL_PRINT_BASE",
+        "gcode": "\nEND_PRINT\nTURN_OFF_HEATERS\nCLEAR_PAUSE\n\nCANCEL_PRINT_BASE"
+    },
+    "gcode_macro PRIME_LINE": {
+        "description": "Prints a primeline, used internally, if configured, as part of the START_PRINT macro.",
+        "gcode": "\nSAVE_GCODE_STATE NAME=prime_line_state\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n{% set z_speed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|lower == 'min' %}\n{% set x_start = 5 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|lower == 'max' %}\n{% set x_start = printer.toolhead.axis_maximum.x - 5 %}\n{% else %}\n{% set x_start = printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|float %}\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == 'min' %}\n{% set y_start = 5 %}\n{% set y_factor = 1 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == 'max' %}\n{% set y_start = printer.toolhead.axis_maximum.y - 5 %}\n{% set y_factor = -1 %}\n{% else %}\n{% set y_start = printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|float %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|float < printer.toolhead.axis_maximum.y / 2 %}\n{% set y_factor = 1 %}\n{% else %}\n{% set y_factor = -1 %}\n{% endif %}\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_direction|lower == 'forwards' %}\n{% set y_factor = 1 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_direction|lower == 'backwards' %}\n{% set y_factor = -1 %}\n{% endif %}\n{% set z = printer[\"gcode_macro RatOS\"].start_print_park_z_height|float %}\n\nG90\n\nM82\nM117 Priming nozzle with prime line..\nRESPOND MSG=\"Priming nozzle with prime line..\"\n\nG0 Z{z} F{z_speed}\n\nG1 X{x_start} F{speed}\nG1 Y{y_start} F{speed}\n\nG1 Z0.3 F{z_speed}\n\nG92 E0\n\nG1 Y{y_start + (70 * y_factor)} E16 F1200\n\nG1 Y{y_start + (90 * y_factor)} F{speed}\nRESTORE_GCODE_STATE NAME=prime_line_state"
+    },
+    "gcode_macro PRIME_BLOB": {
+        "description": "Prints a primeblob, used internally, if configured, as part of the START_PRINT macro. Slower than PRIME_LINE but much more effective.",
+        "gcode": "\nSAVE_GCODE_STATE NAME=prime_blob_state\nM117 Priming nozzle with prime blob..\nRESPOND MSG=\"Priming nozzle with prime blob..\"\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n{% set z_speed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\n{% set fan_speed = printer[\"gcode_macro RatOS\"].nozzle_prime_bridge_fan|float %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|lower == 'min' %}\n{% set x_start = 5 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|lower == 'max' %}\n{% set x_start = printer.toolhead.axis_maximum.x - 5 %}\n{% else %}\n{% set x_start = printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|float %}\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == 'min' %}\n{% set y_start = 5 %}\n{% set y_factor = 1 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == 'max' %}\n{% set y_start = printer.toolhead.axis_maximum.y - 5 %}\n{% set y_factor = -1 %}\n{% else %}\n{% set y_start = printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|float %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|float < printer.toolhead.axis_maximum.y / 2 %}\n{% set y_factor = 1 %}\n{% else %}\n{% set y_factor = -1 %}\n{% endif %}\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_direction|lower == 'forwards' %}\n{% set y_factor = 1 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_direction|lower == 'backwards' %}\n{% set y_factor = -1 %}\n{% endif %}\n{% set z = printer[\"gcode_macro RatOS\"].start_print_park_z_height|float %}\n\nG90\n\nM83\n\nG0 Z{z} F{z_speed}\n\nG1 X{x_start} F{speed}\nG1 Y{y_start + (15 * y_factor)} F{speed}\n\nG1 Z0.5 F{z_speed}\n\nG1 Y{y_start} F{speed}\n\nG1 F60 E20\n\nM106 S{fan_speed}\n\nG1 Z5 F100 E5\n\nG1 F200 Y{y_start + (25 * y_factor)} E1\n\n\n\nG1 F200 Y{y_start + (30 * y_factor)} Z3.8 E0.5\nG1 F200 Y{y_start + (35 * y_factor)} Z2.6 E0.5\nG1 F200 Y{y_start + (40 * y_factor)} Z1.4 E0.5\nG1 F200 Y{y_start + (45 * y_factor)} Z0.2 E0.5\n\nM106 S0\n\nG1 F200 Y{y_start + (50 * y_factor)} Z0.2 E0.6\n\nG1 F{speed} Y{y_start + (100 * y_factor)}\nRESTORE_GCODE_STATE NAME=prime_blob_state"
+    },
+    "gcode_macro _PARK": {
+        "gcode": "\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n\n{% if params.X != '' %}\n{% if params.X|float >= printer.toolhead.axis_minimum.x + 5 and params.X|float <= printer.toolhead.axis_maximum.x - 5 %}\n{% set safe_x = params.X|float %}\n{% else %}\n{action_respond_info('The requested X co-ordinate is outside the defined axis bounds - using defaults')}\n{% set safe_x = printer.toolhead.axis_maximum.x / 2 %}\n{% endif %}\n{% else %}\n{% set safe_x = printer.toolhead.axis_maximum.x / 2 %}\n{% endif %}\n\n{% if params.LOCATION|default('back')|lower == 'back' %}\n{% set y = printer.toolhead.axis_maximum.y - 5 %}\n{% elif params.LOCATION|lower == 'front' %}\n{% set y = printer.toolhead.axis_minimum.y + 5 %}\n{% elif params.LOCATION|lower == 'center' %}\n{% set y = printer.toolhead.axis_maximum.y / 2 %}\n{% endif %}\n\nG90\n\nG0 X{safe_x} Y{y} F{speed}"
+    },
+    "gcode_macro M600": {
+        "description": "Executes a color change by pausing the printer an unloading the filament.",
+        "gcode": "\nPAUSE\nUNLOAD_FILAMENT\nM117 Please load new filament and resume\nRESPOND MSG=\"Please load new filament and resume\""
+    },
+    "gcode_macro UNLOAD_FILAMENT": {
+        "description": "Unloads the filament. Note: be careful with PETG, make sure you inspect the tip of your filament before reloading to avoid jams.",
+        "gcode": "\nSAVE_GCODE_STATE NAME=unload_state\nG91\n{% if params.TEMP is defined or printer.extruder.can_extrude|lower == 'false' %}\nM117 Heating...\n\nM104 S{params.TEMP|default(220, true)}\nTEMPERATURE_WAIT SENSOR=extruder MINIMUM={params.TEMP|default(220, true)}\n{% endif %}\n{% set unload_speed = printer[\"gcode_macro RatOS\"].filament_unload_speed|float * 60 %}\n{% set unload_length = printer[\"gcode_macro RatOS\"].filament_unload_length|float %}\nM117 Unloading filament...\n\nG0 E10 F300\n\nG0 E-5 F3600\n\nG4 P3000\n\nG0 E5 F3600\n\nG0 E-15 F3600\n\nG0 E-{unload_length} F{unload_speed}\nM117 Filament unloaded!\nRESPOND MSG=\"Filament unloaded! Please inspect the tip of the filament before reloading.\"\nRESTORE_GCODE_STATE NAME=unload_state"
+    },
+    "gcode_macro LOAD_FILAMENT": {
+        "description": "Loads new filament. Note: be careful with PETG, make sure you inspect the tip of your filament before loading to avoid jams.",
+        "gcode": "\nSAVE_GCODE_STATE NAME=load_state\nG91\n\n{% if params.TEMP is defined or printer.extruder.can_extrude|lower == 'false' %}\nM117 Heating...\nM104 S{params.TEMP|default(220, true)}\nTEMPERATURE_WAIT SENSOR=extruder MINIMUM={params.TEMP|default(220, true)}\n{% endif %}\n{% set load_speed = printer[\"gcode_macro RatOS\"].filament_load_speed|float * 60 %}\n{% set load_length = printer[\"gcode_macro RatOS\"].filament_load_length|float %}\nM117 Loading filament...\n\nG0 E{load_length} F{load_speed}\n\nG4 P1000\n\nG0 E40 F100\n\nM400\nM117 Filament loaded!\nRESPOND MSG=\"Filament loaded!\"\nRESTORE_GCODE_STATE NAME=load_state"
+    },
+    "gcode_macro SET_CENTER_KINEMATIC_POSITION": {
+        "description": "FOR DEBUGGING PURPOSES ONLY. Sets the internal printer kinematic state to the center of all axes regardless of actual physical position.",
+        "gcode": "\nRESPOND MSG=\"WARNING: ONLY USE SET_CENTER_KINEMATIC_POSITION FOR DEBUGGING PURPOSES. YOU'RE OVERRIDING THE INTERNAL POSITIONING STATE OF THE PRINTER. PROCEED WITH CAUTION AND DO A PROPER G28 WHEN DONE.\"\nSET_GCODE_VARIABLE MACRO=MAYBE_HOME VARIABLE=is_kinematic_position_overriden VALUE=True\nSET_KINEMATIC_POSITION X={printer.toolhead.axis_maximum.x / 2} Y={printer.toolhead.axis_maximum.y / 2} Z={printer.toolhead.axis_maximum.z / 2}"
+    },
+    "gcode_macro START_PRINT": {
+        "description": "Start print procedure, use this in your Slicer.",
+        "gcode": "\nCLEAR_PAUSE\n{% if printer[\"gcode_macro RatOS\"].force_absolute_position|lower == 'true' %}\nG90\n{% endif %}\nSAVE_GCODE_STATE NAME=start_print_state\n\nG21\n\nG90\n\nM82\n_USER_START_PRINT_BEFORE_HOMING\n{% if printer[\"gcode_macro RatOS\"].z_probe|lower == 'stowable' %}\nSTOWABLE_PROBE_BEGIN_BATCH\n{% endif %}\n\nMAYBE_HOME\n{% if params.CHAMBER_TEMP is defined %}\n_START_PRINT_HEAT_CHAMBER CHAMBER_TEMP={params.CHAMBER_TEMP} BED_TEMP={printer[\"gcode_macro RatOS\"].start_print_heat_chamber_bed_temp}\n_USER_START_PRINT_HEAT_CHAMBER CHAMBER_TEMP={params.CHAMBER_TEMP} BED_TEMP={printer[\"gcode_macro RatOS\"].start_print_heat_chamber_bed_temp}\n{% endif %}\nM117 Heating bed...\nRESPOND MSG=\"Heating bed...\"\n\nM190 S{params.BED_TEMP|default(printer.heater_bed.target, true) }\n\n_USER_START_PRINT_AFTER_HEATING_BED\n\n_START_PRINT_AFTER_HEATING_BED\n\n_USER_START_PRINT_BED_MESH\n\n_START_PRINT_BED_MESH X0={params.X0} X1={params.X1} Y0={params.Y0} Y1={params.Y1}\n{% if printer[\"gcode_macro RatOS\"].z_probe|lower == 'stowable' %}\nSTOWABLE_PROBE_END_BATCH\n{% endif %}\n\nM104 S{params.EXTRUDER_TEMP|default(printer.extruder.target, true) }\n\n_USER_START_PRINT_PARK\n\n_START_PRINT_PARK\n\nM117 Heating Extruder...\nRESPOND MSG=\"Heating Extruder...\"\nM109 S{params.EXTRUDER_TEMP|default(printer.extruder.target, true) }\n\n_USER_START_PRINT_AFTER_HEATING_EXTRUDER\n\n_START_PRINT_AFTER_HEATING_EXTRUDER\nM117 Printing...\nRESPOND MSG=\"Printing...\"\nRESTORE_GCODE_STATE NAME=start_print_state\n\n{% if printer[\"gcode_macro RatOS\"].relative_extrusion|lower == 'true' %}\nM83\n{% else %}\nM82\n{% endif %}\nG92 E0"
+    },
+    "gcode_macro _USER_START_PRINT_BEFORE_HOMING": {
+        "gcode": ""
+    },
+    "gcode_macro _START_PRINT_AFTER_HEATING_BED": {
+        "gcode": "\n{% if printer[\"gcode_macro RatOS\"].preheat_extruder|lower == 'true' %}\n{% set min_temp = printer[\"gcode_macro RatOS\"].preheat_extruder_temp|float %}\n{% set max_temp = printer[\"gcode_macro RatOS\"].preheat_extruder_temp|float + 5 %}\nM117 Pre-heating extruder...\nRESPOND MSG=\"Pre-heating extruder...\"\n\n\nM104 S{min_temp}\nTEMPERATURE_WAIT SENSOR=extruder MINIMUM={min_temp} MAXIMUM={max_temp}\n{% endif %}\nM117 Adjusting Z tilt...\nRESPOND MSG=\"Adjusting Z tilt...\"\n\nZ_TILT_ADJUST\nM117 Rehoming Z after Z tilt adjustment...\nRESPOND MSG=\"Rehoming Z after Z tilt adjustment...\"\n\nG28 Z"
+    },
+    "gcode_macro _USER_START_PRINT_AFTER_HEATING_BED": {
+        "gcode": ""
+    },
+    "gcode_macro _START_PRINT_BED_MESH": {
+        "gcode": "\n{% set default_profile = printer[\"gcode_macro RatOS\"].bed_mesh_profile|default('ratos') %}\n{% if printer[\"gcode_macro RatOS\"].calibrate_bed_mesh|lower == 'true' %}\nBED_MESH_CLEAR\n{% if printer[\"gcode_macro RatOS\"].adaptive_mesh|lower == 'true' %}\nCALIBRATE_ADAPTIVE_MESH PROFILE={default_profile} X0={params.X0} X1={params.X1} Y0={params.Y0} Y1={params.Y1}\n{% else %}\nBED_MESH_CALIBRATE PROFILE={default_profile}\n{% endif %}\nBED_MESH_PROFILE LOAD={default_profile}\n{% elif printer[\"gcode_macro RatOS\"].bed_mesh_profile is defined %}\nBED_MESH_CLEAR\nBED_MESH_PROFILE LOAD={printer[\"gcode_macro RatOS\"].bed_mesh_profile}\n{% endif %}"
+    },
+    "gcode_macro _USER_START_PRINT_BED_MESH": {
+        "gcode": "\nBED_MESH_CLEAR\n{% set bed_target = printer['heater_bed'].target|int %}\n{% set meshName = \"mesh-\" ~ bed_target|string %}\nRESPOND MSG=\"Looking for mesh {meshName}...\" PREFIX=\n{% set allMeshes = printer[\"bed_mesh\"].profiles %}\n{% if meshName in allMeshes %}\nRESPOND MSG=\"{meshName} found, loading...\" PREFIX=\nBED_MESH_PROFILE LOAD={meshName}\n{% else %}\nRESPOND MSG=\"{meshName} not found, starting calibration...\" PREFIX=\nBED_MESH_CALIBRATE PROFILE={meshName}\n{% endif %}\nRESPOND MSG=\"Mesh {meshName} ready.\" PREFIX="
+    },
+    "gcode_macro _START_PRINT_PARK": {
+        "gcode": "\n{% set z = printer[\"gcode_macro RatOS\"].start_print_park_z_height|float %}\n{% set zSpeed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\n_PARK LOCATION={printer[\"gcode_macro RatOS\"].start_print_park_in} X={printer[\"gcode_macro RatOS\"].start_print_park_x}\nG0 Z{z} F{zSpeed}"
+    },
+    "gcode_macro _USER_START_PRINT_PARK": {
+        "gcode": ""
+    },
+    "gcode_macro _START_PRINT_AFTER_HEATING_EXTRUDER": {
+        "gcode": "\n{% set has_offset = printer[\"gcode_macro RatOS\"].probe_for_priming_result|float(9999.9) != 9999.9 %}\n{% if has_offset %}\nADD_PRIME_PROBE_TO_OFFSET\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_priming|lower == 'primeline' %}\nPRIME_LINE\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_priming|lower == 'primeblob' %}\nPRIME_BLOB\n{% endif %}\n{% if has_offset %}\nSUBTRACT_PRIME_PROBE_FROM_OFFSET\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].skew_profile is defined %}\nSKEW_PROFILE LOAD={printer[\"gcode_macro RatOS\"].skew_profile}\n{% endif %}"
+    },
+    "gcode_macro _USER_START_PRINT_AFTER_HEATING_EXTRUDER": {
+        "gcode": ""
+    },
+    "gcode_macro _START_PRINT_HEAT_CHAMBER": {
+        "description": "Uses the extruder sensor to wait for chamber temp. Override the _START_PRINT_HEAT_CHAMBER macro to implement heated chamber handling.",
+        "gcode": "\n{% if params.CHAMBER_TEMP is defined and params.BED_TEMP is defined and params.CHAMBER_TEMP|int > 0 %}\n{% set z = printer[\"gcode_macro RatOS\"].start_print_park_z_height|float %}\n{% set zSpeed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\nG0 Z{z} F{zSpeed}\nM84\nM117 Heating chamber...\nRESPOND MSG=\"Heating chamber...\"\nM140 S{params.BED_TEMP}\nTEMPERATURE_WAIT SENSOR=extruder MINIMUM={params.CHAMBER_TEMP}\nMAYBE_HOME\n{% endif %}"
+    },
+    "gcode_macro _USER_START_PRINT_HEAT_CHAMBER": {
+        "description": "Uses the extruder sensor to wait for chamber temp. Override the _START_PRINT_HEAT_CHAMBER macro to implement heated chamber handling.",
+        "gcode": ""
+    },
+    "gcode_macro END_PRINT": {
+        "description": "End print procedure, use this in your Slicer.",
+        "gcode": "\nSAVE_GCODE_STATE NAME=end_print_state\n_USER_END_PRINT_BEFORE_HEATERS_OFF\n_END_PRINT_BEFORE_HEATERS_OFF\nTURN_OFF_HEATERS\n_USER_END_PRINT_AFTER_HEATERS_OFF\n_END_PRINT_AFTER_HEATERS_OFF\n_USER_END_PRINT_PARK\n_END_PRINT_PARK\n\n{% if printer[\"gcode_macro RatOS\"].skew_profile is defined %}\nSET_SKEW CLEAR=1\n{% endif %}\n\nM84\n\nM107\n\nBED_MESH_CLEAR\nM117 Done :)\nRESPOND MSG=\"Done :)\"\nRESTORE_GCODE_STATE NAME=end_print_state"
+    },
+    "gcode_macro _END_PRINT_BEFORE_HEATERS_OFF": {
+        "gcode": "\nRESPOND MSG=\"Cleaning up...\""
+    },
+    "gcode_macro _USER_END_PRINT_BEFORE_HEATERS_OFF": {
+        "gcode": ""
+    },
+    "gcode_macro _END_PRINT_AFTER_HEATERS_OFF": {
+        "gcode": "\n\n{% set max_z = printer.toolhead.axis_maximum.z|float %}\n{% set act_z = printer.toolhead.position.z|float %}\n{% set z_hop = printer[\"gcode_macro RatOS\"].end_print_park_z_hop|float %}\n{% if act_z < (max_z - z_hop) %}\n{% set z_safe = z_hop %}\n{% else %}\n{% set z_safe = max_z - act_z %}\n{% endif %}\n\nG91\n\nG1 E-2 F3600\n\nG0 Z{z_safe} F3600\n\nG1 E-2 F3600\n\nG90"
+    },
+    "gcode_macro _USER_END_PRINT_AFTER_HEATERS_OFF": {
+        "gcode": ""
+    },
+    "gcode_macro _END_PRINT_PARK": {
+        "gcode": "\n_PARK LOCATION={printer[\"gcode_macro RatOS\"].end_print_park_in} X={printer[\"gcode_macro RatOS\"].end_print_park_x}"
+    },
+    "gcode_macro _USER_END_PRINT_PARK": {
+        "gcode": ""
+    },
+    "gcode_macro SAVE_PROBE_RESULT": {
+        "gcode": "\n{% set last_z = printer.probe.last_z_result %}\nSET_GCODE_VARIABLE MACRO=RatOS VARIABLE={params.VARIABLE|default('last_z')} VALUE={last_z}"
+    },
+    "gcode_macro PROBE_FOR_PRIMING": {
+        "gcode": "\n{% if printer[\"gcode_macro RatOS\"].nozzle_priming|lower != 'false' %}\nSAVE_GCODE_STATE NAME=probe_for_priming_state\nRESPOND MSG=\"Probing the prime location..\"\n{% set speed = printer[\"gcode_macro RatOS\"].macro_travel_speed|float * 60 %}\n{% set z_speed = printer[\"gcode_macro RatOS\"].macro_z_speed|float * 60 %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|lower == 'min' %}\n{% set x_start = 5 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|lower == 'max' %}\n{% set x_start = printer.toolhead.axis_maximum.x - 5 %}\n{% else %}\n{% set x_start = printer[\"gcode_macro RatOS\"].nozzle_prime_start_x|float %}\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == 'min' %}\n{% set y_start = 5 %}\n{% elif printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == 'max' %}\n{% set y_start = printer.toolhead.axis_maximum.y - 5 %}\n{% else %}\n{% set y_start = printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|float %}\n{% endif %}\n{% set z = printer.configfile.settings.bed_mesh.horizontal_move_z|float %}\n\n{% set mesh_config = printer.configfile.config.bed_mesh %}\n\n\n{% if printer.configfile.settings.bltouch is defined %}\n{% set x_offset = printer.configfile.settings.bltouch.x_offset|float %}\n{% set y_offset = printer.configfile.settings.bltouch.y_offset|float %}\n{% elif printer.configfile.settings.probe is defined %}\n{% set x_offset = printer.configfile.settings.probe.x_offset|float %}\n{% set y_offset = printer.configfile.settings.probe.y_offset|float %}\n{% elif printer.configfile.settings.beacon is defined %}\n{% set x_offset = printer.configfile.settings.beacon.x_offset|float %}\n{% set y_offset = printer.configfile.settings.beacon.y_offset|float %}\n{% else %}\n{ action_raise_error(\"No probe or bltouch section found. Adaptive priming only works with [probe] or [bltouch].\") }\n{% endif %}\n\n\n{% set min_x = mesh_config.mesh_min.split(\",\")[0]|float - x_offset %}\n{% set min_y = mesh_config.mesh_min.split(\",\")[1]|float - y_offset %}\n{% set max_x = mesh_config.mesh_max.split(\",\")[0]|float - x_offset %}\n{% set max_y = mesh_config.mesh_max.split(\",\")[1]|float - y_offset %}\n\n\n{% set x_start = [[x_start, max_x]|min, min_x]|max %}\n{% set y_start = [[y_start, max_y]|min, min_y]|max %}\n\nRESPOND MSG=\"PROBE_FOR_PRIMING: Probing the prime location at X: {x_start} Y: {y_start}\"\n\n\nG90\n\nM83\n\nG0 Z{z} F{z_speed}\n\nG1 X{x_start} Y{y_start} F{speed}\nPROBE_CURRENT_POSITION\nSAVE_PROBE_RESULT VARIABLE=probe_for_priming_result\n\nRESTORE_GCODE_STATE NAME=probe_for_priming_state\n{% endif %}"
+    },
+    "gcode_macro RESET_PRIME_PROBE_STATE": {
+        "gcode": "\nSET_GCODE_VARIABLE MACRO=RatOS VARIABLE=probe_for_priming_result VALUE=None"
+    },
+    "gcode_macro PROBE_CURRENT_POSITION": {
+        "gcode": "\nSAVE_GCODE_STATE NAME=probe_current_position_state\n{% if printer[\"gcode_macro RatOS\"].z_probe|lower == 'stowable' %}\nASSERT_PROBE_DEPLOYED\n{% endif %}\nPROBE\nRESTORE_GCODE_STATE NAME=probe_current_position_state MOVE=1 MOVE_SPEED={printer[\"gcode_macro RatOS\"].macro_z_speed|float}"
+    },
+    "gcode_macro ADD_PRIME_PROBE_TO_OFFSET": {
+        "gcode": "\n{% set last_z = printer[\"gcode_macro RatOS\"].probe_for_priming_result|float(9999.9) %}\n{% if printer.configfile.settings.bltouch is defined %}\n{% set z_offset = printer.configfile.settings.bltouch.z_offset|float %}\n{% elif printer.configfile.settings.probe is defined %}\n{% set z_offset = printer.configfile.settings.probe.z_offset|float %}\n{% else %}\n{ action_raise_error(\"No probe or bltouch section found. Adaptive priming only works with [probe] or [bltouch].\") }\n{% endif %}\n{% if last_z == 9999.9 %}\n{ action_raise_error(\"No probe result found for prime area. This is likely a bug.\") }\n{% endif %}\n{% set adjustment = last_z - z_offset %}\n{% set adjustment_threshold = printer[\"gcode_macro RatOS\"].adaptive_prime_offset_threshold|float %}\n{% if adjustment < adjustment_threshold %}\n{ action_raise_error(\"Abnormal probe offset detected. Needed offset of {adjustment} is below the offset threshold of -1mm. Please verify the probe is over the bed when probing for priming. If it isn't, you should adjust you min/max bed_mesh settings so the probe is always over the print area.\") }\n{% endif %}\nRESPOND MSG=\"ADD_PRIME_PROBE_TO_OFFSET: adjusting z offset by {adjustment}\"\nSET_GCODE_OFFSET Z_ADJUST={adjustment} MOVE=1"
+    },
+    "gcode_macro SUBTRACT_PRIME_PROBE_FROM_OFFSET": {
+        "gcode": "\n{% set last_z = printer[\"gcode_macro RatOS\"].probe_for_priming_result|float(9999.9) %}\n{% if printer.configfile.settings.bltouch is defined %}\n{% set z_offset = printer.configfile.settings.bltouch.z_offset|float %}\n{% elif printer.configfile.settings.probe is defined %}\n{% set z_offset = printer.configfile.settings.probe.z_offset|float %}\n{% else %}\n{ action_raise_error(\"No probe or bltouch section found. Adaptive priming only works with [probe] or [bltouch].\") }\n{% endif %}\n{% if last_z == 9999.9 %}\n{ action_raise_error(\"No probe result found for prime area. This is likely a bug.\") }\n{% endif %}\nRESPOND MSG=\"SUBTRACT_PRIME_PROBE_FROM_OFFSET: adjusting z offset by {z_offset - last_z}\"\nSET_GCODE_OFFSET Z_ADJUST={z_offset - last_z} MOVE=1"
+    },
+    "gcode_macro CALIBRATE_ADAPTIVE_MESH": {
+        "gcode": "\n\n{% set default_profile = params.PROFILE %}\n\n\n{% set x0 = params.X0|default(-1)|float %}\n{% set y0 = params.Y0|default(-1)|float %}\n{% set x1 = params.X1|default(-1)|float %}\n{% set y1 = params.Y1|default(-1)|float %}\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: Recieved coordinates X0={x0} Y0={y0} X1={x1} Y1={y1}\"\n\n{% if x0 >= x1 or y0 >= y1 %}\n\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: Invalid coordinates received. Please check your slicer settings. Falling back to full bed mesh.\"\nBED_MESH_CALIBRATE PROFILE={default_profile}\n{% else %}\n\n{% set mesh_config = printer.configfile.config.bed_mesh %}\n\n\n{% set min_x = mesh_config.mesh_min.split(\",\")[0]|float %}\n{% set min_y = mesh_config.mesh_min.split(\",\")[1]|float %}\n{% set max_x = mesh_config.mesh_max.split(\",\")[0]|float %}\n{% set max_y = mesh_config.mesh_max.split(\",\")[1]|float %}\n\n\n{% set mesh_x0 = [[x0, max_x]|min, min_x]|max %}\n{% set mesh_y0 = [[y0, max_y]|min, min_y]|max %}\n{% set mesh_x1 = [[x1, max_x]|min, min_x]|max %}\n{% set mesh_y1 = [[y1, max_y]|min, min_y]|max %}\n\n{% if mesh_x0 == min_x and mesh_y0 == min_y and mesh_x1 == max_x and mesh_y1 == max_y %}\n\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: Print is using the full bed, falling back to full bed mesh.\"\nBED_MESH_CALIBRATE PROFILE={default_profile}\n{% else %}\n{% if printer[\"gcode_macro RatOS\"].z_probe|lower == 'stowable' %}\nDEPLOY_PROBE\n{% endif %}\n\n{% set probe_count_x = mesh_config.probe_count.split(\",\")[0]|int %}\n{% if mesh_config.probe_count.split(\",\")|length == 2 %}\n{% set probe_count_y = mesh_config.probe_count.split(\",\")[1]|int %}\n{% else %}\n{% set probe_count_y = mesh_config.probe_count.split(\",\")[0]|int %}\n{% endif %}\n\n\n{% set probe_x_step = (max_x - min_x) / probe_count_x %}\n{% set probe_y_step = (max_y - min_y) / probe_count_y %}\n\n\n{% set mesh_count_x = ([(mesh_x1 - mesh_x0) / probe_x_step, 3]|max)|int %}\n{% set mesh_count_y = ([(mesh_y1 - mesh_y0) / probe_y_step, 3]|max)|int %}\n{% set min_mesh_count = [mesh_count_x, mesh_count_y]|min %}\n{% set max_mesh_count = [mesh_count_x, mesh_count_y]|max %}\n\n\n{% set algorithm = mesh_config.algorithm %}\n{% if algorithm|lower == 'lagrange' and max_mesh_count > 6 %}\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: cannot exceed a probe_count of 6 when using lagrange interpolation. Falling back to bicubic interpolation.\"\n{% set algorithm = 'bicubic' %}\n{% endif %}\n{% if algorithm|lower == 'bicubic' and min_mesh_count < 4 %}\n{% if max_mesh_count > 6 %}\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: invalid probe_count option when using bicubic interpolation. Combination of 3 points on one axis with more than 6 on another is not permitted. Forcing minimum mesh count to be 4.\"\n{% set min_mesh_count = 4 %}\n{% else %}\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: bicubic interpolation with a probe_count of less than 4 points detected. Forcing lagrange interpolation.\"\n{% set algorithm = 'lagrange' %}\n{% endif %}\n{% endif %}\n\n{% set mesh_count_x = ([min_mesh_count, mesh_count_x]|max)|int %}\n{% set mesh_count_x = ([max_mesh_count, mesh_count_x]|min)|int %}\n{% set mesh_count_y = ([min_mesh_count, mesh_count_y]|max)|int %}\n{% set mesh_count_y = ([max_mesh_count, mesh_count_y]|min)|int %}\n\n{% set should_prime = printer[\"gcode_macro RatOS\"].nozzle_priming == 'primeline' or printer[\"gcode_macro RatOS\"].nozzle_priming == 'primeblob' %}\n{% if printer.configfile.settings.beacon is defined %}\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: adaptive priming is currently not supported for Beacon. Disabling priming..\"\nSET_GCODE_VARIABLE MACRO=RatOS VARIABLE=nozzle_priming VALUE=False\n{% set should_prime = False %}\n{% endif %}\n\n{% set prime_first = printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|lower == \"min\" or printer[\"gcode_macro RatOS\"].nozzle_prime_start_y|float(printer.toolhead.axis_maximum.y) < printer.toolhead.axis_maximum.y / 2 %}\n\n{% if should_prime and prime_first %}\nPROBE_FOR_PRIMING\n{% endif %}\n\nRESPOND MSG=\"CALIBRATE_ADAPTIVE_MESH: mesh coordinates X0={mesh_x0} Y0={mesh_y0} X1={mesh_x1} Y1={mesh_y1}\"\nBED_MESH_CALIBRATE PROFILE={default_profile} algorithm={algorithm} mesh_min={mesh_x0},{mesh_y0} mesh_max={mesh_x1},{mesh_y1} probe_count={mesh_count_x},{mesh_count_y}\n\n{% if should_prime and not prime_first %}\nPROBE_FOR_PRIMING\n{% endif %}\n{% if printer[\"gcode_macro RatOS\"].z_probe|lower == 'stowable' %}\nSTOW_PROBE\n{% endif %}\n\n{% endif %}\n{% endif %}"
+    },
+    "gcode_shell_command generate_shaper_graph_x": {
+        "command": "/home/pi/printer_data/config/RatOS/scripts/generate-shaper-graph-x.sh",
+        "timeout": "60.",
+        "verbose": "True"
+    },
+    "gcode_shell_command generate_shaper_graph_y": {
+        "command": "/home/pi/printer_data/config/RatOS/scripts/generate-shaper-graph-y.sh",
+        "timeout": "60.",
+        "verbose": "True"
+    },
+    "gcode_shell_command generate_belt_tension_graph": {
+        "command": "/home/pi/printer_data/config/RatOS/scripts/generate-belt-tension-graph.sh",
+        "timeout": "90.",
+        "verbose": "True"
+    },
+    "gcode_shell_command compile_binaries": {
+        "command": "/home/pi/printer_data/config/RatOS/scripts/compile-binaries.sh",
+        "timeout": "600."
+    },
+    "gcode_shell_command change_hostname": {
+        "command": "/home/pi/printer_data/config/RatOS/scripts/change-hostname.sh",
+        "timeout": "10."
+    },
+    "gcode_macro GENERATE_SHAPER_GRAPHS": {
+        "description": "Genarates input shaper resonances graphs for analysis. Uses the AXIS parameter for if you only want to do one axis at a time, (eg. GENERATE_SHAPER_GRAPHS AXIS=X)",
+        "gcode": "\n{% if params.AXIS is defined %}\n{% if params.AXIS|lower == 'x' %}\nMAYBE_HOME\nTEST_RESONANCES AXIS=X\nRUN_SHELL_COMMAND CMD=generate_shaper_graph_x\nRESPOND MSG=\"Input shaper graph generated for the X axis. You'll find it in the input_shaper folder in the machine tab!\"\n{% elif params.AXIS|lower == 'y' %}\nMAYBE_HOME\nTEST_RESONANCES AXIS=Y\nRUN_SHELL_COMMAND CMD=generate_shaper_graph_y\nRESPOND MSG=\"Input shaper graph generated for the Y axis. You'll find it in the input_shaper folder in the machine tab!\"\n{% else %}\n{action_raise_error(\"Unknown axis specified. Expected X or Y.\")}\n{% endif %}\n{% else %}\nMAYBE_HOME\nTEST_RESONANCES AXIS=X\nTEST_RESONANCES AXIS=Y\nRUN_SHELL_COMMAND CMD=generate_shaper_graph_x\nRUN_SHELL_COMMAND CMD=generate_shaper_graph_y\nRESPOND MSG=\"Input shaper graphs generated for X and Y. You'll find them in the input_shaper folder in the machine tab!\"\n{% endif %}"
+    },
+    "gcode_macro MEASURE_COREXY_BELT_TENSION": {
+        "description": "Generates resonance graph used to ensure belts are equally tensioned.",
+        "gcode": "\nTEST_RESONANCES AXIS=1,1  OUTPUT=raw_data NAME=belt-tension-upper\nTEST_RESONANCES AXIS=1,-1 OUTPUT=raw_data NAME=belt-tension-lower\nRUN_SHELL_COMMAND CMD=generate_belt_tension_graph\nRESPOND MSG=\"Belt tension graphs generated. You'll find them in the input_shaper folder in the machine tab!\""
+    },
+    "gcode_macro COMPILE_FIRMWARE": {
+        "description": "Compiles firmware with currently installed klipper version for all supported RatOS boards. Note: this may take up to 10 minutes.",
+        "gcode": "\nRESPOND MSG=\"Compiling binaries.. This can take up to 10 minutes. Please do not turn off your Raspberry Pi!\"\nRUN_SHELL_COMMAND CMD=compile_binaries\nRESPOND MSG=\"Firmware binaries compiled successfully! You can find them in the firmware_binaries folder in the machine tab!\""
+    },
+    "gcode_macro CHANGE_HOSTNAME": {
+        "description": "Change the hostname of your Raspberry Pi.",
+        "gcode": "\n{% if params.HOSTNAME is not defined %}\nRESPOND MSG='You have to specify a new hostname with the HOSTNAME parameter. Ex: CHANGE_HOSTNAME HOSTNAME=\"MY_NEW_HOSTNAME\"'\nRESPOND MSG=\"Please note: RFCs mandate that a hostname's labels may contain only the ASCII letters 'a' through 'z' (case-insensitive), the digits '0' through '9', and the hyphen. Hostname labels cannot begin or end with a hyphen. No other symbols, punctuation characters, or blank spaces are permitted.\"\n{% else %}\nRUN_SHELL_COMMAND CMD=change_hostname PARAMS={params.HOSTNAME}\n{% endif %}"
+    },
+    "gcode_macro Z_TILT_ADJUST": {
+        "rename_existing": "Z_TILT_ADJUST_ORIG",
+        "gcode": "\n{% if printer[\"gcode_macro RatOS\"].z_probe == 'stowable' %}\nDEPLOY_PROBE\n{% endif %}\nZ_TILT_ADJUST_ORIG\n{% if printer[\"gcode_macro RatOS\"].z_probe == 'stowable' %}\nSTOW_PROBE\n{% endif %}"
+    },
+    "stepper_x": {
+        "step_pin": "x_step_pin",
+        "dir_pin": "x_dir_pin",
+        "enable_pin": "!x_enable_pin",
+        "rotation_distance": "40",
+        "microsteps": "64",
+        "homing_speed": "50",
+        "homing_retract_dist": "0",
+        "position_max": "400",
+        "position_endstop": "-1",
+        "endstop_pin": "tmc2209_stepper_x:virtual_endstop",
+        "position_min": "-1"
+    },
+    "stepper_y": {
+        "step_pin": "y_step_pin",
+        "dir_pin": "y_dir_pin",
+        "enable_pin": "!y_enable_pin",
+        "rotation_distance": "40",
+        "microsteps": "64",
+        "homing_speed": "50",
+        "homing_retract_dist": "0",
+        "position_max": "400",
+        "position_endstop": "0",
+        "endstop_pin": "tmc2209_stepper_y:virtual_endstop",
+        "position_min": "0"
+    },
+    "stepper_z": {
+        "endstop_pin": "probe:z_virtual_endstop",
+        "step_pin": "z0_step_pin",
+        "dir_pin": "!z0_dir_pin",
+        "enable_pin": "!z0_enable_pin",
+        "rotation_distance": "4",
+        "microsteps": "64",
+        "position_min": "-5",
+        "homing_speed": "10",
+        "position_max": "400"
+    },
+    "stepper_z1": {
+        "step_pin": "z1_step_pin",
+        "dir_pin": "!z1_dir_pin",
+        "enable_pin": "!z1_enable_pin",
+        "rotation_distance": "4",
+        "microsteps": "64"
+    },
+    "stepper_z2": {
+        "step_pin": "z2_step_pin",
+        "dir_pin": "!z2_dir_pin",
+        "enable_pin": "!z2_enable_pin",
+        "rotation_distance": "4",
+        "microsteps": "64"
+    },
+    "extruder": {
+        "step_pin": "e_step_pin",
+        "dir_pin": "!e_dir_pin",
+        "enable_pin": "!e_enable_pin",
+        "microsteps": "64",
+        "rotation_distance": "5.808320",
+        "full_steps_per_rotation": "200",
+        "filament_diameter": "1.750",
+        "max_extrude_only_velocity": "120",
+        "max_extrude_only_accel": "800",
+        "pressure_advance_smooth_time": "0.02",
+        "max_extrude_only_distance": "200",
+        "nozzle_diameter": "0.6",
+        "heater_pin": "e_heater_pin",
+        "sensor_type": "ATC Semitec 104GT-2",
+        "sensor_pin": "e_sensor_pin",
+        "min_extrude_temp": "0",
+        "min_temp": "0",
+        "max_temp": "285",
+        "pressure_advance": "0.03",
+        "control": "pid",
+        "pid_kp": "41.270",
+        "pid_ki": "3.483",
+        "pid_kd": "122.261"
+    },
+    "tmc2209 stepper_z": {
+        "uart_pin": "z0_uart_pin",
+        "run_current": "1.1",
+        "driver_tbl": "1",
+        "driver_toff": "3",
+        "driver_hend": "0",
+        "driver_hstrt": "0",
+        "stealthchop_threshold": "0",
+        "interpolate": "False"
+    },
+    "tmc2209 stepper_z1": {
+        "uart_pin": "z1_uart_pin",
+        "run_current": "1.1",
+        "driver_tbl": "1",
+        "driver_toff": "3",
+        "driver_hend": "0",
+        "driver_hstrt": "0",
+        "stealthchop_threshold": "0",
+        "interpolate": "False"
+    },
+    "tmc2209 stepper_z2": {
+        "uart_pin": "z2_uart_pin",
+        "run_current": "1.1",
+        "driver_tbl": "1",
+        "driver_toff": "3",
+        "driver_hend": "0",
+        "driver_hstrt": "0",
+        "stealthchop_threshold": "0",
+        "interpolate": "False"
+    },
+    "bed_mesh": {
+        "speed": "300",
+        "horizontal_move_z": "5",
+        "mesh_min": "20,20",
+        "mesh_max": "365,360",
+        "probe_count": "7,7",
+        "fade_start": "1.0",
+        "fade_end": "10.0",
+        "mesh_pps": "2,2",
+        "algorithm": "bicubic",
+        "bicubic_tension": ".2"
+    },
+    "z_tilt": {
+        "speed": "300",
+        "z_positions": "\n0,0\n200,400\n400,0",
+        "points": "\n60,60\n235,370\n360,60",
+        "horizontal_move_z": "20",
+        "retries": "10",
+        "retry_tolerance": "0.02"
+    },
+    "tmc2209 stepper_x": {
+        "stealthchop_threshold": "0",
+        "interpolate": "False",
+        "uart_pin": "x_uart_pin",
+        "run_current": "1.6",
+        "driver_tbl": "2",
+        "driver_toff": "3",
+        "driver_hend": "0",
+        "driver_hstrt": "6",
+        "diag_pin": "^x_diag_pin",
+        "driver_sgthrs": "141"
+    },
+    "tmc2209 stepper_y": {
+        "stealthchop_threshold": "0",
+        "interpolate": "False",
+        "uart_pin": "y_uart_pin",
+        "run_current": "1.6",
+        "driver_tbl": "2",
+        "driver_toff": "3",
+        "driver_hend": "0",
+        "driver_hstrt": "6",
+        "diag_pin": "^y_diag_pin",
+        "driver_sgthrs": "129"
+    },
+    "tmc2209 extruder": {
+        "uart_pin": "e_uart_pin",
+        "run_current": "0.707",
+        "stealthchop_threshold": "0",
+        "interpolate": "False",
+        "driver_tbl": "1",
+        "driver_toff": "3",
+        "driver_hend": "9",
+        "driver_hstrt": "7"
+    },
+    "probe": {
+        "pin": "^probe_pin",
+        "x_offset": "-27.8",
+        "y_offset": "-12",
+        "speed": "5",
+        "samples": "3",
+        "sample_retract_dist": "2",
+        "lift_speed": "5.0",
+        "samples_result": "median",
+        "samples_tolerance": "0.02",
+        "samples_tolerance_retries": "5",
+        "z_offset": "0.810"
+    },
+    "firmware_retraction": {
+        "retract_speed": "120",
+        "unretract_extra_length": "0",
+        "unretract_speed": "120",
+        "retract_length": "0.5"
+    },
+    "gcode_macro HMTK_VARS": {
+        "description": "Echo HMTK variables to the console.",
+        "variable_channel_positions": "[10, 27, 34, 51, 68, 85, 102, 119, 136]",
+        "variable_current_channel": "-1",
+        "variable_is_homed": "False",
+        "gcode": "\nECHO_HMTK_VARS"
+    },
+    "gcode_macro ECHO_HMTK_VARS": {
+        "description": "Echo HMTK variables to the console.",
+        "gcode": "\n{% for var, value in printer[\"gcode_macro HMTK_VARS\"].items() %}\n{action_respond_info(var ~ \": \" ~ value)}\n{% endfor %}"
+    },
+    "tmc2209 manual_stepper selector_stepper": {
+        "diag_pin": "^PG12",
+        "driver_sgthrs": "82",
+        "interpolate": "false",
+        "run_current": "0.7",
+        "sense_resistor": "0.110",
+        "stealthchop_threshold": "0",
+        "uart_pin": "PF2"
+    },
+    "manual_stepper selector_stepper": {
+        "accel": "1000",
+        "dir_pin": "!PF10",
+        "enable_pin": "!PG2",
+        "endstop_pin": "tmc2209_selector_stepper:virtual_endstop",
+        "full_steps_per_rotation": "200",
+        "microsteps": "32",
+        "rotation_distance": "40",
+        "step_pin": "PF9",
+        "velocity": "40"
+    },
+    "gcode_macro _ANNOUNCE": {
+        "description": "Sends a message to the terminal and the screen",
+        "gcode": "\nM117 {params.MSG}\nRESPOND MSG=\"{params.MSG}\" PREFIX=\"\""
+    },
+    "gcode_macro _HOME_HMTK": {
+        "description": "Homes the HMTK",
+        "gcode": "\n_ANNOUNCE MSG=\"Homing HMTK Selector...\"\nMANUAL_STEPPER STEPPER=selector_stepper SET_POSITION=200\nMANUAL_STEPPER STEPPER=selector_stepper MOVE=0 STOP_ON_ENDSTOP=1\nMANUAL_STEPPER STEPPER=selector_stepper SET_POSITION=0\nSET_GCODE_VARIABLE MACRO=HMTK_VARS VARIABLE=is_homed VALUE=True\nSET_GCODE_VARIABLE MACRO=HMTK_VARS VARIABLE=current_channel VALUE=-1\n_ANNOUNCE MSG=\"Done homing HMTK\""
+    },
+    "gcode_macro _HOME_HMTK_IF_NEEDED": {
+        "description": "If the HMTK isn't homed, home the selector",
+        "gcode": "\n{% if printer[\"gcode_macro HMTK_VARS\"].is_homed|lower == 'false' %}\n_HOME_HMTK\n{% endif %}"
+    },
+    "gcode_macro _HMTK_CHANGE_TOOL": {
+        "description": "Change to the desired tool",
+        "gcode": "\n_ANNOUNCE MSG=\"Changing tool...\"\n_HOME_HMTK_IF_NEEDED\nMANUAL_STEPPER STEPPER=selector_stepper MOVE={printer[\"gcode_macro HMTK_VARS\"].channel_positions[params.TOOL|int]}"
+    },
+    "gcode_macro T0": {
+        "description": "Change to tool 0",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=0"
+    },
+    "gcode_macro T1": {
+        "description": "Change to tool 1",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=1"
+    },
+    "gcode_macro T2": {
+        "description": "Change to tool 2",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=2"
+    },
+    "gcode_macro T3": {
+        "description": "Change to tool 3",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=3"
+    },
+    "gcode_macro T4": {
+        "description": "Change to tool 4",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=4"
+    },
+    "gcode_macro T5": {
+        "description": "Change to tool 5",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=5"
+    },
+    "gcode_macro T6": {
+        "description": "Change to tool 6",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=6"
+    },
+    "gcode_macro T7": {
+        "description": "Change to tool 7",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=7"
+    },
+    "gcode_macro T8": {
+        "description": "Change to tool 8",
+        "gcode": "\n_HMTK_CHANGE_TOOL TOOL=8"
+    },
+    "temperature_sensor chamber": {
+        "sensor_type": "TDK NTCG104LH104JT1",
+        "sensor_pin": "PF5"
+    },
+    "gcode_macro G32": {
+        "description": "Runs home all, z tilt, home Z",
+        "gcode": "\nSAVE_GCODE_STATE NAME=STATE_G32\nG28\nZ_TILT_ADJUST\nG28 Z\nRESTORE_GCODE_STATE NAME=STATE_G32"
+    },
+    "bed_mesh mesh-108": {
+        "version": "1",
+        "points": "\n0.033750, -0.001875, -0.010313, 0.009687, 0.017812, 0.043437, 0.059062\n0.052187, 0.050000, 0.063437, 0.060000, 0.059687, 0.054375, 0.024375\n0.044062, 0.053125, 0.090937, 0.081875, 0.019062, 0.034062, 0.020312\n0.014687, 0.007812, -0.022500, 0.020000, -0.010938, -0.019375, -0.060625\n0.078750, 0.078750, 0.069062, 0.099062, 0.058125, 0.017187, -0.063438\n0.090625, 0.083125, 0.076562, 0.079062, 0.033750, -0.013750, -0.073125\n0.090312, 0.051562, 0.050625, 0.050312, 0.006875, -0.034063, -0.116563",
+        "x_count": "7",
+        "y_count": "7",
+        "mesh_x_pps": "2",
+        "mesh_y_pps": "2",
+        "algo": "bicubic",
+        "tension": "0.2",
+        "min_x": "20.0",
+        "max_x": "365.0",
+        "min_y": "20.0",
+        "max_y": "359.9599999999999"
+    }
+}
