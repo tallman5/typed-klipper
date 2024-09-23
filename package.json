@@ -1,0 +1,36 @@
+{
+  "name": "@tallman5/typed-klipper",
+  "version": "1.0.0",
+  "description": "TS interfaces for converting Klipper configuration files.",
+  "author": "Joseph McGurkin <joseph@mcgurkin.net>",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "files": [
+    "/dist",
+    "!/dist/**/*.js.map",
+    "!/dist/**/*.tsbuildinfo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tallman5/typed-klipper"
+  },
+  "homepage": "https://github.com/tallman5/typed-klipper#readme",
+  "bugs": {
+    "url": "https://github.com/tallman5/typed-klipper/issues"
+  },
+  "keywords": [],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dist": "tsc --project tsconfig.build.json",
+    "distpack": "tsc --project tsconfig.build.json && npm pack",
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/node": "^22.5.5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.2"
+  }
+}
