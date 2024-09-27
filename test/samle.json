@@ -5,6 +5,9 @@
     "mcu": {
         "serial": "/dev/btt-octopus-11"
     },
+    "mcu my_extra_mcu": {
+        "serial": "/dev/another-serial"
+    },
     "temperature_sensor Octopus": {
         "sensor_type": "temperature_mcu",
         "min_temp": "0",

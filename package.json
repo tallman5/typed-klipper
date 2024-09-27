@@ -24,13 +24,15 @@
     "dist": "tsc --project tsconfig.build.json",
     "distpack": "tsc --project tsconfig.build.json && npm pack",
     "test": "jest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate-classes": "npx ts-node ./src/utils/generate-klipper-classes.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",
-    "@types/node": "^22.5.5",
+    "@types/node": "^22.7.3",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   }
 }

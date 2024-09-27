@@ -1,29 +1,183 @@
-import { IHeater } from "./heater";
+import { ConfigurableComponent } from "../transformations/configurableComponent";
 
-export interface IExtruder extends IHeater {
-    step_pin: string;
-    dir_pin: string;
-    enable_pin: string;
-    microsteps: number;
-    rotation_distance: number;
-    full_steps_per_rotation: number;
-    gear_ratio: string;
-    nozzle_diameter: number;
-    filament_diameter: number;
-    max_extrude_cross_section: number;
-    instantaneous_corner_velocity: number;
-    max_extrude_only_distance: number;
-    max_extrude_only_velocity: number;
-    max_extrude_only_accel: number;
-    pressure_advance: number;
-    pressure_advance_smooth_time: number;
-    max_power: number;
-    pullup_resistor: number;
-    smooth_time: number;
-    pid_Kp: number;
-    pid_Ki: number;
-    pid_Kd: number;
-    max_delta: number;
-    pwm_cycle_time: number;
-    min_extrude_temp: number;
+export class Extruder extends ConfigurableComponent {
+  constructor(
+    configKey: string,
+    public step_pin: string,
+    public dir_pin: string,
+    public enable_pin: string,
+    public microsteps: number,
+    public rotation_distance: number,
+    public nozzle_diameter: number,
+    public filament_diameter: number,
+    public heater_pin: string,
+    public sensor_type: string,
+    public sensor_pin: string,
+    public control: string,
+    public pid_Kp: number,
+    public pid_Ki: number,
+    public pid_Kd: number,
+    public min_temp: number,
+    public max_temp: number,
+    public full_steps_per_rotation?: number,
+    public gear_ratio?: number,
+    public max_extrude_cross_section?: number,
+    public instantaneous_corner_velocity?: number,
+    public max_extrude_only_distance?: number,
+    public max_extrude_only_velocity?: number,
+    public max_extrude_only_accel?: number,
+    public pressure_advance?: number,
+    public pressure_advance_smooth_time?: number,
+    public max_power?: number,
+    public pullup_resistor?: string,
+    public smooth_time?: number,
+    public max_delta?: number,
+    public pwm_cycle_time?: number,
+    public min_extrude_temp?: number
+  ) {
+    super(configKey);
+  }
+
+  toJSON(): any {
+    return {
+      [this.configKey]: {
+        step_pin: this.step_pin,
+        dir_pin: this.dir_pin,
+        enable_pin: this.enable_pin,
+        microsteps: this.microsteps,
+        rotation_distance: this.rotation_distance,
+        nozzle_diameter: this.nozzle_diameter,
+        filament_diameter: this.filament_diameter,
+        heater_pin: this.heater_pin,
+        sensor_type: this.sensor_type,
+        sensor_pin: this.sensor_pin,
+        control: this.control,
+        pid_Kp: this.pid_Kp,
+        pid_Ki: this.pid_Ki,
+        pid_Kd: this.pid_Kd,
+        min_temp: this.min_temp,
+        max_temp: this.max_temp,
+        full_steps_per_rotation: this.full_steps_per_rotation,
+        gear_ratio: this.gear_ratio,
+        max_extrude_cross_section: this.max_extrude_cross_section,
+        instantaneous_corner_velocity: this.instantaneous_corner_velocity,
+        max_extrude_only_distance: this.max_extrude_only_distance,
+        max_extrude_only_velocity: this.max_extrude_only_velocity,
+        max_extrude_only_accel: this.max_extrude_only_accel,
+        pressure_advance: this.pressure_advance,
+        pressure_advance_smooth_time: this.pressure_advance_smooth_time,
+        max_power: this.max_power,
+        pullup_resistor: this.pullup_resistor,
+        smooth_time: this.smooth_time,
+        max_delta: this.max_delta,
+        pwm_cycle_time: this.pwm_cycle_time,
+        min_extrude_temp: this.min_extrude_temp,
+      }
+    };
+  }
+
+  toCfg(): string {
+    let configStr = `[${this.configKey}]
+`;
+    configStr += `step_pin: ${this.step_pin}
+`;
+    configStr += `dir_pin: ${this.dir_pin}
+`;
+    configStr += `enable_pin: ${this.enable_pin}
+`;
+    configStr += `microsteps: ${this.microsteps}
+`;
+    configStr += `rotation_distance: ${this.rotation_distance}
+`;
+    configStr += `nozzle_diameter: ${this.nozzle_diameter}
+`;
+    configStr += `filament_diameter: ${this.filament_diameter}
+`;
+    configStr += `heater_pin: ${this.heater_pin}
+`;
+    configStr += `sensor_type: ${this.sensor_type}
+`;
+    configStr += `sensor_pin: ${this.sensor_pin}
+`;
+    configStr += `control: ${this.control}
+`;
+    configStr += `pid_Kp: ${this.pid_Kp}
+`;
+    configStr += `pid_Ki: ${this.pid_Ki}
+`;
+    configStr += `pid_Kd: ${this.pid_Kd}
+`;
+    configStr += `min_temp: ${this.min_temp}
+`;
+    configStr += `max_temp: ${this.max_temp}
+`;
+    if (this.full_steps_per_rotation) configStr += `full_steps_per_rotation: ${this.full_steps_per_rotation}
+`;
+    if (this.gear_ratio) configStr += `gear_ratio: ${this.gear_ratio}
+`;
+    if (this.max_extrude_cross_section) configStr += `max_extrude_cross_section: ${this.max_extrude_cross_section}
+`;
+    if (this.instantaneous_corner_velocity) configStr += `instantaneous_corner_velocity: ${this.instantaneous_corner_velocity}
+`;
+    if (this.max_extrude_only_distance) configStr += `max_extrude_only_distance: ${this.max_extrude_only_distance}
+`;
+    if (this.max_extrude_only_velocity) configStr += `max_extrude_only_velocity: ${this.max_extrude_only_velocity}
+`;
+    if (this.max_extrude_only_accel) configStr += `max_extrude_only_accel: ${this.max_extrude_only_accel}
+`;
+    if (this.pressure_advance) configStr += `pressure_advance: ${this.pressure_advance}
+`;
+    if (this.pressure_advance_smooth_time) configStr += `pressure_advance_smooth_time: ${this.pressure_advance_smooth_time}
+`;
+    if (this.max_power) configStr += `max_power: ${this.max_power}
+`;
+    if (this.pullup_resistor) configStr += `pullup_resistor: ${this.pullup_resistor}
+`;
+    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}
+`;
+    if (this.max_delta) configStr += `max_delta: ${this.max_delta}
+`;
+    if (this.pwm_cycle_time) configStr += `pwm_cycle_time: ${this.pwm_cycle_time}
+`;
+    if (this.min_extrude_temp) configStr += `min_extrude_temp: ${this.min_extrude_temp}
+`;
+    return configStr.trim();
+  }
+
+  static fromJson(configKey: string, config: any): Extruder {
+    return new Extruder(
+      configKey,
+      config.step_pin,
+      config.dir_pin,
+      config.enable_pin,
+      config.microsteps,
+      config.rotation_distance,
+      config.nozzle_diameter,
+      config.filament_diameter,
+      config.heater_pin,
+      config.sensor_type,
+      config.sensor_pin,
+      config.control,
+      config.pid_Kp,
+      config.pid_Ki,
+      config.pid_Kd,
+      config.min_temp,
+      config.max_temp,
+      config.full_steps_per_rotation,
+      config.gear_ratio,
+      config.max_extrude_cross_section,
+      config.instantaneous_corner_velocity,
+      config.max_extrude_only_distance,
+      config.max_extrude_only_velocity,
+      config.max_extrude_only_accel,
+      config.pressure_advance,
+      config.pressure_advance_smooth_time,
+      config.max_power,
+      config.pullup_resistor,
+      config.smooth_time,
+      config.max_delta,
+      config.pwm_cycle_time,
+      config.min_extrude_temp
+    );
+  }
 }
