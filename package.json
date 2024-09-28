@@ -1,7 +1,7 @@
 {
   "name": "@tallman5/typed-klipper",
-  "version": "1.0.0",
-  "description": "TS interfaces for converting Klipper configuration files.",
+  "version": "1.0.1",
+  "description": "TS classes for converting Klipper configuration files.",
   "author": "Joseph McGurkin <joseph@mcgurkin.net>",
   "main": "dist/index.js",
   "license": "ISC",
