@@ -4,7 +4,7 @@ import { klipperFromJson } from "../transformations/klipperFromJson";
 export class KlipperConfig extends ConfigurableComponent {
     constructor(
         public knownComponents : IConfigurableComponent[] = [],
-        public unknownComponents : any[] = []
+        public unknownComponents : IConfigurableComponent[] = []
     ) {
         super('klipper-config');
     }

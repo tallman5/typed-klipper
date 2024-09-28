@@ -1,10 +1,10 @@
-import { IConfigurableComponent } from "../models/configurableComponent";
+import { ConfigurableComponent, IConfigurableComponent } from "../models/configurableComponent";
 import { createComponentFromJson } from "./createComponentFromJson";
 import { KlipperConfig } from "../models/klipperConfig";
 
 export const klipperFromJson = (config: any): KlipperConfig => {
     let knownComponents: IConfigurableComponent[] = [];
-    let unknownComponents: any[] = [];
+    let unknownComponents: IConfigurableComponent[] = [];
 
     for (const key in config) {
         const newComponent = createComponentFromJson(key, config[key]);
@@ -17,7 +17,11 @@ export const klipperFromJson = (config: any): KlipperConfig => {
         else {
             unknownComponents = [
                 ...unknownComponents,
-                config[key]
+                {
+                    configKey: key,
+                    toJSON: function () { throw new Error("Function not implemented."); },
+                    toCfg: function (): string { throw new Error("Function not implemented."); }
+                }
             ];
         }
     }
