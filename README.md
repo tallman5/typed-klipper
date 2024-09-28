@@ -1,3 +1,5 @@
 # @tallman/typed-klipper
 
-TS interfaces for converting Klipper configuration files.
+This project is still in Alpha!
+
+TS classes for Klipper configurations.
