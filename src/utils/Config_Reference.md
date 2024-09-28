@@ -1779,7 +1779,7 @@ micro-controller.
 
 ```
 [board_pins my_aliases]
-mcu: mcu
+#mcu: mcu
 #   A comma separated list of micro-controllers that may use the
 #   aliases. The default is to apply the aliases to the main "mcu".
 aliases:

@@ -8,6 +8,7 @@ const path = require('path');
 // Read Markdown file
 const mdFilePath = './src/utils/Config_Reference.md';
 const outputDir = './src/models';
+let camelClassNames: string[] = [];
 let classNames: string[] = [];
 
 // Ensure output directory exists
@@ -121,12 +122,29 @@ export class ${className} extends ConfigurableComponent {
 };
 
 const generateModelIndex = () => {
-  let indexContent = classNames
+  let indexContent = camelClassNames
     .sort()
     .map(c => `export * from './${c}';`)
     .join('\n');
   const filePath = path.join(outputDir, 'index.ts');
   fs.writeFileSync(filePath, indexContent);
+  console.log(`Generated: ${filePath}`);
+};
+
+const generateMapper = () => {
+  let mapperContent: string = `import * as Models from '../models';\n`;
+  mapperContent += `import { IConfigurableComponent } from './configurableComponent';\n`;
+  mapperContent += `\n`;
+  mapperContent += `export const jsonToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => IConfigurableComponent }[] = [\n`;
+  for (let i = 0; i < classNames.length; i++) {
+    const className = classNames[i];
+    const camelClassName = camelClassNames[i];
+    mapperContent += `    { pattern: /^${className.toLowerCase()}/, handler: (configKey, json) => Models.${className}.fromJson(configKey, json) },\n`;
+  }
+  mapperContent += `];`;
+
+  const filePath = './src/transformations/jsonToComponentMapper.ts';
+  fs.writeFileSync(filePath, mapperContent);
   console.log(`Generated: ${filePath}`);
 };
 
@@ -145,12 +163,16 @@ const parseMarkdownAndGenerateClasses = (filePath: string) => {
       if (className) {
         className = convertToClassName(className);
         const camelClassName = className.charAt(0).toLowerCase() + className.slice(1);
-        if (!classNames.includes(camelClassName)) {
+        if (!camelClassNames.includes(camelClassName)) {
           const parameters = extractParameters(configBlock);
           generateClassFile(className, parameters);
+          camelClassNames = [
+            ...camelClassNames,
+            camelClassName
+          ];
           classNames = [
             ...classNames,
-            camelClassName
+            className
           ];
         }
         else {
@@ -165,6 +187,7 @@ const parseMarkdownAndGenerateClasses = (filePath: string) => {
   }
 
   generateModelIndex();
+  generateMapper();
 };
 
 // Run the script
