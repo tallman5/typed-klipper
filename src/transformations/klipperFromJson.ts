@@ -1,6 +1,6 @@
-import { IConfigurableComponent } from "./configurableComponent";
+import { IConfigurableComponent } from "../models/configurableComponent";
 import { createComponentFromJson } from "./createComponentFromJson";
-import { KlipperConfig } from "./klipperConfig";
+import { KlipperConfig } from "../models/klipperConfig";
 
 export const klipperFromJson = (config: any): KlipperConfig => {
     let knownComponents: IConfigurableComponent[] = [];

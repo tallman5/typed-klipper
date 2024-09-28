@@ -142,7 +142,7 @@ information on calculating the `rotation_distance` parameter. See the
 homing using multiple micro-controllers.
 
 ```
-[stepper_x]
+[stepper]
 step_pin:
 #   Step GPIO pin (triggered high). This parameter must be provided.
 dir_pin:
@@ -239,15 +239,15 @@ max_z_accel:
 
 # The stepper_x section is used to describe the stepper controlling
 # the X axis in a cartesian robot.
-[stepper_x]
+[stepper]
 
 # The stepper_y section is used to describe the stepper controlling
 # the Y axis in a cartesian robot.
-[stepper_y]
+[stepper]
 
 # The stepper_z section is used to describe the stepper controlling
 # the Z axis in a cartesian robot.
-[stepper_z]
+[stepper]
 ```
 
 ### Linear Delta Kinematics
@@ -408,7 +408,7 @@ arm_x_length:
 
 # The stepper_y section is used to describe the stepper controlling
 # the Y axis in a deltesian robot.
-[stepper_y]
+[stepper]
 ```
 
 ### CoreXY Kinematics
@@ -435,15 +435,15 @@ max_z_accel:
 
 # The stepper_x section is used to describe the X axis as well as the
 # stepper controlling the X+Y movement.
-[stepper_x]
+[stepper]
 
 # The stepper_y section is used to describe the Y axis as well as the
 # stepper controlling the X-Y movement.
-[stepper_y]
+[stepper]
 
 # The stepper_z section is used to describe the stepper controlling
 # the Z axis.
-[stepper_z]
+[stepper]
 ```
 
 ### CoreXZ Kinematics
@@ -467,15 +467,15 @@ max_z_accel:
 
 # The stepper_x section is used to describe the X axis as well as the
 # stepper controlling the X+Z movement.
-[stepper_x]
+[stepper]
 
 # The stepper_y section is used to describe the stepper controlling
 # the Y axis.
-[stepper_y]
+[stepper]
 
 # The stepper_z section is used to describe the Z axis as well as the
 # stepper controlling the X-Z movement.
-[stepper_z]
+[stepper]
 ```
 
 ### Hybrid-CoreXY Kinematics
@@ -501,15 +501,15 @@ max_z_accel:
 
 # The stepper_x section is used to describe the X axis as well as the
 # stepper controlling the X-Y movement.
-[stepper_x]
+[stepper]
 
 # The stepper_y section is used to describe the stepper controlling
 # the Y axis.
-[stepper_y]
+[stepper]
 
 # The stepper_z section is used to describe the stepper controlling
 # the Z axis.
-[stepper_z]
+[stepper]
 ```
 
 ### Hybrid-CoreXZ Kinematics
@@ -535,15 +535,15 @@ max_z_accel:
 
 # The stepper_x section is used to describe the X axis as well as the
 # stepper controlling the X-Z movement.
-[stepper_x]
+[stepper]
 
 # The stepper_y section is used to describe the stepper controlling
 # the Y axis.
-[stepper_y]
+[stepper]
 
 # The stepper_z section is used to describe the stepper controlling
 # the Z axis.
-[stepper_z]
+[stepper]
 ```
 
 ### Polar Kinematics
@@ -586,7 +586,7 @@ gear_ratio:
 
 # The stepper_z section is used to describe the stepper controlling
 # the Z axis.
-[stepper_z]
+[stepper]
 ```
 
 ### Rotary delta Kinematics
@@ -2080,7 +2080,7 @@ One may define any number of sections with a numeric suffix starting
 at 1 (for example, "stepper_z1", "stepper_z2", etc.).
 
 ```
-[stepper_z1]
+[stepper]
 #step_pin:
 #dir_pin:
 #enable_pin:
@@ -2105,7 +2105,7 @@ See [sample-multi-extruder.cfg](../config/sample-multi-extruder.cfg)
 for an example configuration.
 
 ```
-[extruder1]
+[extruder]
 #step_pin:
 #dir_pin:
 #...

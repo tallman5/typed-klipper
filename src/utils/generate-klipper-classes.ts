@@ -1,36 +1,40 @@
 const fs = require('fs');
 const path = require('path');
 
-// This script just generates the bulk of the code.
-// The classes it does create are accurate.
-// However some others are needed in addition to this output.
+interface IClassConfig {
+  configKey: string;
+  className: string;
+  camelCase: string;
+}
 
 // Read Markdown file
 const mdFilePath = './src/utils/Config_Reference.md';
-const outputDir = './src/models';
-let camelClassNames: string[] = [];
-let classNames: string[] = [];
+const outputDir = './src/models/generated';
+let classConfigs: IClassConfig[] = [];
 
 // Ensure output directory exists
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
 
-const convertToClassName = (className: string): string => {
-  return className
+const convertToCamelCase = (configKey: string): string => {
+  let result = convertToClassName(configKey);
+  result = result.charAt(0).toLowerCase() + result.slice(1);
+  return result;
+};
+
+const convertToClassName = (configKey: string): string => {
+  return configKey
     .split('_')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join('');
 };
 
-// Helper function to capitalize class names
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
-
 // Extracts the name of the component (e.g., "extruder", "mcu")
 const extractConfigName = (configBlock: string): string | null => {
   const configHeaderRegex = /^\[(\w+)(\s.+)?\]/m;  // Matches [config_key] or [config_key optional_description]
   const match = configBlock.match(configHeaderRegex);
-  return match ? capitalize(match[1]) : null;
+  return match ? match[1] : null;
 };
 
 // Extracts the parameters (required/optional fields) from the code block
@@ -61,7 +65,7 @@ const extractParameters = (configBlock: string): { required: string[], optional:
 };
 
 // Generates a TypeScript class file
-const generateClassFile = (className: string, parameters: { required: string[], optional: string[] }) => {
+const generateClassFile = (classConfig: IClassConfig, parameters: { required: string[], optional: string[] }) => {
   const { required, optional } = parameters;
 
   // Create constructor parameters for required and optional fields
@@ -81,9 +85,9 @@ const generateClassFile = (className: string, parameters: { required: string[], 
 
   // Template for the TypeScript class
   const classTemplate = `
-import { ConfigurableComponent } from "../transformations/configurableComponent";
+import { ConfigurableComponent } from "..";
 
-export class ${className} extends ConfigurableComponent {
+export class ${classConfig.className} extends ConfigurableComponent {
   constructor(
     configKey: string,
     ${constructorParams}
@@ -105,8 +109,8 @@ export class ${className} extends ConfigurableComponent {
     return configStr.trim();
   }
 
-  static fromJson(configKey: string, config: any): ${className} {
-    return new ${className}(
+  static fromJson(configKey: string, config: any): ${classConfig.className} {
+    return new ${classConfig.className}(
       configKey,
       ${required.map(param => `config.${param}`).concat(optional.map(param => `config.${param}`)).join(',\n      ')}
     );
@@ -115,35 +119,38 @@ export class ${className} extends ConfigurableComponent {
 `;
 
   // Write class to file
-  const fileName = `${className}.ts`;
+  const fileName = `${classConfig.camelCase}.ts`;
   const filePath = path.join(outputDir, fileName);
   fs.writeFileSync(filePath, classTemplate.trim());
-  console.log(`Generated: ${filePath}`);
+  // console.log(`Generated: ${filePath}`);
 };
 
+// Generates the /src/models/index.ts file with exports for all the classes
 const generateModelIndex = () => {
-  let indexContent = camelClassNames
+  let indexContent = classConfigs
     .sort()
-    .map(c => `export * from './${c}';`)
+    .map(c => `export * from './${c.camelCase}';`)
     .join('\n');
+
+  indexContent += "export * from './jsonToComponentMapper';";
+  
   const filePath = path.join(outputDir, 'index.ts');
   fs.writeFileSync(filePath, indexContent);
   console.log(`Generated: ${filePath}`);
 };
 
+// Generates the jsonToComponentMapper function which chooses classes from the Moonraker JSON
 const generateMapper = () => {
-  let mapperContent: string = `import * as Models from '../models';\n`;
-  mapperContent += `import { IConfigurableComponent } from './configurableComponent';\n`;
+  let mapperContent: string = `import * as Models from '../../models';\n`;
   mapperContent += `\n`;
-  mapperContent += `export const jsonToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => IConfigurableComponent }[] = [\n`;
-  for (let i = 0; i < classNames.length; i++) {
-    const className = classNames[i];
-    const camelClassName = camelClassNames[i];
-    mapperContent += `    { pattern: /^${className.toLowerCase()}/, handler: (configKey, json) => Models.${className}.fromJson(configKey, json) },\n`;
+  mapperContent += `export const jsonToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => Models.IConfigurableComponent }[] = [\n`;
+  for (let i = 0; i < classConfigs.length; i++) {
+    const classConfig = classConfigs[i];
+    mapperContent += `    { pattern: /^${classConfig.configKey}/, handler: (configKey, json) => Models.${classConfig.className}.fromJson(configKey, json) },\n`;
   }
   mapperContent += `];`;
 
-  const filePath = './src/transformations/jsonToComponentMapper.ts';
+  const filePath = path.join(outputDir, 'jsonToComponentMapper.ts');
   fs.writeFileSync(filePath, mapperContent);
   console.log(`Generated: ${filePath}`);
 };
@@ -158,34 +165,37 @@ const parseMarkdownAndGenerateClasses = (filePath: string) => {
   if (codeBlocks) {
     codeBlocks.forEach((block: string, index: number) => {
       const configBlock = block.replace(/```/g, '').trim();
-      let className = extractConfigName(configBlock);
+      let configKey = extractConfigName(configBlock);
 
-      if (className) {
-        className = convertToClassName(className);
-        const camelClassName = className.charAt(0).toLowerCase() + className.slice(1);
-        if (!camelClassNames.includes(camelClassName)) {
+      if (configKey) {
+        console.log(configKey);
+        const existingItem = classConfigs.find(c => c.configKey === configKey);
+        if (!existingItem) {
+          const classConfig: IClassConfig = {
+            configKey,
+            className: convertToClassName(configKey),
+            camelCase: convertToCamelCase(configKey)
+          }
+          classConfigs = [
+            ...classConfigs,
+            classConfig
+          ]
+
           const parameters = extractParameters(configBlock);
-          generateClassFile(className, parameters);
-          camelClassNames = [
-            ...camelClassNames,
-            camelClassName
-          ];
-          classNames = [
-            ...classNames,
-            className
-          ];
+          generateClassFile(classConfig, parameters);
         }
         else {
-          console.log(`Skipping class ${className}: Already done.`);
+          // console.log(`Skipping class ${className}: Already done.`);
         }
       } else {
-        console.log(`Skipping block ${index + 1}: No valid config header found.`);
+        // console.log(`Skipping block ${index + 1}: No valid config header found.`);
       }
     });
   } else {
     console.log('No configuration sections found in the Markdown file.');
   }
 
+  classConfigs.sort((a, b) => a.className.localeCompare(b.className));
   generateModelIndex();
   generateMapper();
 };
