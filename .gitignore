@@ -1,5 +1,5 @@
 node_modules/
 dist
 *.tgz
-test/printer.cfg
-test/unkown.cfg
+test/output
+

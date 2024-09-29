@@ -1,25 +1,25 @@
-import configData from './samle.json';
+import moonrakerData from './configs/moonraker.json';
 import { KlipperConfig, klipperFromJson } from '../src';
 const fs = require('fs');
 
 describe('Conversions', () => {
     let klipperTs: KlipperConfig;
 
-    it('should convert JSON to TS', () => {
-        klipperTs = klipperFromJson(configData);
+    it('Should convert Moonraker JSON to TS', () => {
+        klipperTs = klipperFromJson(moonrakerData);
         expect(klipperTs).toBeTruthy();
     });
 
-    it('should convert model to klipper configuration', () => {
+    it('Should convert component to Klipper configuration', () => {
         const klipperCfg = klipperTs.toCfg();
         expect(klipperCfg).toBeTruthy();
 
-        const goodPath = './test/printer.cfg';
+        const goodPath = './test/output/printer.cfg';
         fs.writeFileSync(goodPath, klipperCfg);
         console.log(`Generated: ${goodPath}`);
 
         if (klipperTs.unknownComponents && klipperTs.unknownComponents.length > 0) {
-            const badPath = './test/unkown.cfg';
+            const badPath = './test/output/unkown.cfg';
             const badContent = klipperTs.unknownComponents
                 .map(c => `${c.configKey}`)
                 .join('\n');
