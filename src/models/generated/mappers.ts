@@ -1,6 +1,6 @@
 import * as Models from '../../models';
 
-export const jsonToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => Models.IConfigurableComponent }[] = [
+export const moonrakerToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => Models.IConfigurableComponent }[] = [
     { pattern: /^ad5206/, handler: (configKey, json) => Models.Ad5206.fromJson(configKey, json) },
     { pattern: /^adc_scaled/, handler: (configKey, json) => Models.AdcScaled.fromJson(configKey, json) },
     { pattern: /^adc_temperature/, handler: (configKey, json) => Models.AdcTemperature.fromJson(configKey, json) },

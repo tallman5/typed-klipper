@@ -90,4 +90,5 @@ export * from './tsl1401clFilamentWidthSensor';
 export * from './verifyHeater';
 export * from './virtualSdcard';
 export * from './zThermalAdjust';
-export * from './zTilt';export * from './jsonToComponentMapper';
+export * from './zTilt';
+export * from './mappers';

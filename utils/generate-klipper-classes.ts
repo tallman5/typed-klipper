@@ -8,11 +8,10 @@ interface IClassConfig {
 }
 
 // Read Markdown file
-const mdFilePath = './src/utils/Config_Reference.md';
+const mdFilePath = './utils/Config_Reference.md';
 const outputDir = './src/models/generated';
 let classConfigs: IClassConfig[] = [];
 
-// Ensure output directory exists
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
@@ -125,39 +124,39 @@ export class ${classConfig.className} extends ConfigurableComponent {
   // console.log(`Generated: ${filePath}`);
 };
 
-// Generates the /src/models/index.ts file with exports for all the classes
+// Generates the outputDir/index.ts file with exports for all the classes
 const generateModelIndex = () => {
   let indexContent = classConfigs
     .sort()
     .map(c => `export * from './${c.camelCase}';`)
     .join('\n');
 
-  indexContent += "export * from './jsonToComponentMapper';";
+  indexContent += "\nexport * from './mappers';";
   
   const filePath = path.join(outputDir, 'index.ts');
   fs.writeFileSync(filePath, indexContent);
   console.log(`Generated: ${filePath}`);
 };
 
-// Generates the jsonToComponentMapper function which chooses classes from the Moonraker JSON
+// Generates the mappers.ts
 const generateMapper = () => {
   let mapperContent: string = `import * as Models from '../../models';\n`;
   mapperContent += `\n`;
-  mapperContent += `export const jsonToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => Models.IConfigurableComponent }[] = [\n`;
+  mapperContent += `export const moonrakerToComponentMapper: { pattern: RegExp, handler: (configKey: string, config: any) => Models.IConfigurableComponent }[] = [\n`;
   for (let i = 0; i < classConfigs.length; i++) {
     const classConfig = classConfigs[i];
     mapperContent += `    { pattern: /^${classConfig.configKey}/, handler: (configKey, json) => Models.${classConfig.className}.fromJson(configKey, json) },\n`;
   }
   mapperContent += `];`;
 
-  const filePath = path.join(outputDir, 'jsonToComponentMapper.ts');
+  const filePath = path.join(outputDir, 'mappers.ts');
   fs.writeFileSync(filePath, mapperContent);
   console.log(`Generated: ${filePath}`);
 };
 
 // Main function to parse the Markdown file and generate classes
-const parseMarkdownAndGenerateClasses = (filePath: string) => {
-  const mdContent = fs.readFileSync(filePath, 'utf-8');
+const parseMarkdownAndGenerateClasses = () => {
+  const mdContent = fs.readFileSync(mdFilePath, 'utf-8');
 
   // Extract code blocks containing configuration sections
   const codeBlocks = mdContent.match(/```([\s\S]*?)```/g);
@@ -201,4 +200,4 @@ const parseMarkdownAndGenerateClasses = (filePath: string) => {
 };
 
 // Run the script
-parseMarkdownAndGenerateClasses(mdFilePath);
+parseMarkdownAndGenerateClasses();
