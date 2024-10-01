@@ -23,16 +23,14 @@ export class SamdSercom extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `sercom: ${this.sercom}
 `;
     configStr += `tx_pin: ${this.tx_pin}
 `;
     configStr += `clk_pin: ${this.clk_pin}
 `;
-    if (this.rx_pin) configStr += `rx_pin: ${this.rx_pin}
-`;
+    if (this.rx_pin) configStr += `rx_pin: ${this.rx_pin}\n`;
     return configStr.trim();
   }
 

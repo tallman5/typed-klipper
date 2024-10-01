@@ -65,58 +65,32 @@ export class TemperatureFan extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.pin) configStr += `pin: ${this.pin}
-`;
-    if (this.max_power) configStr += `max_power: ${this.max_power}
-`;
-    if (this.shutdown_speed) configStr += `shutdown_speed: ${this.shutdown_speed}
-`;
-    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}
-`;
-    if (this.hardware_pwm) configStr += `hardware_pwm: ${this.hardware_pwm}
-`;
-    if (this.kick_start_time) configStr += `kick_start_time: ${this.kick_start_time}
-`;
-    if (this.off_below) configStr += `off_below: ${this.off_below}
-`;
-    if (this.tachometer_pin) configStr += `tachometer_pin: ${this.tachometer_pin}
-`;
-    if (this.tachometer_ppr) configStr += `tachometer_ppr: ${this.tachometer_ppr}
-`;
-    if (this.tachometer_poll_interval) configStr += `tachometer_poll_interval: ${this.tachometer_poll_interval}
-`;
-    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}
-`;
-    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}
-`;
-    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}
-`;
-    if (this.control) configStr += `control: ${this.control}
-`;
-    if (this.max_delta) configStr += `max_delta: ${this.max_delta}
-`;
-    if (this.min_temp) configStr += `min_temp: ${this.min_temp}
-`;
-    if (this.max_temp) configStr += `max_temp: ${this.max_temp}
-`;
-    if (this.pid_Kp) configStr += `pid_Kp: ${this.pid_Kp}
-`;
-    if (this.pid_Ki) configStr += `pid_Ki: ${this.pid_Ki}
-`;
-    if (this.pid_Kd) configStr += `pid_Kd: ${this.pid_Kd}
-`;
-    if (this.pid_deriv_time) configStr += `pid_deriv_time: ${this.pid_deriv_time}
-`;
-    if (this.target_temp) configStr += `target_temp: ${this.target_temp}
-`;
-    if (this.max_speed) configStr += `max_speed: ${this.max_speed}
-`;
-    if (this.min_speed) configStr += `min_speed: ${this.min_speed}
-`;
-    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.pin) configStr += `pin: ${this.pin}\n`;
+    if (this.max_power) configStr += `max_power: ${this.max_power}\n`;
+    if (this.shutdown_speed) configStr += `shutdown_speed: ${this.shutdown_speed}\n`;
+    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}\n`;
+    if (this.hardware_pwm) configStr += `hardware_pwm: ${this.hardware_pwm}\n`;
+    if (this.kick_start_time) configStr += `kick_start_time: ${this.kick_start_time}\n`;
+    if (this.off_below) configStr += `off_below: ${this.off_below}\n`;
+    if (this.tachometer_pin) configStr += `tachometer_pin: ${this.tachometer_pin}\n`;
+    if (this.tachometer_ppr) configStr += `tachometer_ppr: ${this.tachometer_ppr}\n`;
+    if (this.tachometer_poll_interval) configStr += `tachometer_poll_interval: ${this.tachometer_poll_interval}\n`;
+    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}\n`;
+    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}\n`;
+    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}\n`;
+    if (this.control) configStr += `control: ${this.control}\n`;
+    if (this.max_delta) configStr += `max_delta: ${this.max_delta}\n`;
+    if (this.min_temp) configStr += `min_temp: ${this.min_temp}\n`;
+    if (this.max_temp) configStr += `max_temp: ${this.max_temp}\n`;
+    if (this.pid_Kp) configStr += `pid_Kp: ${this.pid_Kp}\n`;
+    if (this.pid_Ki) configStr += `pid_Ki: ${this.pid_Ki}\n`;
+    if (this.pid_Kd) configStr += `pid_Kd: ${this.pid_Kd}\n`;
+    if (this.pid_deriv_time) configStr += `pid_deriv_time: ${this.pid_deriv_time}\n`;
+    if (this.target_temp) configStr += `target_temp: ${this.target_temp}\n`;
+    if (this.max_speed) configStr += `max_speed: ${this.max_speed}\n`;
+    if (this.min_speed) configStr += `min_speed: ${this.min_speed}\n`;
+    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}\n`;
     return configStr.trim();
   }
 

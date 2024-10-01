@@ -29,22 +29,14 @@ export class Thermistor extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.temperature1) configStr += `temperature1: ${this.temperature1}
-`;
-    if (this.resistance1) configStr += `resistance1: ${this.resistance1}
-`;
-    if (this.temperature2) configStr += `temperature2: ${this.temperature2}
-`;
-    if (this.resistance2) configStr += `resistance2: ${this.resistance2}
-`;
-    if (this.temperature3) configStr += `temperature3: ${this.temperature3}
-`;
-    if (this.resistance3) configStr += `resistance3: ${this.resistance3}
-`;
-    if (this.beta) configStr += `beta: ${this.beta}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.temperature1) configStr += `temperature1: ${this.temperature1}\n`;
+    if (this.resistance1) configStr += `resistance1: ${this.resistance1}\n`;
+    if (this.temperature2) configStr += `temperature2: ${this.temperature2}\n`;
+    if (this.resistance2) configStr += `resistance2: ${this.resistance2}\n`;
+    if (this.temperature3) configStr += `temperature3: ${this.temperature3}\n`;
+    if (this.resistance3) configStr += `resistance3: ${this.resistance3}\n`;
+    if (this.beta) configStr += `beta: ${this.beta}\n`;
     return configStr.trim();
   }
 

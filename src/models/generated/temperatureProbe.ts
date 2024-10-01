@@ -43,36 +43,21 @@ export class TemperatureProbe extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}
-`;
-    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}
-`;
-    if (this.min_temp) configStr += `min_temp: ${this.min_temp}
-`;
-    if (this.max_temp) configStr += `max_temp: ${this.max_temp}
-`;
-    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}
-`;
-    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}
-`;
-    if (this.resting_z) configStr += `resting_z: ${this.resting_z}
-`;
-    if (this.calibration_position) configStr += `calibration_position: ${this.calibration_position}
-`;
-    if (this.calibration_bed_temp) configStr += `calibration_bed_temp: ${this.calibration_bed_temp}
-`;
-    if (this.calibration_extruder_temp) configStr += `calibration_extruder_temp: ${this.calibration_extruder_temp}
-`;
-    if (this.extruder_heating_z) configStr += `extruder_heating_z: ${this.extruder_heating_z}
-`;
-    if (this.max_validation_temp) configStr += `max_validation_temp: ${this.max_validation_temp}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}\n`;
+    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}\n`;
+    if (this.min_temp) configStr += `min_temp: ${this.min_temp}\n`;
+    if (this.max_temp) configStr += `max_temp: ${this.max_temp}\n`;
+    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}\n`;
+    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}\n`;
+    if (this.resting_z) configStr += `resting_z: ${this.resting_z}\n`;
+    if (this.calibration_position) configStr += `calibration_position: ${this.calibration_position}\n`;
+    if (this.calibration_bed_temp) configStr += `calibration_bed_temp: ${this.calibration_bed_temp}\n`;
+    if (this.calibration_extruder_temp) configStr += `calibration_extruder_temp: ${this.calibration_extruder_temp}\n`;
+    if (this.extruder_heating_z) configStr += `extruder_heating_z: ${this.extruder_heating_z}\n`;
+    if (this.max_validation_temp) configStr += `max_validation_temp: ${this.max_validation_temp}\n`;
     return configStr.trim();
   }
 

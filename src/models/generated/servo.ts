@@ -27,20 +27,14 @@ export class Servo extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `pin: ${this.pin}
 `;
-    if (this.maximum_servo_angle) configStr += `maximum_servo_angle: ${this.maximum_servo_angle}
-`;
-    if (this.minimum_pulse_width) configStr += `minimum_pulse_width: ${this.minimum_pulse_width}
-`;
-    if (this.maximum_pulse_width) configStr += `maximum_pulse_width: ${this.maximum_pulse_width}
-`;
-    if (this.initial_angle) configStr += `initial_angle: ${this.initial_angle}
-`;
-    if (this.initial_pulse_width) configStr += `initial_pulse_width: ${this.initial_pulse_width}
-`;
+    if (this.maximum_servo_angle) configStr += `maximum_servo_angle: ${this.maximum_servo_angle}\n`;
+    if (this.minimum_pulse_width) configStr += `minimum_pulse_width: ${this.minimum_pulse_width}\n`;
+    if (this.maximum_pulse_width) configStr += `maximum_pulse_width: ${this.maximum_pulse_width}\n`;
+    if (this.initial_angle) configStr += `initial_angle: ${this.initial_angle}\n`;
+    if (this.initial_pulse_width) configStr += `initial_pulse_width: ${this.initial_pulse_width}\n`;
     return configStr.trim();
   }
 

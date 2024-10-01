@@ -51,44 +51,26 @@ export class ProbeEddyCurrent extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `sensor_type: ${this.sensor_type}
 `;
-    if (this.intb_pin) configStr += `intb_pin: ${this.intb_pin}
-`;
-    if (this.z_offset) configStr += `z_offset: ${this.z_offset}
-`;
-    if (this.i2c_address) configStr += `i2c_address: ${this.i2c_address}
-`;
-    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}
-`;
-    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}
-`;
-    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}
-`;
-    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}
-`;
-    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}
-`;
-    if (this.x_offset) configStr += `x_offset: ${this.x_offset}
-`;
-    if (this.y_offset) configStr += `y_offset: ${this.y_offset}
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.lift_speed) configStr += `lift_speed: ${this.lift_speed}
-`;
-    if (this.samples) configStr += `samples: ${this.samples}
-`;
-    if (this.sample_retract_dist) configStr += `sample_retract_dist: ${this.sample_retract_dist}
-`;
-    if (this.samples_result) configStr += `samples_result: ${this.samples_result}
-`;
-    if (this.samples_tolerance) configStr += `samples_tolerance: ${this.samples_tolerance}
-`;
-    if (this.samples_tolerance_retries) configStr += `samples_tolerance_retries: ${this.samples_tolerance_retries}
-`;
+    if (this.intb_pin) configStr += `intb_pin: ${this.intb_pin}\n`;
+    if (this.z_offset) configStr += `z_offset: ${this.z_offset}\n`;
+    if (this.i2c_address) configStr += `i2c_address: ${this.i2c_address}\n`;
+    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}\n`;
+    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}\n`;
+    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}\n`;
+    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}\n`;
+    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}\n`;
+    if (this.x_offset) configStr += `x_offset: ${this.x_offset}\n`;
+    if (this.y_offset) configStr += `y_offset: ${this.y_offset}\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.lift_speed) configStr += `lift_speed: ${this.lift_speed}\n`;
+    if (this.samples) configStr += `samples: ${this.samples}\n`;
+    if (this.sample_retract_dist) configStr += `sample_retract_dist: ${this.sample_retract_dist}\n`;
+    if (this.samples_result) configStr += `samples_result: ${this.samples_result}\n`;
+    if (this.samples_tolerance) configStr += `samples_tolerance: ${this.samples_tolerance}\n`;
+    if (this.samples_tolerance_retries) configStr += `samples_tolerance_retries: ${this.samples_tolerance_retries}\n`;
     return configStr.trim();
   }
 

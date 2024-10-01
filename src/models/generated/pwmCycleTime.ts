@@ -25,18 +25,13 @@ export class PwmCycleTime extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `pin: ${this.pin}
 `;
-    if (this.value) configStr += `value: ${this.value}
-`;
-    if (this.shutdown_value) configStr += `shutdown_value: ${this.shutdown_value}
-`;
-    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}
-`;
-    if (this.scale) configStr += `scale: ${this.scale}
-`;
+    if (this.value) configStr += `value: ${this.value}\n`;
+    if (this.shutdown_value) configStr += `shutdown_value: ${this.shutdown_value}\n`;
+    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}\n`;
+    if (this.scale) configStr += `scale: ${this.scale}\n`;
     return configStr.trim();
   }
 

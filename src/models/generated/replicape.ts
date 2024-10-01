@@ -73,66 +73,38 @@ export class Replicape extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `revision: ${this.revision}
 `;
     configStr += `host_mcu: ${this.host_mcu}
 `;
-    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}
-`;
-    if (this.standstill_power_down) configStr += `standstill_power_down: ${this.standstill_power_down}
-`;
-    if (this.stepper_x_microstep_mode) configStr += `stepper_x_microstep_mode: ${this.stepper_x_microstep_mode}
-`;
-    if (this.stepper_y_microstep_mode) configStr += `stepper_y_microstep_mode: ${this.stepper_y_microstep_mode}
-`;
-    if (this.stepper_z_microstep_mode) configStr += `stepper_z_microstep_mode: ${this.stepper_z_microstep_mode}
-`;
-    if (this.stepper_e_microstep_mode) configStr += `stepper_e_microstep_mode: ${this.stepper_e_microstep_mode}
-`;
-    if (this.stepper_h_microstep_mode) configStr += `stepper_h_microstep_mode: ${this.stepper_h_microstep_mode}
-`;
-    if (this.stepper_x_current) configStr += `stepper_x_current: ${this.stepper_x_current}
-`;
-    if (this.stepper_y_current) configStr += `stepper_y_current: ${this.stepper_y_current}
-`;
-    if (this.stepper_z_current) configStr += `stepper_z_current: ${this.stepper_z_current}
-`;
-    if (this.stepper_e_current) configStr += `stepper_e_current: ${this.stepper_e_current}
-`;
-    if (this.stepper_h_current) configStr += `stepper_h_current: ${this.stepper_h_current}
-`;
-    if (this.stepper_x_chopper_off_time_high) configStr += `stepper_x_chopper_off_time_high: ${this.stepper_x_chopper_off_time_high}
-`;
-    if (this.stepper_y_chopper_off_time_high) configStr += `stepper_y_chopper_off_time_high: ${this.stepper_y_chopper_off_time_high}
-`;
-    if (this.stepper_z_chopper_off_time_high) configStr += `stepper_z_chopper_off_time_high: ${this.stepper_z_chopper_off_time_high}
-`;
-    if (this.stepper_e_chopper_off_time_high) configStr += `stepper_e_chopper_off_time_high: ${this.stepper_e_chopper_off_time_high}
-`;
-    if (this.stepper_h_chopper_off_time_high) configStr += `stepper_h_chopper_off_time_high: ${this.stepper_h_chopper_off_time_high}
-`;
-    if (this.stepper_x_chopper_hysteresis_high) configStr += `stepper_x_chopper_hysteresis_high: ${this.stepper_x_chopper_hysteresis_high}
-`;
-    if (this.stepper_y_chopper_hysteresis_high) configStr += `stepper_y_chopper_hysteresis_high: ${this.stepper_y_chopper_hysteresis_high}
-`;
-    if (this.stepper_z_chopper_hysteresis_high) configStr += `stepper_z_chopper_hysteresis_high: ${this.stepper_z_chopper_hysteresis_high}
-`;
-    if (this.stepper_e_chopper_hysteresis_high) configStr += `stepper_e_chopper_hysteresis_high: ${this.stepper_e_chopper_hysteresis_high}
-`;
-    if (this.stepper_h_chopper_hysteresis_high) configStr += `stepper_h_chopper_hysteresis_high: ${this.stepper_h_chopper_hysteresis_high}
-`;
-    if (this.stepper_x_chopper_blank_time_high) configStr += `stepper_x_chopper_blank_time_high: ${this.stepper_x_chopper_blank_time_high}
-`;
-    if (this.stepper_y_chopper_blank_time_high) configStr += `stepper_y_chopper_blank_time_high: ${this.stepper_y_chopper_blank_time_high}
-`;
-    if (this.stepper_z_chopper_blank_time_high) configStr += `stepper_z_chopper_blank_time_high: ${this.stepper_z_chopper_blank_time_high}
-`;
-    if (this.stepper_e_chopper_blank_time_high) configStr += `stepper_e_chopper_blank_time_high: ${this.stepper_e_chopper_blank_time_high}
-`;
-    if (this.stepper_h_chopper_blank_time_high) configStr += `stepper_h_chopper_blank_time_high: ${this.stepper_h_chopper_blank_time_high}
-`;
+    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}\n`;
+    if (this.standstill_power_down) configStr += `standstill_power_down: ${this.standstill_power_down}\n`;
+    if (this.stepper_x_microstep_mode) configStr += `stepper_x_microstep_mode: ${this.stepper_x_microstep_mode}\n`;
+    if (this.stepper_y_microstep_mode) configStr += `stepper_y_microstep_mode: ${this.stepper_y_microstep_mode}\n`;
+    if (this.stepper_z_microstep_mode) configStr += `stepper_z_microstep_mode: ${this.stepper_z_microstep_mode}\n`;
+    if (this.stepper_e_microstep_mode) configStr += `stepper_e_microstep_mode: ${this.stepper_e_microstep_mode}\n`;
+    if (this.stepper_h_microstep_mode) configStr += `stepper_h_microstep_mode: ${this.stepper_h_microstep_mode}\n`;
+    if (this.stepper_x_current) configStr += `stepper_x_current: ${this.stepper_x_current}\n`;
+    if (this.stepper_y_current) configStr += `stepper_y_current: ${this.stepper_y_current}\n`;
+    if (this.stepper_z_current) configStr += `stepper_z_current: ${this.stepper_z_current}\n`;
+    if (this.stepper_e_current) configStr += `stepper_e_current: ${this.stepper_e_current}\n`;
+    if (this.stepper_h_current) configStr += `stepper_h_current: ${this.stepper_h_current}\n`;
+    if (this.stepper_x_chopper_off_time_high) configStr += `stepper_x_chopper_off_time_high: ${this.stepper_x_chopper_off_time_high}\n`;
+    if (this.stepper_y_chopper_off_time_high) configStr += `stepper_y_chopper_off_time_high: ${this.stepper_y_chopper_off_time_high}\n`;
+    if (this.stepper_z_chopper_off_time_high) configStr += `stepper_z_chopper_off_time_high: ${this.stepper_z_chopper_off_time_high}\n`;
+    if (this.stepper_e_chopper_off_time_high) configStr += `stepper_e_chopper_off_time_high: ${this.stepper_e_chopper_off_time_high}\n`;
+    if (this.stepper_h_chopper_off_time_high) configStr += `stepper_h_chopper_off_time_high: ${this.stepper_h_chopper_off_time_high}\n`;
+    if (this.stepper_x_chopper_hysteresis_high) configStr += `stepper_x_chopper_hysteresis_high: ${this.stepper_x_chopper_hysteresis_high}\n`;
+    if (this.stepper_y_chopper_hysteresis_high) configStr += `stepper_y_chopper_hysteresis_high: ${this.stepper_y_chopper_hysteresis_high}\n`;
+    if (this.stepper_z_chopper_hysteresis_high) configStr += `stepper_z_chopper_hysteresis_high: ${this.stepper_z_chopper_hysteresis_high}\n`;
+    if (this.stepper_e_chopper_hysteresis_high) configStr += `stepper_e_chopper_hysteresis_high: ${this.stepper_e_chopper_hysteresis_high}\n`;
+    if (this.stepper_h_chopper_hysteresis_high) configStr += `stepper_h_chopper_hysteresis_high: ${this.stepper_h_chopper_hysteresis_high}\n`;
+    if (this.stepper_x_chopper_blank_time_high) configStr += `stepper_x_chopper_blank_time_high: ${this.stepper_x_chopper_blank_time_high}\n`;
+    if (this.stepper_y_chopper_blank_time_high) configStr += `stepper_y_chopper_blank_time_high: ${this.stepper_y_chopper_blank_time_high}\n`;
+    if (this.stepper_z_chopper_blank_time_high) configStr += `stepper_z_chopper_blank_time_high: ${this.stepper_z_chopper_blank_time_high}\n`;
+    if (this.stepper_e_chopper_blank_time_high) configStr += `stepper_e_chopper_blank_time_high: ${this.stepper_e_chopper_blank_time_high}\n`;
+    if (this.stepper_h_chopper_blank_time_high) configStr += `stepper_h_chopper_blank_time_high: ${this.stepper_h_chopper_blank_time_high}\n`;
     return configStr.trim();
   }
 

@@ -35,28 +35,17 @@ export class BedScrews extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.screw1) configStr += `screw1: ${this.screw1}
-`;
-    if (this.screw1_name) configStr += `screw1_name: ${this.screw1_name}
-`;
-    if (this.screw1_fine_adjust) configStr += `screw1_fine_adjust: ${this.screw1_fine_adjust}
-`;
-    if (this.screw2) configStr += `screw2: ${this.screw2}
-`;
-    if (this.screw2_name) configStr += `screw2_name: ${this.screw2_name}
-`;
-    if (this.screw2_fine_adjust) configStr += `screw2_fine_adjust: ${this.screw2_fine_adjust}
-`;
-    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}
-`;
-    if (this.probe_height) configStr += `probe_height: ${this.probe_height}
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.probe_speed) configStr += `probe_speed: ${this.probe_speed}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.screw1) configStr += `screw1: ${this.screw1}\n`;
+    if (this.screw1_name) configStr += `screw1_name: ${this.screw1_name}\n`;
+    if (this.screw1_fine_adjust) configStr += `screw1_fine_adjust: ${this.screw1_fine_adjust}\n`;
+    if (this.screw2) configStr += `screw2: ${this.screw2}\n`;
+    if (this.screw2_name) configStr += `screw2_name: ${this.screw2_name}\n`;
+    if (this.screw2_fine_adjust) configStr += `screw2_fine_adjust: ${this.screw2_fine_adjust}\n`;
+    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}\n`;
+    if (this.probe_height) configStr += `probe_height: ${this.probe_height}\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.probe_speed) configStr += `probe_speed: ${this.probe_speed}\n`;
     return configStr.trim();
   }
 

@@ -19,12 +19,9 @@ export class HomingHeaters extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.steppers) configStr += `steppers: ${this.steppers}
-`;
-    if (this.heaters) configStr += `heaters: ${this.heaters}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.steppers) configStr += `steppers: ${this.steppers}\n`;
+    if (this.heaters) configStr += `heaters: ${this.heaters}\n`;
     return configStr.trim();
   }
 

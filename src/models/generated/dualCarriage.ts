@@ -37,30 +37,19 @@ export class DualCarriage extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `axis: ${this.axis}
 `;
-    if (this.safe_distance) configStr += `safe_distance: ${this.safe_distance}
-`;
-    if (this.step_pin) configStr += `step_pin: ${this.step_pin}
-`;
-    if (this.dir_pin) configStr += `dir_pin: ${this.dir_pin}
-`;
-    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}
-`;
-    if (this.microsteps) configStr += `microsteps: ${this.microsteps}
-`;
-    if (this.rotation_distance) configStr += `rotation_distance: ${this.rotation_distance}
-`;
-    if (this.endstop_pin) configStr += `endstop_pin: ${this.endstop_pin}
-`;
-    if (this.position_endstop) configStr += `position_endstop: ${this.position_endstop}
-`;
-    if (this.position_min) configStr += `position_min: ${this.position_min}
-`;
-    if (this.position_max) configStr += `position_max: ${this.position_max}
-`;
+    if (this.safe_distance) configStr += `safe_distance: ${this.safe_distance}\n`;
+    if (this.step_pin) configStr += `step_pin: ${this.step_pin}\n`;
+    if (this.dir_pin) configStr += `dir_pin: ${this.dir_pin}\n`;
+    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}\n`;
+    if (this.microsteps) configStr += `microsteps: ${this.microsteps}\n`;
+    if (this.rotation_distance) configStr += `rotation_distance: ${this.rotation_distance}\n`;
+    if (this.endstop_pin) configStr += `endstop_pin: ${this.endstop_pin}\n`;
+    if (this.position_endstop) configStr += `position_endstop: ${this.position_endstop}\n`;
+    if (this.position_min) configStr += `position_min: ${this.position_min}\n`;
+    if (this.position_max) configStr += `position_max: ${this.position_max}\n`;
     return configStr.trim();
   }
 

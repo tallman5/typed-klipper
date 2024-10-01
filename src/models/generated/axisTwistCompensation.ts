@@ -25,18 +25,15 @@ export class AxisTwistCompensation extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `calibrate_start_x: ${this.calibrate_start_x}
 `;
     configStr += `calibrate_end_x: ${this.calibrate_end_x}
 `;
     configStr += `calibrate_y: ${this.calibrate_y}
 `;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}
-`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}\n`;
     return configStr.trim();
   }
 

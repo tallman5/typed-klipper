@@ -37,30 +37,18 @@ export class Mcp4728 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.i2c_address) configStr += `i2c_address: ${this.i2c_address}
-`;
-    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}
-`;
-    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}
-`;
-    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}
-`;
-    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}
-`;
-    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}
-`;
-    if (this.channel_a) configStr += `channel_a: ${this.channel_a}
-`;
-    if (this.channel_b) configStr += `channel_b: ${this.channel_b}
-`;
-    if (this.channel_c) configStr += `channel_c: ${this.channel_c}
-`;
-    if (this.channel_d) configStr += `channel_d: ${this.channel_d}
-`;
-    if (this.scale) configStr += `scale: ${this.scale}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.i2c_address) configStr += `i2c_address: ${this.i2c_address}\n`;
+    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}\n`;
+    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}\n`;
+    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}\n`;
+    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}\n`;
+    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}\n`;
+    if (this.channel_a) configStr += `channel_a: ${this.channel_a}\n`;
+    if (this.channel_b) configStr += `channel_b: ${this.channel_b}\n`;
+    if (this.channel_c) configStr += `channel_c: ${this.channel_c}\n`;
+    if (this.channel_d) configStr += `channel_d: ${this.channel_d}\n`;
+    if (this.scale) configStr += `scale: ${this.scale}\n`;
     return configStr.trim();
   }
 

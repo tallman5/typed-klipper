@@ -17,10 +17,8 @@ export class PauseResume extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.recover_velocity) configStr += `recover_velocity: ${this.recover_velocity}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.recover_velocity) configStr += `recover_velocity: ${this.recover_velocity}\n`;
     return configStr.trim();
   }
 

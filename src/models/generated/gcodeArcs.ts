@@ -17,10 +17,8 @@ export class GcodeArcs extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.resolution) configStr += `resolution: ${this.resolution}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.resolution) configStr += `resolution: ${this.resolution}\n`;
     return configStr.trim();
   }
 

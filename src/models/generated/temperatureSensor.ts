@@ -25,18 +25,12 @@ export class TemperatureSensor extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}
-`;
-    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}
-`;
-    if (this.min_temp) configStr += `min_temp: ${this.min_temp}
-`;
-    if (this.max_temp) configStr += `max_temp: ${this.max_temp}
-`;
-    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}\n`;
+    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}\n`;
+    if (this.min_temp) configStr += `min_temp: ${this.min_temp}\n`;
+    if (this.max_temp) configStr += `max_temp: ${this.max_temp}\n`;
+    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}\n`;
     return configStr.trim();
   }
 

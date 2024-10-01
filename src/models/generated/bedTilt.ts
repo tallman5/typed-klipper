@@ -27,20 +27,13 @@ export class BedTilt extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.x_adjust) configStr += `x_adjust: ${this.x_adjust}
-`;
-    if (this.y_adjust) configStr += `y_adjust: ${this.y_adjust}
-`;
-    if (this.z_adjust) configStr += `z_adjust: ${this.z_adjust}
-`;
-    if (this.points) configStr += `points: ${this.points}
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.x_adjust) configStr += `x_adjust: ${this.x_adjust}\n`;
+    if (this.y_adjust) configStr += `y_adjust: ${this.y_adjust}\n`;
+    if (this.z_adjust) configStr += `z_adjust: ${this.z_adjust}\n`;
+    if (this.points) configStr += `points: ${this.points}\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}\n`;
     return configStr.trim();
   }
 

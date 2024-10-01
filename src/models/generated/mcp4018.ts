@@ -23,16 +23,14 @@ export class Mcp4018 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `scl_pin: ${this.scl_pin}
 `;
     configStr += `sda_pin: ${this.sda_pin}
 `;
     configStr += `wiper: ${this.wiper}
 `;
-    if (this.scale) configStr += `scale: ${this.scale}
-`;
+    if (this.scale) configStr += `scale: ${this.scale}\n`;
     return configStr.trim();
   }
 

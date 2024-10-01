@@ -59,52 +59,31 @@ export class Tmc2208 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `uart_pin: ${this.uart_pin}
 `;
     configStr += `run_current: ${this.run_current}
 `;
-    if (this.tx_pin) configStr += `tx_pin: ${this.tx_pin}
-`;
-    if (this.select_pins) configStr += `select_pins: ${this.select_pins}
-`;
-    if (this.interpolate) configStr += `interpolate: ${this.interpolate}
-`;
-    if (this.hold_current) configStr += `hold_current: ${this.hold_current}
-`;
-    if (this.sense_resistor) configStr += `sense_resistor: ${this.sense_resistor}
-`;
-    if (this.stealthchop_threshold) configStr += `stealthchop_threshold: ${this.stealthchop_threshold}
-`;
-    if (this.driver_MULTISTEP_FILT) configStr += `driver_MULTISTEP_FILT: ${this.driver_MULTISTEP_FILT}
-`;
-    if (this.driver_IHOLDDELAY) configStr += `driver_IHOLDDELAY: ${this.driver_IHOLDDELAY}
-`;
-    if (this.driver_TPOWERDOWN) configStr += `driver_TPOWERDOWN: ${this.driver_TPOWERDOWN}
-`;
-    if (this.driver_TBL) configStr += `driver_TBL: ${this.driver_TBL}
-`;
-    if (this.driver_TOFF) configStr += `driver_TOFF: ${this.driver_TOFF}
-`;
-    if (this.driver_HEND) configStr += `driver_HEND: ${this.driver_HEND}
-`;
-    if (this.driver_HSTRT) configStr += `driver_HSTRT: ${this.driver_HSTRT}
-`;
-    if (this.driver_PWM_AUTOGRAD) configStr += `driver_PWM_AUTOGRAD: ${this.driver_PWM_AUTOGRAD}
-`;
-    if (this.driver_PWM_AUTOSCALE) configStr += `driver_PWM_AUTOSCALE: ${this.driver_PWM_AUTOSCALE}
-`;
-    if (this.driver_PWM_LIM) configStr += `driver_PWM_LIM: ${this.driver_PWM_LIM}
-`;
-    if (this.driver_PWM_REG) configStr += `driver_PWM_REG: ${this.driver_PWM_REG}
-`;
-    if (this.driver_PWM_FREQ) configStr += `driver_PWM_FREQ: ${this.driver_PWM_FREQ}
-`;
-    if (this.driver_PWM_GRAD) configStr += `driver_PWM_GRAD: ${this.driver_PWM_GRAD}
-`;
-    if (this.driver_PWM_OFS) configStr += `driver_PWM_OFS: ${this.driver_PWM_OFS}
-`;
+    if (this.tx_pin) configStr += `tx_pin: ${this.tx_pin}\n`;
+    if (this.select_pins) configStr += `select_pins: ${this.select_pins}\n`;
+    if (this.interpolate) configStr += `interpolate: ${this.interpolate}\n`;
+    if (this.hold_current) configStr += `hold_current: ${this.hold_current}\n`;
+    if (this.sense_resistor) configStr += `sense_resistor: ${this.sense_resistor}\n`;
+    if (this.stealthchop_threshold) configStr += `stealthchop_threshold: ${this.stealthchop_threshold}\n`;
+    if (this.driver_MULTISTEP_FILT) configStr += `driver_MULTISTEP_FILT: ${this.driver_MULTISTEP_FILT}\n`;
+    if (this.driver_IHOLDDELAY) configStr += `driver_IHOLDDELAY: ${this.driver_IHOLDDELAY}\n`;
+    if (this.driver_TPOWERDOWN) configStr += `driver_TPOWERDOWN: ${this.driver_TPOWERDOWN}\n`;
+    if (this.driver_TBL) configStr += `driver_TBL: ${this.driver_TBL}\n`;
+    if (this.driver_TOFF) configStr += `driver_TOFF: ${this.driver_TOFF}\n`;
+    if (this.driver_HEND) configStr += `driver_HEND: ${this.driver_HEND}\n`;
+    if (this.driver_HSTRT) configStr += `driver_HSTRT: ${this.driver_HSTRT}\n`;
+    if (this.driver_PWM_AUTOGRAD) configStr += `driver_PWM_AUTOGRAD: ${this.driver_PWM_AUTOGRAD}\n`;
+    if (this.driver_PWM_AUTOSCALE) configStr += `driver_PWM_AUTOSCALE: ${this.driver_PWM_AUTOSCALE}\n`;
+    if (this.driver_PWM_LIM) configStr += `driver_PWM_LIM: ${this.driver_PWM_LIM}\n`;
+    if (this.driver_PWM_REG) configStr += `driver_PWM_REG: ${this.driver_PWM_REG}\n`;
+    if (this.driver_PWM_FREQ) configStr += `driver_PWM_FREQ: ${this.driver_PWM_FREQ}\n`;
+    if (this.driver_PWM_GRAD) configStr += `driver_PWM_GRAD: ${this.driver_PWM_GRAD}\n`;
+    if (this.driver_PWM_OFS) configStr += `driver_PWM_OFS: ${this.driver_PWM_OFS}\n`;
     return configStr.trim();
   }
 

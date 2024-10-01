@@ -23,16 +23,11 @@ export class FirmwareRetraction extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.retract_length) configStr += `retract_length: ${this.retract_length}
-`;
-    if (this.retract_speed) configStr += `retract_speed: ${this.retract_speed}
-`;
-    if (this.unretract_extra_length) configStr += `unretract_extra_length: ${this.unretract_extra_length}
-`;
-    if (this.unretract_speed) configStr += `unretract_speed: ${this.unretract_speed}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.retract_length) configStr += `retract_length: ${this.retract_length}\n`;
+    if (this.retract_speed) configStr += `retract_speed: ${this.retract_speed}\n`;
+    if (this.unretract_extra_length) configStr += `unretract_extra_length: ${this.unretract_extra_length}\n`;
+    if (this.unretract_speed) configStr += `unretract_speed: ${this.unretract_speed}\n`;
     return configStr.trim();
   }
 

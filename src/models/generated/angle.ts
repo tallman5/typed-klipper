@@ -33,26 +33,18 @@ export class Angle extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `sensor_type: ${this.sensor_type}
 `;
     configStr += `cs_pin: ${this.cs_pin}
 `;
-    if (this.sample_period) configStr += `sample_period: ${this.sample_period}
-`;
-    if (this.stepper) configStr += `stepper: ${this.stepper}
-`;
-    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}
-`;
-    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}
-`;
-    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}
-`;
-    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}
-`;
-    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}
-`;
+    if (this.sample_period) configStr += `sample_period: ${this.sample_period}\n`;
+    if (this.stepper) configStr += `stepper: ${this.stepper}\n`;
+    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}\n`;
+    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}\n`;
+    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}\n`;
+    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}\n`;
+    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}\n`;
     return configStr.trim();
   }
 

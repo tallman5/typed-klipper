@@ -25,18 +25,13 @@ export class SafeZHome extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `home_xy_position: ${this.home_xy_position}
 `;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.z_hop) configStr += `z_hop: ${this.z_hop}
-`;
-    if (this.z_hop_speed) configStr += `z_hop_speed: ${this.z_hop_speed}
-`;
-    if (this.move_to_previous) configStr += `move_to_previous: ${this.move_to_previous}
-`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.z_hop) configStr += `z_hop: ${this.z_hop}\n`;
+    if (this.z_hop_speed) configStr += `z_hop_speed: ${this.z_hop_speed}\n`;
+    if (this.move_to_previous) configStr += `move_to_previous: ${this.move_to_previous}\n`;
     return configStr.trim();
   }
 

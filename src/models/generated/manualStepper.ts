@@ -31,24 +31,15 @@ export class ManualStepper extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.step_pin) configStr += `step_pin: ${this.step_pin}
-`;
-    if (this.dir_pin) configStr += `dir_pin: ${this.dir_pin}
-`;
-    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}
-`;
-    if (this.microsteps) configStr += `microsteps: ${this.microsteps}
-`;
-    if (this.rotation_distance) configStr += `rotation_distance: ${this.rotation_distance}
-`;
-    if (this.velocity) configStr += `velocity: ${this.velocity}
-`;
-    if (this.accel) configStr += `accel: ${this.accel}
-`;
-    if (this.endstop_pin) configStr += `endstop_pin: ${this.endstop_pin}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.step_pin) configStr += `step_pin: ${this.step_pin}\n`;
+    if (this.dir_pin) configStr += `dir_pin: ${this.dir_pin}\n`;
+    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}\n`;
+    if (this.microsteps) configStr += `microsteps: ${this.microsteps}\n`;
+    if (this.rotation_distance) configStr += `rotation_distance: ${this.rotation_distance}\n`;
+    if (this.velocity) configStr += `velocity: ${this.velocity}\n`;
+    if (this.accel) configStr += `accel: ${this.accel}\n`;
+    if (this.endstop_pin) configStr += `endstop_pin: ${this.endstop_pin}\n`;
     return configStr.trim();
   }
 

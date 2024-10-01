@@ -23,16 +23,11 @@ export class VerifyHeater extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.max_error) configStr += `max_error: ${this.max_error}
-`;
-    if (this.check_gain_time) configStr += `check_gain_time: ${this.check_gain_time}
-`;
-    if (this.hysteresis) configStr += `hysteresis: ${this.hysteresis}
-`;
-    if (this.heating_gain) configStr += `heating_gain: ${this.heating_gain}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.max_error) configStr += `max_error: ${this.max_error}\n`;
+    if (this.check_gain_time) configStr += `check_gain_time: ${this.check_gain_time}\n`;
+    if (this.hysteresis) configStr += `hysteresis: ${this.hysteresis}\n`;
+    if (this.heating_gain) configStr += `heating_gain: ${this.heating_gain}\n`;
     return configStr.trim();
   }
 

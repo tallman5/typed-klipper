@@ -25,18 +25,13 @@ export class Mcu extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `serial: ${this.serial}
 `;
-    if (this.baud) configStr += `baud: ${this.baud}
-`;
-    if (this.canbus_uuid) configStr += `canbus_uuid: ${this.canbus_uuid}
-`;
-    if (this.canbus_interface) configStr += `canbus_interface: ${this.canbus_interface}
-`;
-    if (this.restart_method) configStr += `restart_method: ${this.restart_method}
-`;
+    if (this.baud) configStr += `baud: ${this.baud}\n`;
+    if (this.canbus_uuid) configStr += `canbus_uuid: ${this.canbus_uuid}\n`;
+    if (this.canbus_interface) configStr += `canbus_interface: ${this.canbus_interface}\n`;
+    if (this.restart_method) configStr += `restart_method: ${this.restart_method}\n`;
     return configStr.trim();
   }
 

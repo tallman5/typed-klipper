@@ -21,14 +21,12 @@ export class AdcScaled extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `vref_pin: ${this.vref_pin}
 `;
     configStr += `vssa_pin: ${this.vssa_pin}
 `;
-    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}
-`;
+    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}\n`;
     return configStr.trim();
   }
 

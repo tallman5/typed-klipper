@@ -17,10 +17,8 @@ export class ForceMove extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.enable_force_move) configStr += `enable_force_move: ${this.enable_force_move}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.enable_force_move) configStr += `enable_force_move: ${this.enable_force_move}\n`;
     return configStr.trim();
   }
 

@@ -47,40 +47,25 @@ export class SmartEffector extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `pin: ${this.pin}
 `;
     configStr += `z_offset: ${this.z_offset}
 `;
-    if (this.control_pin) configStr += `control_pin: ${this.control_pin}
-`;
-    if (this.probe_accel) configStr += `probe_accel: ${this.probe_accel}
-`;
-    if (this.recovery_time) configStr += `recovery_time: ${this.recovery_time}
-`;
-    if (this.x_offset) configStr += `x_offset: ${this.x_offset}
-`;
-    if (this.y_offset) configStr += `y_offset: ${this.y_offset}
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.samples) configStr += `samples: ${this.samples}
-`;
-    if (this.sample_retract_dist) configStr += `sample_retract_dist: ${this.sample_retract_dist}
-`;
-    if (this.samples_result) configStr += `samples_result: ${this.samples_result}
-`;
-    if (this.samples_tolerance) configStr += `samples_tolerance: ${this.samples_tolerance}
-`;
-    if (this.samples_tolerance_retries) configStr += `samples_tolerance_retries: ${this.samples_tolerance_retries}
-`;
-    if (this.activate_gcode) configStr += `activate_gcode: ${this.activate_gcode}
-`;
-    if (this.deactivate_gcode) configStr += `deactivate_gcode: ${this.deactivate_gcode}
-`;
-    if (this.deactivate_on_each_sample) configStr += `deactivate_on_each_sample: ${this.deactivate_on_each_sample}
-`;
+    if (this.control_pin) configStr += `control_pin: ${this.control_pin}\n`;
+    if (this.probe_accel) configStr += `probe_accel: ${this.probe_accel}\n`;
+    if (this.recovery_time) configStr += `recovery_time: ${this.recovery_time}\n`;
+    if (this.x_offset) configStr += `x_offset: ${this.x_offset}\n`;
+    if (this.y_offset) configStr += `y_offset: ${this.y_offset}\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.samples) configStr += `samples: ${this.samples}\n`;
+    if (this.sample_retract_dist) configStr += `sample_retract_dist: ${this.sample_retract_dist}\n`;
+    if (this.samples_result) configStr += `samples_result: ${this.samples_result}\n`;
+    if (this.samples_tolerance) configStr += `samples_tolerance: ${this.samples_tolerance}\n`;
+    if (this.samples_tolerance_retries) configStr += `samples_tolerance_retries: ${this.samples_tolerance_retries}\n`;
+    if (this.activate_gcode) configStr += `activate_gcode: ${this.activate_gcode}\n`;
+    if (this.deactivate_gcode) configStr += `deactivate_gcode: ${this.deactivate_gcode}\n`;
+    if (this.deactivate_on_each_sample) configStr += `deactivate_on_each_sample: ${this.deactivate_on_each_sample}\n`;
     return configStr.trim();
   }
 

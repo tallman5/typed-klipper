@@ -35,28 +35,17 @@ export class Led extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.red_pin) configStr += `red_pin: ${this.red_pin}
-`;
-    if (this.green_pin) configStr += `green_pin: ${this.green_pin}
-`;
-    if (this.blue_pin) configStr += `blue_pin: ${this.blue_pin}
-`;
-    if (this.white_pin) configStr += `white_pin: ${this.white_pin}
-`;
-    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}
-`;
-    if (this.hardware_pwm) configStr += `hardware_pwm: ${this.hardware_pwm}
-`;
-    if (this.initial_RED) configStr += `initial_RED: ${this.initial_RED}
-`;
-    if (this.initial_GREEN) configStr += `initial_GREEN: ${this.initial_GREEN}
-`;
-    if (this.initial_BLUE) configStr += `initial_BLUE: ${this.initial_BLUE}
-`;
-    if (this.initial_WHITE) configStr += `initial_WHITE: ${this.initial_WHITE}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.red_pin) configStr += `red_pin: ${this.red_pin}\n`;
+    if (this.green_pin) configStr += `green_pin: ${this.green_pin}\n`;
+    if (this.blue_pin) configStr += `blue_pin: ${this.blue_pin}\n`;
+    if (this.white_pin) configStr += `white_pin: ${this.white_pin}\n`;
+    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}\n`;
+    if (this.hardware_pwm) configStr += `hardware_pwm: ${this.hardware_pwm}\n`;
+    if (this.initial_RED) configStr += `initial_RED: ${this.initial_RED}\n`;
+    if (this.initial_GREEN) configStr += `initial_GREEN: ${this.initial_GREEN}\n`;
+    if (this.initial_BLUE) configStr += `initial_BLUE: ${this.initial_BLUE}\n`;
+    if (this.initial_WHITE) configStr += `initial_WHITE: ${this.initial_WHITE}\n`;
     return configStr.trim();
   }
 

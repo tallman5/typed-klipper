@@ -17,8 +17,7 @@ export class ExcludeObject extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     
     return configStr.trim();
   }

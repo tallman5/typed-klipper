@@ -25,18 +25,13 @@ export class GcodeButton extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `pin: ${this.pin}
 `;
-    if (this.analog_range) configStr += `analog_range: ${this.analog_range}
-`;
-    if (this.analog_pullup_resistor) configStr += `analog_pullup_resistor: ${this.analog_pullup_resistor}
-`;
-    if (this.press_gcode) configStr += `press_gcode: ${this.press_gcode}
-`;
-    if (this.release_gcode) configStr += `release_gcode: ${this.release_gcode}
-`;
+    if (this.analog_range) configStr += `analog_range: ${this.analog_range}\n`;
+    if (this.analog_pullup_resistor) configStr += `analog_pullup_resistor: ${this.analog_pullup_resistor}\n`;
+    if (this.press_gcode) configStr += `press_gcode: ${this.press_gcode}\n`;
+    if (this.release_gcode) configStr += `release_gcode: ${this.release_gcode}\n`;
     return configStr.trim();
   }
 

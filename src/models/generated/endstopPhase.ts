@@ -21,14 +21,10 @@ export class EndstopPhase extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.endstop_accuracy) configStr += `endstop_accuracy: ${this.endstop_accuracy}
-`;
-    if (this.trigger_phase) configStr += `trigger_phase: ${this.trigger_phase}
-`;
-    if (this.endstop_align_zero) configStr += `endstop_align_zero: ${this.endstop_align_zero}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.endstop_accuracy) configStr += `endstop_accuracy: ${this.endstop_accuracy}\n`;
+    if (this.trigger_phase) configStr += `trigger_phase: ${this.trigger_phase}\n`;
+    if (this.endstop_align_zero) configStr += `endstop_align_zero: ${this.endstop_align_zero}\n`;
     return configStr.trim();
   }
 

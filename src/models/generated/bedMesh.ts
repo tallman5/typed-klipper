@@ -57,50 +57,28 @@ export class BedMesh extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}
-`;
-    if (this.mesh_radius) configStr += `mesh_radius: ${this.mesh_radius}
-`;
-    if (this.mesh_origin) configStr += `mesh_origin: ${this.mesh_origin}
-`;
-    if (this.mesh_min) configStr += `mesh_min: ${this.mesh_min}
-`;
-    if (this.mesh_max) configStr += `mesh_max: ${this.mesh_max}
-`;
-    if (this.probe_count) configStr += `probe_count: ${this.probe_count}
-`;
-    if (this.round_probe_count) configStr += `round_probe_count: ${this.round_probe_count}
-`;
-    if (this.fade_start) configStr += `fade_start: ${this.fade_start}
-`;
-    if (this.fade_end) configStr += `fade_end: ${this.fade_end}
-`;
-    if (this.fade_target) configStr += `fade_target: ${this.fade_target}
-`;
-    if (this.split_delta_z) configStr += `split_delta_z: ${this.split_delta_z}
-`;
-    if (this.move_check_distance) configStr += `move_check_distance: ${this.move_check_distance}
-`;
-    if (this.mesh_pps) configStr += `mesh_pps: ${this.mesh_pps}
-`;
-    if (this.algorithm) configStr += `algorithm: ${this.algorithm}
-`;
-    if (this.bicubic_tension) configStr += `bicubic_tension: ${this.bicubic_tension}
-`;
-    if (this.zero_reference_position) configStr += `zero_reference_position: ${this.zero_reference_position}
-`;
-    if (this.faulty_region_1_min) configStr += `faulty_region_1_min: ${this.faulty_region_1_min}
-`;
-    if (this.faulty_region_1_max) configStr += `faulty_region_1_max: ${this.faulty_region_1_max}
-`;
-    if (this.adaptive_margin) configStr += `adaptive_margin: ${this.adaptive_margin}
-`;
-    if (this.scan_overshoot) configStr += `scan_overshoot: ${this.scan_overshoot}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.horizontal_move_z) configStr += `horizontal_move_z: ${this.horizontal_move_z}\n`;
+    if (this.mesh_radius) configStr += `mesh_radius: ${this.mesh_radius}\n`;
+    if (this.mesh_origin) configStr += `mesh_origin: ${this.mesh_origin}\n`;
+    if (this.mesh_min) configStr += `mesh_min: ${this.mesh_min}\n`;
+    if (this.mesh_max) configStr += `mesh_max: ${this.mesh_max}\n`;
+    if (this.probe_count) configStr += `probe_count: ${this.probe_count}\n`;
+    if (this.round_probe_count) configStr += `round_probe_count: ${this.round_probe_count}\n`;
+    if (this.fade_start) configStr += `fade_start: ${this.fade_start}\n`;
+    if (this.fade_end) configStr += `fade_end: ${this.fade_end}\n`;
+    if (this.fade_target) configStr += `fade_target: ${this.fade_target}\n`;
+    if (this.split_delta_z) configStr += `split_delta_z: ${this.split_delta_z}\n`;
+    if (this.move_check_distance) configStr += `move_check_distance: ${this.move_check_distance}\n`;
+    if (this.mesh_pps) configStr += `mesh_pps: ${this.mesh_pps}\n`;
+    if (this.algorithm) configStr += `algorithm: ${this.algorithm}\n`;
+    if (this.bicubic_tension) configStr += `bicubic_tension: ${this.bicubic_tension}\n`;
+    if (this.zero_reference_position) configStr += `zero_reference_position: ${this.zero_reference_position}\n`;
+    if (this.faulty_region_1_min) configStr += `faulty_region_1_min: ${this.faulty_region_1_min}\n`;
+    if (this.faulty_region_1_max) configStr += `faulty_region_1_max: ${this.faulty_region_1_max}\n`;
+    if (this.adaptive_margin) configStr += `adaptive_margin: ${this.adaptive_margin}\n`;
+    if (this.scan_overshoot) configStr += `scan_overshoot: ${this.scan_overshoot}\n`;
     return configStr.trim();
   }
 

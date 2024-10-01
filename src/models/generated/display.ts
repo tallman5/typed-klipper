@@ -51,44 +51,26 @@ export class Display extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `lcd_type: ${this.lcd_type}
 `;
-    if (this.display_group) configStr += `display_group: ${this.display_group}
-`;
-    if (this.menu_timeout) configStr += `menu_timeout: ${this.menu_timeout}
-`;
-    if (this.menu_root) configStr += `menu_root: ${this.menu_root}
-`;
-    if (this.menu_reverse_navigation) configStr += `menu_reverse_navigation: ${this.menu_reverse_navigation}
-`;
-    if (this.encoder_pins) configStr += `encoder_pins: ${this.encoder_pins}
-`;
-    if (this.encoder_steps_per_detent) configStr += `encoder_steps_per_detent: ${this.encoder_steps_per_detent}
-`;
-    if (this.click_pin) configStr += `click_pin: ${this.click_pin}
-`;
-    if (this.back_pin) configStr += `back_pin: ${this.back_pin}
-`;
-    if (this.up_pin) configStr += `up_pin: ${this.up_pin}
-`;
-    if (this.down_pin) configStr += `down_pin: ${this.down_pin}
-`;
-    if (this.kill_pin) configStr += `kill_pin: ${this.kill_pin}
-`;
-    if (this.analog_pullup_resistor) configStr += `analog_pullup_resistor: ${this.analog_pullup_resistor}
-`;
-    if (this.analog_range_click_pin) configStr += `analog_range_click_pin: ${this.analog_range_click_pin}
-`;
-    if (this.analog_range_back_pin) configStr += `analog_range_back_pin: ${this.analog_range_back_pin}
-`;
-    if (this.analog_range_up_pin) configStr += `analog_range_up_pin: ${this.analog_range_up_pin}
-`;
-    if (this.analog_range_down_pin) configStr += `analog_range_down_pin: ${this.analog_range_down_pin}
-`;
-    if (this.analog_range_kill_pin) configStr += `analog_range_kill_pin: ${this.analog_range_kill_pin}
-`;
+    if (this.display_group) configStr += `display_group: ${this.display_group}\n`;
+    if (this.menu_timeout) configStr += `menu_timeout: ${this.menu_timeout}\n`;
+    if (this.menu_root) configStr += `menu_root: ${this.menu_root}\n`;
+    if (this.menu_reverse_navigation) configStr += `menu_reverse_navigation: ${this.menu_reverse_navigation}\n`;
+    if (this.encoder_pins) configStr += `encoder_pins: ${this.encoder_pins}\n`;
+    if (this.encoder_steps_per_detent) configStr += `encoder_steps_per_detent: ${this.encoder_steps_per_detent}\n`;
+    if (this.click_pin) configStr += `click_pin: ${this.click_pin}\n`;
+    if (this.back_pin) configStr += `back_pin: ${this.back_pin}\n`;
+    if (this.up_pin) configStr += `up_pin: ${this.up_pin}\n`;
+    if (this.down_pin) configStr += `down_pin: ${this.down_pin}\n`;
+    if (this.kill_pin) configStr += `kill_pin: ${this.kill_pin}\n`;
+    if (this.analog_pullup_resistor) configStr += `analog_pullup_resistor: ${this.analog_pullup_resistor}\n`;
+    if (this.analog_range_click_pin) configStr += `analog_range_click_pin: ${this.analog_range_click_pin}\n`;
+    if (this.analog_range_back_pin) configStr += `analog_range_back_pin: ${this.analog_range_back_pin}\n`;
+    if (this.analog_range_up_pin) configStr += `analog_range_up_pin: ${this.analog_range_up_pin}\n`;
+    if (this.analog_range_down_pin) configStr += `analog_range_down_pin: ${this.analog_range_down_pin}\n`;
+    if (this.analog_range_kill_pin) configStr += `analog_range_kill_pin: ${this.analog_range_kill_pin}\n`;
     return configStr.trim();
   }
 

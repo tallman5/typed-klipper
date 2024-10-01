@@ -51,44 +51,27 @@ export class Bltouch extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `sensor_pin: ${this.sensor_pin}
 `;
     configStr += `control_pin: ${this.control_pin}
 `;
-    if (this.pin_move_time) configStr += `pin_move_time: ${this.pin_move_time}
-`;
-    if (this.stow_on_each_sample) configStr += `stow_on_each_sample: ${this.stow_on_each_sample}
-`;
-    if (this.probe_with_touch_mode) configStr += `probe_with_touch_mode: ${this.probe_with_touch_mode}
-`;
-    if (this.pin_up_reports_not_triggered) configStr += `pin_up_reports_not_triggered: ${this.pin_up_reports_not_triggered}
-`;
-    if (this.pin_up_touch_mode_reports_triggered) configStr += `pin_up_touch_mode_reports_triggered: ${this.pin_up_touch_mode_reports_triggered}
-`;
-    if (this.set_output_mode) configStr += `set_output_mode: ${this.set_output_mode}
-`;
-    if (this.x_offset) configStr += `x_offset: ${this.x_offset}
-`;
-    if (this.y_offset) configStr += `y_offset: ${this.y_offset}
-`;
-    if (this.z_offset) configStr += `z_offset: ${this.z_offset}
-`;
-    if (this.speed) configStr += `speed: ${this.speed}
-`;
-    if (this.lift_speed) configStr += `lift_speed: ${this.lift_speed}
-`;
-    if (this.samples) configStr += `samples: ${this.samples}
-`;
-    if (this.sample_retract_dist) configStr += `sample_retract_dist: ${this.sample_retract_dist}
-`;
-    if (this.samples_result) configStr += `samples_result: ${this.samples_result}
-`;
-    if (this.samples_tolerance) configStr += `samples_tolerance: ${this.samples_tolerance}
-`;
-    if (this.samples_tolerance_retries) configStr += `samples_tolerance_retries: ${this.samples_tolerance_retries}
-`;
+    if (this.pin_move_time) configStr += `pin_move_time: ${this.pin_move_time}\n`;
+    if (this.stow_on_each_sample) configStr += `stow_on_each_sample: ${this.stow_on_each_sample}\n`;
+    if (this.probe_with_touch_mode) configStr += `probe_with_touch_mode: ${this.probe_with_touch_mode}\n`;
+    if (this.pin_up_reports_not_triggered) configStr += `pin_up_reports_not_triggered: ${this.pin_up_reports_not_triggered}\n`;
+    if (this.pin_up_touch_mode_reports_triggered) configStr += `pin_up_touch_mode_reports_triggered: ${this.pin_up_touch_mode_reports_triggered}\n`;
+    if (this.set_output_mode) configStr += `set_output_mode: ${this.set_output_mode}\n`;
+    if (this.x_offset) configStr += `x_offset: ${this.x_offset}\n`;
+    if (this.y_offset) configStr += `y_offset: ${this.y_offset}\n`;
+    if (this.z_offset) configStr += `z_offset: ${this.z_offset}\n`;
+    if (this.speed) configStr += `speed: ${this.speed}\n`;
+    if (this.lift_speed) configStr += `lift_speed: ${this.lift_speed}\n`;
+    if (this.samples) configStr += `samples: ${this.samples}\n`;
+    if (this.sample_retract_dist) configStr += `sample_retract_dist: ${this.sample_retract_dist}\n`;
+    if (this.samples_result) configStr += `samples_result: ${this.samples_result}\n`;
+    if (this.samples_tolerance) configStr += `samples_tolerance: ${this.samples_tolerance}\n`;
+    if (this.samples_tolerance_retries) configStr += `samples_tolerance_retries: ${this.samples_tolerance_retries}\n`;
     return configStr.trim();
   }
 

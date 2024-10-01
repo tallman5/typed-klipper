@@ -37,30 +37,19 @@ export class Mcp4451 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `i2c_address: ${this.i2c_address}
 `;
-    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}
-`;
-    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}
-`;
-    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}
-`;
-    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}
-`;
-    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}
-`;
-    if (this.wiper_0) configStr += `wiper_0: ${this.wiper_0}
-`;
-    if (this.wiper_1) configStr += `wiper_1: ${this.wiper_1}
-`;
-    if (this.wiper_2) configStr += `wiper_2: ${this.wiper_2}
-`;
-    if (this.wiper_3) configStr += `wiper_3: ${this.wiper_3}
-`;
-    if (this.scale) configStr += `scale: ${this.scale}
-`;
+    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}\n`;
+    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}\n`;
+    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}\n`;
+    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}\n`;
+    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}\n`;
+    if (this.wiper_0) configStr += `wiper_0: ${this.wiper_0}\n`;
+    if (this.wiper_1) configStr += `wiper_1: ${this.wiper_1}\n`;
+    if (this.wiper_2) configStr += `wiper_2: ${this.wiper_2}\n`;
+    if (this.wiper_3) configStr += `wiper_3: ${this.wiper_3}\n`;
+    if (this.scale) configStr += `scale: ${this.scale}\n`;
     return configStr.trim();
   }
 

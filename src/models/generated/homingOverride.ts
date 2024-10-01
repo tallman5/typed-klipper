@@ -25,18 +25,13 @@ export class HomingOverride extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `gcode: ${this.gcode}
 `;
-    if (this.axes) configStr += `axes: ${this.axes}
-`;
-    if (this.set_position_x) configStr += `set_position_x: ${this.set_position_x}
-`;
-    if (this.set_position_y) configStr += `set_position_y: ${this.set_position_y}
-`;
-    if (this.set_position_z) configStr += `set_position_z: ${this.set_position_z}
-`;
+    if (this.axes) configStr += `axes: ${this.axes}\n`;
+    if (this.set_position_x) configStr += `set_position_x: ${this.set_position_x}\n`;
+    if (this.set_position_y) configStr += `set_position_y: ${this.set_position_y}\n`;
+    if (this.set_position_z) configStr += `set_position_z: ${this.set_position_z}\n`;
     return configStr.trim();
   }
 

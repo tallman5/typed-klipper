@@ -17,8 +17,7 @@ export class LoadCell extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `sensor_type: ${this.sensor_type}
 `;
     return configStr.trim();

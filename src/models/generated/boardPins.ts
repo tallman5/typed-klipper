@@ -19,12 +19,10 @@ export class BoardPins extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `aliases: ${this.aliases}
 `;
-    if (this.mcu) configStr += `mcu: ${this.mcu}
-`;
+    if (this.mcu) configStr += `mcu: ${this.mcu}\n`;
     return configStr.trim();
   }
 

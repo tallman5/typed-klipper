@@ -55,48 +55,29 @@ export class HallFilamentWidthSensor extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `adc1: ${this.adc1}
 `;
     configStr += `adc2: ${this.adc2}
 `;
-    if (this.cal_dia1) configStr += `cal_dia1: ${this.cal_dia1}
-`;
-    if (this.cal_dia2) configStr += `cal_dia2: ${this.cal_dia2}
-`;
-    if (this.raw_dia1) configStr += `raw_dia1: ${this.raw_dia1}
-`;
-    if (this.raw_dia2) configStr += `raw_dia2: ${this.raw_dia2}
-`;
-    if (this.default_nominal_filament_diameter) configStr += `default_nominal_filament_diameter: ${this.default_nominal_filament_diameter}
-`;
-    if (this.max_difference) configStr += `max_difference: ${this.max_difference}
-`;
-    if (this.measurement_delay) configStr += `measurement_delay: ${this.measurement_delay}
-`;
-    if (this.enable) configStr += `enable: ${this.enable}
-`;
-    if (this.measurement_interval) configStr += `measurement_interval: ${this.measurement_interval}
-`;
-    if (this.logging) configStr += `logging: ${this.logging}
-`;
-    if (this.min_diameter) configStr += `min_diameter: ${this.min_diameter}
-`;
-    if (this.max_diameter) configStr += `max_diameter: ${this.max_diameter}
-`;
-    if (this.use_current_dia_while_delay) configStr += `use_current_dia_while_delay: ${this.use_current_dia_while_delay}
-`;
-    if (this.pause_on_runout) configStr += `pause_on_runout: ${this.pause_on_runout}
-`;
-    if (this.runout_gcode) configStr += `runout_gcode: ${this.runout_gcode}
-`;
-    if (this.insert_gcode) configStr += `insert_gcode: ${this.insert_gcode}
-`;
-    if (this.event_delay) configStr += `event_delay: ${this.event_delay}
-`;
-    if (this.pause_delay) configStr += `pause_delay: ${this.pause_delay}
-`;
+    if (this.cal_dia1) configStr += `cal_dia1: ${this.cal_dia1}\n`;
+    if (this.cal_dia2) configStr += `cal_dia2: ${this.cal_dia2}\n`;
+    if (this.raw_dia1) configStr += `raw_dia1: ${this.raw_dia1}\n`;
+    if (this.raw_dia2) configStr += `raw_dia2: ${this.raw_dia2}\n`;
+    if (this.default_nominal_filament_diameter) configStr += `default_nominal_filament_diameter: ${this.default_nominal_filament_diameter}\n`;
+    if (this.max_difference) configStr += `max_difference: ${this.max_difference}\n`;
+    if (this.measurement_delay) configStr += `measurement_delay: ${this.measurement_delay}\n`;
+    if (this.enable) configStr += `enable: ${this.enable}\n`;
+    if (this.measurement_interval) configStr += `measurement_interval: ${this.measurement_interval}\n`;
+    if (this.logging) configStr += `logging: ${this.logging}\n`;
+    if (this.min_diameter) configStr += `min_diameter: ${this.min_diameter}\n`;
+    if (this.max_diameter) configStr += `max_diameter: ${this.max_diameter}\n`;
+    if (this.use_current_dia_while_delay) configStr += `use_current_dia_while_delay: ${this.use_current_dia_while_delay}\n`;
+    if (this.pause_on_runout) configStr += `pause_on_runout: ${this.pause_on_runout}\n`;
+    if (this.runout_gcode) configStr += `runout_gcode: ${this.runout_gcode}\n`;
+    if (this.insert_gcode) configStr += `insert_gcode: ${this.insert_gcode}\n`;
+    if (this.event_delay) configStr += `event_delay: ${this.event_delay}\n`;
+    if (this.pause_delay) configStr += `pause_delay: ${this.pause_delay}\n`;
     return configStr.trim();
   }
 

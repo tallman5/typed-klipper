@@ -19,12 +19,10 @@ export class VirtualSdcard extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `path: ${this.path}
 `;
-    if (this.on_error_gcode) configStr += `on_error_gcode: ${this.on_error_gcode}
-`;
+    if (this.on_error_gcode) configStr += `on_error_gcode: ${this.on_error_gcode}\n`;
     return configStr.trim();
   }
 

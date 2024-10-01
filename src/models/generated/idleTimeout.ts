@@ -19,12 +19,9 @@ export class IdleTimeout extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.gcode) configStr += `gcode: ${this.gcode}
-`;
-    if (this.timeout) configStr += `timeout: ${this.timeout}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.gcode) configStr += `gcode: ${this.gcode}\n`;
+    if (this.timeout) configStr += `timeout: ${this.timeout}\n`;
     return configStr.trim();
   }
 

@@ -27,20 +27,13 @@ export class FilamentSwitchSensor extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.pause_on_runout) configStr += `pause_on_runout: ${this.pause_on_runout}
-`;
-    if (this.runout_gcode) configStr += `runout_gcode: ${this.runout_gcode}
-`;
-    if (this.insert_gcode) configStr += `insert_gcode: ${this.insert_gcode}
-`;
-    if (this.event_delay) configStr += `event_delay: ${this.event_delay}
-`;
-    if (this.pause_delay) configStr += `pause_delay: ${this.pause_delay}
-`;
-    if (this.switch_pin) configStr += `switch_pin: ${this.switch_pin}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.pause_on_runout) configStr += `pause_on_runout: ${this.pause_on_runout}\n`;
+    if (this.runout_gcode) configStr += `runout_gcode: ${this.runout_gcode}\n`;
+    if (this.insert_gcode) configStr += `insert_gcode: ${this.insert_gcode}\n`;
+    if (this.event_delay) configStr += `event_delay: ${this.event_delay}\n`;
+    if (this.pause_delay) configStr += `pause_delay: ${this.pause_delay}\n`;
+    if (this.switch_pin) configStr += `switch_pin: ${this.switch_pin}\n`;
     return configStr.trim();
   }
 

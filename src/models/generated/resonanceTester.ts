@@ -33,26 +33,16 @@ export class ResonanceTester extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.probe_points) configStr += `probe_points: ${this.probe_points}
-`;
-    if (this.accel_chip) configStr += `accel_chip: ${this.accel_chip}
-`;
-    if (this.accel_chip_x) configStr += `accel_chip_x: ${this.accel_chip_x}
-`;
-    if (this.accel_chip_y) configStr += `accel_chip_y: ${this.accel_chip_y}
-`;
-    if (this.max_smoothing) configStr += `max_smoothing: ${this.max_smoothing}
-`;
-    if (this.min_freq) configStr += `min_freq: ${this.min_freq}
-`;
-    if (this.max_freq) configStr += `max_freq: ${this.max_freq}
-`;
-    if (this.accel_per_hz) configStr += `accel_per_hz: ${this.accel_per_hz}
-`;
-    if (this.hz_per_sec) configStr += `hz_per_sec: ${this.hz_per_sec}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.probe_points) configStr += `probe_points: ${this.probe_points}\n`;
+    if (this.accel_chip) configStr += `accel_chip: ${this.accel_chip}\n`;
+    if (this.accel_chip_x) configStr += `accel_chip_x: ${this.accel_chip_x}\n`;
+    if (this.accel_chip_y) configStr += `accel_chip_y: ${this.accel_chip_y}\n`;
+    if (this.max_smoothing) configStr += `max_smoothing: ${this.max_smoothing}\n`;
+    if (this.min_freq) configStr += `min_freq: ${this.min_freq}\n`;
+    if (this.max_freq) configStr += `max_freq: ${this.max_freq}\n`;
+    if (this.accel_per_hz) configStr += `accel_per_hz: ${this.accel_per_hz}\n`;
+    if (this.hz_per_sec) configStr += `hz_per_sec: ${this.hz_per_sec}\n`;
     return configStr.trim();
   }
 

@@ -27,20 +27,15 @@ export class Dotstar extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `data_pin: ${this.data_pin}
 `;
     configStr += `clock_pin: ${this.clock_pin}
 `;
-    if (this.chain_count) configStr += `chain_count: ${this.chain_count}
-`;
-    if (this.initial_RED) configStr += `initial_RED: ${this.initial_RED}
-`;
-    if (this.initial_GREEN) configStr += `initial_GREEN: ${this.initial_GREEN}
-`;
-    if (this.initial_BLUE) configStr += `initial_BLUE: ${this.initial_BLUE}
-`;
+    if (this.chain_count) configStr += `chain_count: ${this.chain_count}\n`;
+    if (this.initial_RED) configStr += `initial_RED: ${this.initial_RED}\n`;
+    if (this.initial_GREEN) configStr += `initial_GREEN: ${this.initial_GREEN}\n`;
+    if (this.initial_BLUE) configStr += `initial_BLUE: ${this.initial_BLUE}\n`;
     return configStr.trim();
   }
 

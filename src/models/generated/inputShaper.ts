@@ -29,22 +29,14 @@ export class InputShaper extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.shaper_freq_x) configStr += `shaper_freq_x: ${this.shaper_freq_x}
-`;
-    if (this.shaper_freq_y) configStr += `shaper_freq_y: ${this.shaper_freq_y}
-`;
-    if (this.shaper_type) configStr += `shaper_type: ${this.shaper_type}
-`;
-    if (this.shaper_type_x) configStr += `shaper_type_x: ${this.shaper_type_x}
-`;
-    if (this.shaper_type_y) configStr += `shaper_type_y: ${this.shaper_type_y}
-`;
-    if (this.damping_ratio_x) configStr += `damping_ratio_x: ${this.damping_ratio_x}
-`;
-    if (this.damping_ratio_y) configStr += `damping_ratio_y: ${this.damping_ratio_y}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.shaper_freq_x) configStr += `shaper_freq_x: ${this.shaper_freq_x}\n`;
+    if (this.shaper_freq_y) configStr += `shaper_freq_y: ${this.shaper_freq_y}\n`;
+    if (this.shaper_type) configStr += `shaper_type: ${this.shaper_type}\n`;
+    if (this.shaper_type_x) configStr += `shaper_type_x: ${this.shaper_type_x}\n`;
+    if (this.shaper_type_y) configStr += `shaper_type_y: ${this.shaper_type_y}\n`;
+    if (this.damping_ratio_x) configStr += `damping_ratio_x: ${this.damping_ratio_x}\n`;
+    if (this.damping_ratio_y) configStr += `damping_ratio_y: ${this.damping_ratio_y}\n`;
     return configStr.trim();
   }
 

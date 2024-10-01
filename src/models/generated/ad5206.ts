@@ -41,34 +41,21 @@ export class Ad5206 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `enable_pin: ${this.enable_pin}
 `;
-    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}
-`;
-    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}
-`;
-    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}
-`;
-    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}
-`;
-    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}
-`;
-    if (this.channel_1) configStr += `channel_1: ${this.channel_1}
-`;
-    if (this.channel_2) configStr += `channel_2: ${this.channel_2}
-`;
-    if (this.channel_3) configStr += `channel_3: ${this.channel_3}
-`;
-    if (this.channel_4) configStr += `channel_4: ${this.channel_4}
-`;
-    if (this.channel_5) configStr += `channel_5: ${this.channel_5}
-`;
-    if (this.channel_6) configStr += `channel_6: ${this.channel_6}
-`;
-    if (this.scale) configStr += `scale: ${this.scale}
-`;
+    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}\n`;
+    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}\n`;
+    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}\n`;
+    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}\n`;
+    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}\n`;
+    if (this.channel_1) configStr += `channel_1: ${this.channel_1}\n`;
+    if (this.channel_2) configStr += `channel_2: ${this.channel_2}\n`;
+    if (this.channel_3) configStr += `channel_3: ${this.channel_3}\n`;
+    if (this.channel_4) configStr += `channel_4: ${this.channel_4}\n`;
+    if (this.channel_5) configStr += `channel_5: ${this.channel_5}\n`;
+    if (this.channel_6) configStr += `channel_6: ${this.channel_6}\n`;
+    if (this.scale) configStr += `scale: ${this.scale}\n`;
     return configStr.trim();
   }
 

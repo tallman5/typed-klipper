@@ -27,8 +27,7 @@ export class HeaterBed extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `heater_pin: ${this.heater_pin}
 `;
     configStr += `sensor_type: ${this.sensor_type}

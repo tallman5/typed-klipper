@@ -19,12 +19,9 @@ export class Respond extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.default_type) configStr += `default_type: ${this.default_type}
-`;
-    if (this.default_prefix) configStr += `default_prefix: ${this.default_prefix}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.default_type) configStr += `default_type: ${this.default_type}\n`;
+    if (this.default_prefix) configStr += `default_prefix: ${this.default_prefix}\n`;
     return configStr.trim();
   }
 

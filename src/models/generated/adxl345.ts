@@ -31,24 +31,16 @@ export class Adxl345 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `cs_pin: ${this.cs_pin}
 `;
-    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}
-`;
-    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}
-`;
-    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}
-`;
-    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}
-`;
-    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}
-`;
-    if (this.axes_map) configStr += `axes_map: ${this.axes_map}
-`;
-    if (this.rate) configStr += `rate: ${this.rate}
-`;
+    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}\n`;
+    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}\n`;
+    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}\n`;
+    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}\n`;
+    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}\n`;
+    if (this.axes_map) configStr += `axes_map: ${this.axes_map}\n`;
+    if (this.rate) configStr += `rate: ${this.rate}\n`;
     return configStr.trim();
   }
 

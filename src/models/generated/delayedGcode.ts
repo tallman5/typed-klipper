@@ -19,12 +19,10 @@ export class DelayedGcode extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `gcode: ${this.gcode}
 `;
-    if (this.initial_duration) configStr += `initial_duration: ${this.initial_duration}
-`;
+    if (this.initial_duration) configStr += `initial_duration: ${this.initial_duration}\n`;
     return configStr.trim();
   }
 

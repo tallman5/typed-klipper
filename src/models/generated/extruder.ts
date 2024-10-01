@@ -77,8 +77,7 @@ export class Extruder extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `step_pin: ${this.step_pin}
 `;
     configStr += `dir_pin: ${this.dir_pin}
@@ -111,36 +110,21 @@ export class Extruder extends ConfigurableComponent {
 `;
     configStr += `max_temp: ${this.max_temp}
 `;
-    if (this.full_steps_per_rotation) configStr += `full_steps_per_rotation: ${this.full_steps_per_rotation}
-`;
-    if (this.gear_ratio) configStr += `gear_ratio: ${this.gear_ratio}
-`;
-    if (this.max_extrude_cross_section) configStr += `max_extrude_cross_section: ${this.max_extrude_cross_section}
-`;
-    if (this.instantaneous_corner_velocity) configStr += `instantaneous_corner_velocity: ${this.instantaneous_corner_velocity}
-`;
-    if (this.max_extrude_only_distance) configStr += `max_extrude_only_distance: ${this.max_extrude_only_distance}
-`;
-    if (this.max_extrude_only_velocity) configStr += `max_extrude_only_velocity: ${this.max_extrude_only_velocity}
-`;
-    if (this.max_extrude_only_accel) configStr += `max_extrude_only_accel: ${this.max_extrude_only_accel}
-`;
-    if (this.pressure_advance) configStr += `pressure_advance: ${this.pressure_advance}
-`;
-    if (this.pressure_advance_smooth_time) configStr += `pressure_advance_smooth_time: ${this.pressure_advance_smooth_time}
-`;
-    if (this.max_power) configStr += `max_power: ${this.max_power}
-`;
-    if (this.pullup_resistor) configStr += `pullup_resistor: ${this.pullup_resistor}
-`;
-    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}
-`;
-    if (this.max_delta) configStr += `max_delta: ${this.max_delta}
-`;
-    if (this.pwm_cycle_time) configStr += `pwm_cycle_time: ${this.pwm_cycle_time}
-`;
-    if (this.min_extrude_temp) configStr += `min_extrude_temp: ${this.min_extrude_temp}
-`;
+    if (this.full_steps_per_rotation) configStr += `full_steps_per_rotation: ${this.full_steps_per_rotation}\n`;
+    if (this.gear_ratio) configStr += `gear_ratio: ${this.gear_ratio}\n`;
+    if (this.max_extrude_cross_section) configStr += `max_extrude_cross_section: ${this.max_extrude_cross_section}\n`;
+    if (this.instantaneous_corner_velocity) configStr += `instantaneous_corner_velocity: ${this.instantaneous_corner_velocity}\n`;
+    if (this.max_extrude_only_distance) configStr += `max_extrude_only_distance: ${this.max_extrude_only_distance}\n`;
+    if (this.max_extrude_only_velocity) configStr += `max_extrude_only_velocity: ${this.max_extrude_only_velocity}\n`;
+    if (this.max_extrude_only_accel) configStr += `max_extrude_only_accel: ${this.max_extrude_only_accel}\n`;
+    if (this.pressure_advance) configStr += `pressure_advance: ${this.pressure_advance}\n`;
+    if (this.pressure_advance_smooth_time) configStr += `pressure_advance_smooth_time: ${this.pressure_advance_smooth_time}\n`;
+    if (this.max_power) configStr += `max_power: ${this.max_power}\n`;
+    if (this.pullup_resistor) configStr += `pullup_resistor: ${this.pullup_resistor}\n`;
+    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}\n`;
+    if (this.max_delta) configStr += `max_delta: ${this.max_delta}\n`;
+    if (this.pwm_cycle_time) configStr += `pwm_cycle_time: ${this.pwm_cycle_time}\n`;
+    if (this.min_extrude_temp) configStr += `min_extrude_temp: ${this.min_extrude_temp}\n`;
     return configStr.trim();
   }
 

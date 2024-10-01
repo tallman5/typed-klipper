@@ -33,26 +33,17 @@ export class OutputPin extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `pin: ${this.pin}
 `;
-    if (this.pwm) configStr += `pwm: ${this.pwm}
-`;
-    if (this.value) configStr += `value: ${this.value}
-`;
-    if (this.shutdown_value) configStr += `shutdown_value: ${this.shutdown_value}
-`;
-    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}
-`;
-    if (this.hardware_pwm) configStr += `hardware_pwm: ${this.hardware_pwm}
-`;
-    if (this.scale) configStr += `scale: ${this.scale}
-`;
-    if (this.maximum_mcu_duration) configStr += `maximum_mcu_duration: ${this.maximum_mcu_duration}
-`;
-    if (this.static_value) configStr += `static_value: ${this.static_value}
-`;
+    if (this.pwm) configStr += `pwm: ${this.pwm}\n`;
+    if (this.value) configStr += `value: ${this.value}\n`;
+    if (this.shutdown_value) configStr += `shutdown_value: ${this.shutdown_value}\n`;
+    if (this.cycle_time) configStr += `cycle_time: ${this.cycle_time}\n`;
+    if (this.hardware_pwm) configStr += `hardware_pwm: ${this.hardware_pwm}\n`;
+    if (this.scale) configStr += `scale: ${this.scale}\n`;
+    if (this.maximum_mcu_duration) configStr += `maximum_mcu_duration: ${this.maximum_mcu_duration}\n`;
+    if (this.static_value) configStr += `static_value: ${this.static_value}\n`;
     return configStr.trim();
   }
 

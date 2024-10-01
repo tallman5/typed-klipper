@@ -27,20 +27,14 @@ export class ExtruderStepper extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `extruder: ${this.extruder}
 `;
-    if (this.step_pin) configStr += `step_pin: ${this.step_pin}
-`;
-    if (this.dir_pin) configStr += `dir_pin: ${this.dir_pin}
-`;
-    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}
-`;
-    if (this.microsteps) configStr += `microsteps: ${this.microsteps}
-`;
-    if (this.rotation_distance) configStr += `rotation_distance: ${this.rotation_distance}
-`;
+    if (this.step_pin) configStr += `step_pin: ${this.step_pin}\n`;
+    if (this.dir_pin) configStr += `dir_pin: ${this.dir_pin}\n`;
+    if (this.enable_pin) configStr += `enable_pin: ${this.enable_pin}\n`;
+    if (this.microsteps) configStr += `microsteps: ${this.microsteps}\n`;
+    if (this.rotation_distance) configStr += `rotation_distance: ${this.rotation_distance}\n`;
     return configStr.trim();
   }
 

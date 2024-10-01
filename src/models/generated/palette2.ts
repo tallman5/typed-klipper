@@ -27,20 +27,14 @@ export class Palette2 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `serial: ${this.serial}
 `;
-    if (this.baud) configStr += `baud: ${this.baud}
-`;
-    if (this.feedrate_splice) configStr += `feedrate_splice: ${this.feedrate_splice}
-`;
-    if (this.feedrate_normal) configStr += `feedrate_normal: ${this.feedrate_normal}
-`;
-    if (this.auto_load_speed) configStr += `auto_load_speed: ${this.auto_load_speed}
-`;
-    if (this.auto_cancel_variation) configStr += `auto_cancel_variation: ${this.auto_cancel_variation}
-`;
+    if (this.baud) configStr += `baud: ${this.baud}\n`;
+    if (this.feedrate_splice) configStr += `feedrate_splice: ${this.feedrate_splice}\n`;
+    if (this.feedrate_normal) configStr += `feedrate_normal: ${this.feedrate_normal}\n`;
+    if (this.auto_load_speed) configStr += `auto_load_speed: ${this.auto_load_speed}\n`;
+    if (this.auto_cancel_variation) configStr += `auto_cancel_variation: ${this.auto_cancel_variation}\n`;
     return configStr.trim();
   }
 

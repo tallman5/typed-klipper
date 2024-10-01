@@ -8,7 +8,10 @@ interface IClassConfig {
 }
 
 // Read Markdown file
-const mdFilePath = './utils/Config_Reference.md';
+const sourceFiles: string[] = [
+  './utils/Config_Reference.md',
+  './utils/Other_Configs.md'
+]
 const outputDir = './src/models/generated';
 let classConfigs: IClassConfig[] = [];
 
@@ -79,7 +82,7 @@ const generateClassFile = (classConfig: IClassConfig, parameters: { required: st
   // Generate toCfg() fields
   const cfgFields = required
     .map(param => `configStr += \`${param}: \${this.${param}}\n\`;`)
-    .concat(optional.map(param => `if (this.${param}) configStr += \`${param}: \${this.${param}}\n\`;`))
+    .concat(optional.map(param => `if (this.${param}) configStr += \`${param}: \${this.${param}}\\n\`;`))
     .join('\n    ');
 
   // Template for the TypeScript class
@@ -103,7 +106,7 @@ export class ${classConfig.className} extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = \`[${'${this.configKey}'}]\n\`;
+    let configStr = \`[${'${this.configKey}'}]\\n\`;
     ${cfgFields}
     return configStr.trim();
   }
@@ -132,7 +135,7 @@ const generateModelIndex = () => {
     .join('\n');
 
   indexContent += "\nexport * from './mappers';";
-  
+
   const filePath = path.join(outputDir, 'index.ts');
   fs.writeFileSync(filePath, indexContent);
   console.log(`Generated: ${filePath}`);
@@ -156,43 +159,45 @@ const generateMapper = () => {
 
 // Main function to parse the Markdown file and generate classes
 const parseMarkdownAndGenerateClasses = () => {
-  const mdContent = fs.readFileSync(mdFilePath, 'utf-8');
+  sourceFiles.forEach(sourceFile => {
+    const mdContent = fs.readFileSync(sourceFile, 'utf-8');
 
-  // Extract code blocks containing configuration sections
-  const codeBlocks = mdContent.match(/```([\s\S]*?)```/g);
+    // Extract code blocks containing configuration sections
+    const codeBlocks = mdContent.match(/```([\s\S]*?)```/g);
 
-  if (codeBlocks) {
-    codeBlocks.forEach((block: string, index: number) => {
-      const configBlock = block.replace(/```/g, '').trim();
-      let configKey = extractConfigName(configBlock);
+    if (codeBlocks) {
+      codeBlocks.forEach((block: string, index: number) => {
+        const configBlock = block.replace(/```/g, '').trim();
+        let configKey = extractConfigName(configBlock);
 
-      if (configKey) {
-        console.log(configKey);
-        const existingItem = classConfigs.find(c => c.configKey === configKey);
-        if (!existingItem) {
-          const classConfig: IClassConfig = {
-            configKey,
-            className: convertToClassName(configKey),
-            camelCase: convertToCamelCase(configKey)
+        if (configKey) {
+          console.log(configKey);
+          const existingItem = classConfigs.find(c => c.configKey === configKey);
+          if (!existingItem) {
+            const classConfig: IClassConfig = {
+              configKey,
+              className: convertToClassName(configKey),
+              camelCase: convertToCamelCase(configKey)
+            }
+            classConfigs = [
+              ...classConfigs,
+              classConfig
+            ]
+
+            const parameters = extractParameters(configBlock);
+            generateClassFile(classConfig, parameters);
           }
-          classConfigs = [
-            ...classConfigs,
-            classConfig
-          ]
-
-          const parameters = extractParameters(configBlock);
-          generateClassFile(classConfig, parameters);
+          else {
+            // console.log(`Skipping class ${className}: Already done.`);
+          }
+        } else {
+          // console.log(`Skipping block ${index + 1}: No valid config header found.`);
         }
-        else {
-          // console.log(`Skipping class ${className}: Already done.`);
-        }
-      } else {
-        // console.log(`Skipping block ${index + 1}: No valid config header found.`);
-      }
-    });
-  } else {
-    console.log('No configuration sections found in the Markdown file.');
-  }
+      });
+    } else {
+      console.log('No configuration sections found in the Markdown file.');
+    }
+  });
 
   classConfigs.sort((a, b) => a.className.localeCompare(b.className));
   generateModelIndex();

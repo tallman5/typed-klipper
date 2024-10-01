@@ -41,34 +41,20 @@ export class HeaterGeneric extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}
-`;
-    if (this.heater_pin) configStr += `heater_pin: ${this.heater_pin}
-`;
-    if (this.max_power) configStr += `max_power: ${this.max_power}
-`;
-    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}
-`;
-    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}
-`;
-    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}
-`;
-    if (this.control) configStr += `control: ${this.control}
-`;
-    if (this.pid_Kp) configStr += `pid_Kp: ${this.pid_Kp}
-`;
-    if (this.pid_Ki) configStr += `pid_Ki: ${this.pid_Ki}
-`;
-    if (this.pid_Kd) configStr += `pid_Kd: ${this.pid_Kd}
-`;
-    if (this.pwm_cycle_time) configStr += `pwm_cycle_time: ${this.pwm_cycle_time}
-`;
-    if (this.min_temp) configStr += `min_temp: ${this.min_temp}
-`;
-    if (this.max_temp) configStr += `max_temp: ${this.max_temp}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.gcode_id) configStr += `gcode_id: ${this.gcode_id}\n`;
+    if (this.heater_pin) configStr += `heater_pin: ${this.heater_pin}\n`;
+    if (this.max_power) configStr += `max_power: ${this.max_power}\n`;
+    if (this.sensor_type) configStr += `sensor_type: ${this.sensor_type}\n`;
+    if (this.sensor_pin) configStr += `sensor_pin: ${this.sensor_pin}\n`;
+    if (this.smooth_time) configStr += `smooth_time: ${this.smooth_time}\n`;
+    if (this.control) configStr += `control: ${this.control}\n`;
+    if (this.pid_Kp) configStr += `pid_Kp: ${this.pid_Kp}\n`;
+    if (this.pid_Ki) configStr += `pid_Ki: ${this.pid_Ki}\n`;
+    if (this.pid_Kd) configStr += `pid_Kd: ${this.pid_Kd}\n`;
+    if (this.pwm_cycle_time) configStr += `pwm_cycle_time: ${this.pwm_cycle_time}\n`;
+    if (this.min_temp) configStr += `min_temp: ${this.min_temp}\n`;
+    if (this.max_temp) configStr += `max_temp: ${this.max_temp}\n`;
     return configStr.trim();
   }
 

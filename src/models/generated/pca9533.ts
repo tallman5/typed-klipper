@@ -35,28 +35,17 @@ export class Pca9533 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.i2c_address) configStr += `i2c_address: ${this.i2c_address}
-`;
-    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}
-`;
-    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}
-`;
-    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}
-`;
-    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}
-`;
-    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}
-`;
-    if (this.initial_RED) configStr += `initial_RED: ${this.initial_RED}
-`;
-    if (this.initial_GREEN) configStr += `initial_GREEN: ${this.initial_GREEN}
-`;
-    if (this.initial_BLUE) configStr += `initial_BLUE: ${this.initial_BLUE}
-`;
-    if (this.initial_WHITE) configStr += `initial_WHITE: ${this.initial_WHITE}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.i2c_address) configStr += `i2c_address: ${this.i2c_address}\n`;
+    if (this.i2c_mcu) configStr += `i2c_mcu: ${this.i2c_mcu}\n`;
+    if (this.i2c_bus) configStr += `i2c_bus: ${this.i2c_bus}\n`;
+    if (this.i2c_software_scl_pin) configStr += `i2c_software_scl_pin: ${this.i2c_software_scl_pin}\n`;
+    if (this.i2c_software_sda_pin) configStr += `i2c_software_sda_pin: ${this.i2c_software_sda_pin}\n`;
+    if (this.i2c_speed) configStr += `i2c_speed: ${this.i2c_speed}\n`;
+    if (this.initial_RED) configStr += `initial_RED: ${this.initial_RED}\n`;
+    if (this.initial_GREEN) configStr += `initial_GREEN: ${this.initial_GREEN}\n`;
+    if (this.initial_BLUE) configStr += `initial_BLUE: ${this.initial_BLUE}\n`;
+    if (this.initial_WHITE) configStr += `initial_WHITE: ${this.initial_WHITE}\n`;
     return configStr.trim();
   }
 

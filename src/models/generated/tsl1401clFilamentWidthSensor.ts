@@ -23,16 +23,11 @@ export class Tsl1401clFilamentWidthSensor extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.pin) configStr += `pin: ${this.pin}
-`;
-    if (this.default_nominal_filament_diameter) configStr += `default_nominal_filament_diameter: ${this.default_nominal_filament_diameter}
-`;
-    if (this.max_difference) configStr += `max_difference: ${this.max_difference}
-`;
-    if (this.measurement_delay) configStr += `measurement_delay: ${this.measurement_delay}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.pin) configStr += `pin: ${this.pin}\n`;
+    if (this.default_nominal_filament_diameter) configStr += `default_nominal_filament_diameter: ${this.default_nominal_filament_diameter}\n`;
+    if (this.max_difference) configStr += `max_difference: ${this.max_difference}\n`;
+    if (this.measurement_delay) configStr += `measurement_delay: ${this.measurement_delay}\n`;
     return configStr.trim();
   }
 

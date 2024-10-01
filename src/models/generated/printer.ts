@@ -27,20 +27,16 @@ export class Printer extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `kinematics: ${this.kinematics}
 `;
     configStr += `max_velocity: ${this.max_velocity}
 `;
     configStr += `max_accel: ${this.max_accel}
 `;
-    if (this.minimum_cruise_ratio) configStr += `minimum_cruise_ratio: ${this.minimum_cruise_ratio}
-`;
-    if (this.square_corner_velocity) configStr += `square_corner_velocity: ${this.square_corner_velocity}
-`;
-    if (this.max_accel_to_decel) configStr += `max_accel_to_decel: ${this.max_accel_to_decel}
-`;
+    if (this.minimum_cruise_ratio) configStr += `minimum_cruise_ratio: ${this.minimum_cruise_ratio}\n`;
+    if (this.square_corner_velocity) configStr += `square_corner_velocity: ${this.square_corner_velocity}\n`;
+    if (this.max_accel_to_decel) configStr += `max_accel_to_decel: ${this.max_accel_to_decel}\n`;
     return configStr.trim();
   }
 

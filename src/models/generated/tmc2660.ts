@@ -71,64 +71,37 @@ export class Tmc2660 extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `cs_pin: ${this.cs_pin}
 `;
     configStr += `run_current: ${this.run_current}
 `;
-    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}
-`;
-    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}
-`;
-    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}
-`;
-    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}
-`;
-    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}
-`;
-    if (this.interpolate) configStr += `interpolate: ${this.interpolate}
-`;
-    if (this.sense_resistor) configStr += `sense_resistor: ${this.sense_resistor}
-`;
-    if (this.idle_current_percent) configStr += `idle_current_percent: ${this.idle_current_percent}
-`;
-    if (this.driver_TBL) configStr += `driver_TBL: ${this.driver_TBL}
-`;
-    if (this.driver_RNDTF) configStr += `driver_RNDTF: ${this.driver_RNDTF}
-`;
-    if (this.driver_HDEC) configStr += `driver_HDEC: ${this.driver_HDEC}
-`;
-    if (this.driver_CHM) configStr += `driver_CHM: ${this.driver_CHM}
-`;
-    if (this.driver_HEND) configStr += `driver_HEND: ${this.driver_HEND}
-`;
-    if (this.driver_HSTRT) configStr += `driver_HSTRT: ${this.driver_HSTRT}
-`;
-    if (this.driver_TOFF) configStr += `driver_TOFF: ${this.driver_TOFF}
-`;
-    if (this.driver_SEIMIN) configStr += `driver_SEIMIN: ${this.driver_SEIMIN}
-`;
-    if (this.driver_SEDN) configStr += `driver_SEDN: ${this.driver_SEDN}
-`;
-    if (this.driver_SEMAX) configStr += `driver_SEMAX: ${this.driver_SEMAX}
-`;
-    if (this.driver_SEUP) configStr += `driver_SEUP: ${this.driver_SEUP}
-`;
-    if (this.driver_SEMIN) configStr += `driver_SEMIN: ${this.driver_SEMIN}
-`;
-    if (this.driver_SFILT) configStr += `driver_SFILT: ${this.driver_SFILT}
-`;
-    if (this.driver_SGT) configStr += `driver_SGT: ${this.driver_SGT}
-`;
-    if (this.driver_SLPH) configStr += `driver_SLPH: ${this.driver_SLPH}
-`;
-    if (this.driver_SLPL) configStr += `driver_SLPL: ${this.driver_SLPL}
-`;
-    if (this.driver_DISS2G) configStr += `driver_DISS2G: ${this.driver_DISS2G}
-`;
-    if (this.driver_TS2G) configStr += `driver_TS2G: ${this.driver_TS2G}
-`;
+    if (this.spi_speed) configStr += `spi_speed: ${this.spi_speed}\n`;
+    if (this.spi_bus) configStr += `spi_bus: ${this.spi_bus}\n`;
+    if (this.spi_software_sclk_pin) configStr += `spi_software_sclk_pin: ${this.spi_software_sclk_pin}\n`;
+    if (this.spi_software_mosi_pin) configStr += `spi_software_mosi_pin: ${this.spi_software_mosi_pin}\n`;
+    if (this.spi_software_miso_pin) configStr += `spi_software_miso_pin: ${this.spi_software_miso_pin}\n`;
+    if (this.interpolate) configStr += `interpolate: ${this.interpolate}\n`;
+    if (this.sense_resistor) configStr += `sense_resistor: ${this.sense_resistor}\n`;
+    if (this.idle_current_percent) configStr += `idle_current_percent: ${this.idle_current_percent}\n`;
+    if (this.driver_TBL) configStr += `driver_TBL: ${this.driver_TBL}\n`;
+    if (this.driver_RNDTF) configStr += `driver_RNDTF: ${this.driver_RNDTF}\n`;
+    if (this.driver_HDEC) configStr += `driver_HDEC: ${this.driver_HDEC}\n`;
+    if (this.driver_CHM) configStr += `driver_CHM: ${this.driver_CHM}\n`;
+    if (this.driver_HEND) configStr += `driver_HEND: ${this.driver_HEND}\n`;
+    if (this.driver_HSTRT) configStr += `driver_HSTRT: ${this.driver_HSTRT}\n`;
+    if (this.driver_TOFF) configStr += `driver_TOFF: ${this.driver_TOFF}\n`;
+    if (this.driver_SEIMIN) configStr += `driver_SEIMIN: ${this.driver_SEIMIN}\n`;
+    if (this.driver_SEDN) configStr += `driver_SEDN: ${this.driver_SEDN}\n`;
+    if (this.driver_SEMAX) configStr += `driver_SEMAX: ${this.driver_SEMAX}\n`;
+    if (this.driver_SEUP) configStr += `driver_SEUP: ${this.driver_SEUP}\n`;
+    if (this.driver_SEMIN) configStr += `driver_SEMIN: ${this.driver_SEMIN}\n`;
+    if (this.driver_SFILT) configStr += `driver_SFILT: ${this.driver_SFILT}\n`;
+    if (this.driver_SGT) configStr += `driver_SGT: ${this.driver_SGT}\n`;
+    if (this.driver_SLPH) configStr += `driver_SLPH: ${this.driver_SLPH}\n`;
+    if (this.driver_SLPL) configStr += `driver_SLPL: ${this.driver_SLPL}\n`;
+    if (this.driver_DISS2G) configStr += `driver_DISS2G: ${this.driver_DISS2G}\n`;
+    if (this.driver_TS2G) configStr += `driver_TS2G: ${this.driver_TS2G}\n`;
     return configStr.trim();
   }
 

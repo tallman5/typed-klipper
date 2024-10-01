@@ -49,8 +49,7 @@ export class Stepper extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `step_pin: ${this.step_pin}
 `;
     configStr += `dir_pin: ${this.dir_pin}
@@ -67,24 +66,15 @@ export class Stepper extends ConfigurableComponent {
 `;
     configStr += `position_max: ${this.position_max}
 `;
-    if (this.full_steps_per_rotation) configStr += `full_steps_per_rotation: ${this.full_steps_per_rotation}
-`;
-    if (this.gear_ratio) configStr += `gear_ratio: ${this.gear_ratio}
-`;
-    if (this.step_pulse_duration) configStr += `step_pulse_duration: ${this.step_pulse_duration}
-`;
-    if (this.position_min) configStr += `position_min: ${this.position_min}
-`;
-    if (this.homing_speed) configStr += `homing_speed: ${this.homing_speed}
-`;
-    if (this.homing_retract_dist) configStr += `homing_retract_dist: ${this.homing_retract_dist}
-`;
-    if (this.homing_retract_speed) configStr += `homing_retract_speed: ${this.homing_retract_speed}
-`;
-    if (this.second_homing_speed) configStr += `second_homing_speed: ${this.second_homing_speed}
-`;
-    if (this.homing_positive_dir) configStr += `homing_positive_dir: ${this.homing_positive_dir}
-`;
+    if (this.full_steps_per_rotation) configStr += `full_steps_per_rotation: ${this.full_steps_per_rotation}\n`;
+    if (this.gear_ratio) configStr += `gear_ratio: ${this.gear_ratio}\n`;
+    if (this.step_pulse_duration) configStr += `step_pulse_duration: ${this.step_pulse_duration}\n`;
+    if (this.position_min) configStr += `position_min: ${this.position_min}\n`;
+    if (this.homing_speed) configStr += `homing_speed: ${this.homing_speed}\n`;
+    if (this.homing_retract_dist) configStr += `homing_retract_dist: ${this.homing_retract_dist}\n`;
+    if (this.homing_retract_speed) configStr += `homing_retract_speed: ${this.homing_retract_speed}\n`;
+    if (this.second_homing_speed) configStr += `second_homing_speed: ${this.second_homing_speed}\n`;
+    if (this.homing_positive_dir) configStr += `homing_positive_dir: ${this.homing_positive_dir}\n`;
     return configStr.trim();
   }
 

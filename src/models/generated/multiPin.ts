@@ -17,8 +17,7 @@ export class MultiPin extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
+    let configStr = `[${this.configKey}]\n`;
     configStr += `pins: ${this.pins}
 `;
     return configStr.trim();

@@ -23,16 +23,11 @@ export class AdcTemperature extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.temperature1) configStr += `temperature1: ${this.temperature1}
-`;
-    if (this.voltage1) configStr += `voltage1: ${this.voltage1}
-`;
-    if (this.temperature2) configStr += `temperature2: ${this.temperature2}
-`;
-    if (this.voltage2) configStr += `voltage2: ${this.voltage2}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.temperature1) configStr += `temperature1: ${this.temperature1}\n`;
+    if (this.voltage1) configStr += `voltage1: ${this.voltage1}\n`;
+    if (this.temperature2) configStr += `temperature2: ${this.temperature2}\n`;
+    if (this.voltage2) configStr += `voltage2: ${this.voltage2}\n`;
     return configStr.trim();
   }
 

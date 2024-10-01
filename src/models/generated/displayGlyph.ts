@@ -21,14 +21,10 @@ export class DisplayGlyph extends ConfigurableComponent {
   }
 
   toCfg(): string {
-    let configStr = `[${this.configKey}]
-`;
-    if (this.data) configStr += `data: ${this.data}
-`;
-    if (this.hd44780_data) configStr += `hd44780_data: ${this.hd44780_data}
-`;
-    if (this.hd44780_slot) configStr += `hd44780_slot: ${this.hd44780_slot}
-`;
+    let configStr = `[${this.configKey}]\n`;
+    if (this.data) configStr += `data: ${this.data}\n`;
+    if (this.hd44780_data) configStr += `hd44780_data: ${this.hd44780_data}\n`;
+    if (this.hd44780_slot) configStr += `hd44780_slot: ${this.hd44780_slot}\n`;
     return configStr.trim();
   }
 
