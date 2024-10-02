@@ -28,6 +28,15 @@ export class DisplayGlyph extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): DisplayGlyph {
+    return new DisplayGlyph(
+      configKey,
+      config.data,
+      config.hd44780_data,
+      config.hd44780_slot
+    );
+  }
+
   static fromJson(configKey: string, config: any): DisplayGlyph {
     return new DisplayGlyph(
       configKey,

@@ -30,6 +30,15 @@ export class AdcScaled extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): AdcScaled {
+    return new AdcScaled(
+      configKey,
+      config.vref_pin,
+      config.vssa_pin,
+      config.smooth_time
+    );
+  }
+
   static fromJson(configKey: string, config: any): AdcScaled {
     return new AdcScaled(
       configKey,

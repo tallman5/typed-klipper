@@ -49,6 +49,22 @@ export class Led extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Led {
+    return new Led(
+      configKey,
+      config.red_pin,
+      config.green_pin,
+      config.blue_pin,
+      config.white_pin,
+      config.cycle_time,
+      config.hardware_pwm,
+      config.initial_RED,
+      config.initial_GREEN,
+      config.initial_BLUE,
+      config.initial_WHITE
+    );
+  }
+
   static fromJson(configKey: string, config: any): Led {
     return new Led(
       configKey,

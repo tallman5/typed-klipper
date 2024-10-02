@@ -108,6 +108,41 @@ export class Replicape extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Replicape {
+    return new Replicape(
+      configKey,
+      config.revision,
+      config.host_mcu,
+      config.enable_pin,
+      config.standstill_power_down,
+      config.stepper_x_microstep_mode,
+      config.stepper_y_microstep_mode,
+      config.stepper_z_microstep_mode,
+      config.stepper_e_microstep_mode,
+      config.stepper_h_microstep_mode,
+      config.stepper_x_current,
+      config.stepper_y_current,
+      config.stepper_z_current,
+      config.stepper_e_current,
+      config.stepper_h_current,
+      config.stepper_x_chopper_off_time_high,
+      config.stepper_y_chopper_off_time_high,
+      config.stepper_z_chopper_off_time_high,
+      config.stepper_e_chopper_off_time_high,
+      config.stepper_h_chopper_off_time_high,
+      config.stepper_x_chopper_hysteresis_high,
+      config.stepper_y_chopper_hysteresis_high,
+      config.stepper_z_chopper_hysteresis_high,
+      config.stepper_e_chopper_hysteresis_high,
+      config.stepper_h_chopper_hysteresis_high,
+      config.stepper_x_chopper_blank_time_high,
+      config.stepper_y_chopper_blank_time_high,
+      config.stepper_z_chopper_blank_time_high,
+      config.stepper_e_chopper_blank_time_high,
+      config.stepper_h_chopper_blank_time_high
+    );
+  }
+
   static fromJson(configKey: string, config: any): Replicape {
     return new Replicape(
       configKey,

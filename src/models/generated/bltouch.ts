@@ -75,6 +75,30 @@ export class Bltouch extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Bltouch {
+    return new Bltouch(
+      configKey,
+      config.sensor_pin,
+      config.control_pin,
+      config.pin_move_time,
+      config.stow_on_each_sample,
+      config.probe_with_touch_mode,
+      config.pin_up_reports_not_triggered,
+      config.pin_up_touch_mode_reports_triggered,
+      config.set_output_mode,
+      config.x_offset,
+      config.y_offset,
+      config.z_offset,
+      config.speed,
+      config.lift_speed,
+      config.samples,
+      config.sample_retract_dist,
+      config.samples_result,
+      config.samples_tolerance,
+      config.samples_tolerance_retries
+    );
+  }
+
   static fromJson(configKey: string, config: any): Bltouch {
     return new Bltouch(
       configKey,

@@ -31,6 +31,16 @@ export class AdcTemperature extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): AdcTemperature {
+    return new AdcTemperature(
+      configKey,
+      config.temperature1,
+      config.voltage1,
+      config.temperature2,
+      config.voltage2
+    );
+  }
+
   static fromJson(configKey: string, config: any): AdcTemperature {
     return new AdcTemperature(
       configKey,

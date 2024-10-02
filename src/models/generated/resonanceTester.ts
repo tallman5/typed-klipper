@@ -46,6 +46,21 @@ export class ResonanceTester extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ResonanceTester {
+    return new ResonanceTester(
+      configKey,
+      config.probe_points,
+      config.accel_chip,
+      config.accel_chip_x,
+      config.accel_chip_y,
+      config.max_smoothing,
+      config.min_freq,
+      config.max_freq,
+      config.accel_per_hz,
+      config.hz_per_sec
+    );
+  }
+
   static fromJson(configKey: string, config: any): ResonanceTester {
     return new ResonanceTester(
       configKey,

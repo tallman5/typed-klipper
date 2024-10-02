@@ -41,6 +41,19 @@ export class PwmTool extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): PwmTool {
+    return new PwmTool(
+      configKey,
+      config.pin,
+      config.maximum_mcu_duration,
+      config.value,
+      config.shutdown_value,
+      config.cycle_time,
+      config.hardware_pwm,
+      config.scale
+    );
+  }
+
   static fromJson(configKey: string, config: any): PwmTool {
     return new PwmTool(
       configKey,

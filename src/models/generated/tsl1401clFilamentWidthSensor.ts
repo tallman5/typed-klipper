@@ -31,6 +31,16 @@ export class Tsl1401clFilamentWidthSensor extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Tsl1401clFilamentWidthSensor {
+    return new Tsl1401clFilamentWidthSensor(
+      configKey,
+      config.pin,
+      config.default_nominal_filament_diameter,
+      config.max_difference,
+      config.measurement_delay
+    );
+  }
+
   static fromJson(configKey: string, config: any): Tsl1401clFilamentWidthSensor {
     return new Tsl1401clFilamentWidthSensor(
       configKey,

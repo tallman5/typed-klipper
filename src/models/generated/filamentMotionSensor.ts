@@ -46,6 +46,20 @@ export class FilamentMotionSensor extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): FilamentMotionSensor {
+    return new FilamentMotionSensor(
+      configKey,
+      config.detection_length,
+      config.extruder,
+      config.switch_pin,
+      config.pause_on_runout,
+      config.runout_gcode,
+      config.insert_gcode,
+      config.event_delay,
+      config.pause_delay
+    );
+  }
+
   static fromJson(configKey: string, config: any): FilamentMotionSensor {
     return new FilamentMotionSensor(
       configKey,

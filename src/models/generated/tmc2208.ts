@@ -87,6 +87,34 @@ export class Tmc2208 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Tmc2208 {
+    return new Tmc2208(
+      configKey,
+      config.uart_pin,
+      config.run_current,
+      config.tx_pin,
+      config.select_pins,
+      config.interpolate,
+      config.hold_current,
+      config.sense_resistor,
+      config.stealthchop_threshold,
+      config.driver_MULTISTEP_FILT,
+      config.driver_IHOLDDELAY,
+      config.driver_TPOWERDOWN,
+      config.driver_TBL,
+      config.driver_TOFF,
+      config.driver_HEND,
+      config.driver_HSTRT,
+      config.driver_PWM_AUTOGRAD,
+      config.driver_PWM_AUTOSCALE,
+      config.driver_PWM_LIM,
+      config.driver_PWM_REG,
+      config.driver_PWM_FREQ,
+      config.driver_PWM_GRAD,
+      config.driver_PWM_OFS
+    );
+  }
+
   static fromJson(configKey: string, config: any): Tmc2208 {
     return new Tmc2208(
       configKey,

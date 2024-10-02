@@ -40,6 +40,19 @@ export class Thermistor extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Thermistor {
+    return new Thermistor(
+      configKey,
+      config.temperature1,
+      config.resistance1,
+      config.temperature2,
+      config.resistance2,
+      config.temperature3,
+      config.resistance3,
+      config.beta
+    );
+  }
+
   static fromJson(configKey: string, config: any): Thermistor {
     return new Thermistor(
       configKey,

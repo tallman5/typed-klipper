@@ -46,6 +46,21 @@ export class ZThermalAdjust extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ZThermalAdjust {
+    return new ZThermalAdjust(
+      configKey,
+      config.temp_coeff,
+      config.smooth_time,
+      config.z_adjust_off_above,
+      config.max_z_adjustment,
+      config.sensor_type,
+      config.sensor_pin,
+      config.min_temp,
+      config.max_temp,
+      config.gcode_id
+    );
+  }
+
   static fromJson(configKey: string, config: any): ZThermalAdjust {
     return new ZThermalAdjust(
       configKey,

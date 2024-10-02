@@ -44,6 +44,20 @@ export class Adxl345 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Adxl345 {
+    return new Adxl345(
+      configKey,
+      config.cs_pin,
+      config.spi_speed,
+      config.spi_bus,
+      config.spi_software_sclk_pin,
+      config.spi_software_mosi_pin,
+      config.spi_software_miso_pin,
+      config.axes_map,
+      config.rate
+    );
+  }
+
   static fromJson(configKey: string, config: any): Adxl345 {
     return new Adxl345(
       configKey,

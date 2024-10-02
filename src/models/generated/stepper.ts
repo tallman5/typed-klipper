@@ -78,6 +78,29 @@ export class Stepper extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Stepper {
+    return new Stepper(
+      configKey,
+      config.step_pin,
+      config.dir_pin,
+      config.enable_pin,
+      config.rotation_distance,
+      config.microsteps,
+      config.endstop_pin,
+      config.position_endstop,
+      config.position_max,
+      config.full_steps_per_rotation,
+      config.gear_ratio,
+      config.step_pulse_duration,
+      config.position_min,
+      config.homing_speed,
+      config.homing_retract_dist,
+      config.homing_retract_speed,
+      config.second_homing_speed,
+      config.homing_positive_dir
+    );
+  }
+
   static fromJson(configKey: string, config: any): Stepper {
     return new Stepper(
       configKey,

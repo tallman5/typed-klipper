@@ -30,6 +30,15 @@ export class GcodeShellCommand extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): GcodeShellCommand {
+    return new GcodeShellCommand(
+      configKey,
+      config.command,
+      config.timeout,
+      config.verbose
+    );
+  }
+
   static fromJson(configKey: string, config: any): GcodeShellCommand {
     return new GcodeShellCommand(
       configKey,

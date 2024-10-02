@@ -23,6 +23,13 @@ export class DisplayTemplate extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): DisplayTemplate {
+    return new DisplayTemplate(
+      configKey,
+      config.text
+    );
+  }
+
   static fromJson(configKey: string, config: any): DisplayTemplate {
     return new DisplayTemplate(
       configKey,

@@ -40,6 +40,19 @@ export class Mpu9250 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Mpu9250 {
+    return new Mpu9250(
+      configKey,
+      config.i2c_address,
+      config.i2c_mcu,
+      config.i2c_bus,
+      config.i2c_software_scl_pin,
+      config.i2c_software_sda_pin,
+      config.i2c_speed,
+      config.axes_map
+    );
+  }
+
   static fromJson(configKey: string, config: any): Mpu9250 {
     return new Mpu9250(
       configKey,

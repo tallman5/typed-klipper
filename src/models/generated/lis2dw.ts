@@ -41,6 +41,19 @@ export class Lis2dw extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Lis2dw {
+    return new Lis2dw(
+      configKey,
+      config.cs_pin,
+      config.spi_speed,
+      config.spi_bus,
+      config.spi_software_sclk_pin,
+      config.spi_software_mosi_pin,
+      config.spi_software_miso_pin,
+      config.axes_map
+    );
+  }
+
   static fromJson(configKey: string, config: any): Lis2dw {
     return new Lis2dw(
       configKey,

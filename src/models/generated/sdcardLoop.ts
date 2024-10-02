@@ -22,6 +22,13 @@ export class SdcardLoop extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): SdcardLoop {
+    return new SdcardLoop(
+      configKey,
+      
+    );
+  }
+
   static fromJson(configKey: string, config: any): SdcardLoop {
     return new SdcardLoop(
       configKey,

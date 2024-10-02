@@ -58,6 +58,25 @@ export class Pca9632 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Pca9632 {
+    return new Pca9632(
+      configKey,
+      config.i2c_address,
+      config.i2c_mcu,
+      config.i2c_bus,
+      config.i2c_software_scl_pin,
+      config.i2c_software_sda_pin,
+      config.i2c_speed,
+      config.scl_pin,
+      config.sda_pin,
+      config.color_order,
+      config.initial_RED,
+      config.initial_GREEN,
+      config.initial_BLUE,
+      config.initial_WHITE
+    );
+  }
+
   static fromJson(configKey: string, config: any): Pca9632 {
     return new Pca9632(
       configKey,

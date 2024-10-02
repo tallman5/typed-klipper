@@ -22,6 +22,13 @@ export class Include extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Include {
+    return new Include(
+      configKey,
+      
+    );
+  }
+
   static fromJson(configKey: string, config: any): Include {
     return new Include(
       configKey,

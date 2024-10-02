@@ -77,10 +77,15 @@ const generateClassFile = (classConfig: IClassConfig, parameters: { required: st
     .join(',\n    ');
 
   // Generate toJSON() fields
-  const jsonFields = [...required, ...optional].map(param => `${param}: this.${param},`).join('\n        ');
+  const toJsonFields = [...required, ...optional].map(param => `${param}: this.${param},`).join('\n        ');
+
+  // Generate fromCfg() fields
+  const fromCfgFields = [...required, ...optional]
+    .map(param => `config.${param}`)
+    .join(',\n      ');
 
   // Generate toCfg() fields
-  const cfgFields = required
+  const toCfgFields = required
     .map(param => `configStr += \`${param}: \${this.${param}}\n\`;`)
     .concat(optional.map(param => `if (this.${param}) configStr += \`${param}: \${this.${param}}\\n\`;`))
     .join('\n    ');
@@ -100,15 +105,22 @@ export class ${classConfig.className} extends ConfigurableComponent {
   toJSON(): any {
     return {
       [this.configKey]: {
-        ${jsonFields}
+        ${toJsonFields}
       }
     };
   }
 
   toCfg(): string {
     let configStr = \`[${'${this.configKey}'}]\\n\`;
-    ${cfgFields}
+    ${toCfgFields}
     return configStr.trim();
+  }
+
+  static fromCfg(configKey: string, config: any): ${classConfig.className} {
+    return new ${classConfig.className}(
+      configKey,
+      ${fromCfgFields}
+    );
   }
 
   static fromJson(configKey: string, config: any): ${classConfig.className} {

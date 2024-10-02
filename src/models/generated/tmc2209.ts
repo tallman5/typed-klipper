@@ -114,6 +114,43 @@ export class Tmc2209 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Tmc2209 {
+    return new Tmc2209(
+      configKey,
+      config.uart_pin,
+      config.run_current,
+      config.tx_pin,
+      config.select_pins,
+      config.interpolate,
+      config.hold_current,
+      config.sense_resistor,
+      config.stealthchop_threshold,
+      config.coolstep_threshold,
+      config.uart_address,
+      config.driver_MULTISTEP_FILT,
+      config.driver_IHOLDDELAY,
+      config.driver_TPOWERDOWN,
+      config.driver_TBL,
+      config.driver_TOFF,
+      config.driver_HEND,
+      config.driver_HSTRT,
+      config.driver_PWM_AUTOGRAD,
+      config.driver_PWM_AUTOSCALE,
+      config.driver_PWM_LIM,
+      config.driver_PWM_REG,
+      config.driver_PWM_FREQ,
+      config.driver_PWM_GRAD,
+      config.driver_PWM_OFS,
+      config.driver_SGTHRS,
+      config.driver_SEMIN,
+      config.driver_SEUP,
+      config.driver_SEMAX,
+      config.driver_SEDN,
+      config.driver_SEIMIN,
+      config.diag_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): Tmc2209 {
     return new Tmc2209(
       configKey,

@@ -34,6 +34,16 @@ export class Mcp4018 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Mcp4018 {
+    return new Mcp4018(
+      configKey,
+      config.scl_pin,
+      config.sda_pin,
+      config.wiper,
+      config.scale
+    );
+  }
+
   static fromJson(configKey: string, config: any): Mcp4018 {
     return new Mcp4018(
       configKey,

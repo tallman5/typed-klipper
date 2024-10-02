@@ -47,6 +47,21 @@ export class OutputPin extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): OutputPin {
+    return new OutputPin(
+      configKey,
+      config.pin,
+      config.pwm,
+      config.value,
+      config.shutdown_value,
+      config.cycle_time,
+      config.hardware_pwm,
+      config.scale,
+      config.maximum_mcu_duration,
+      config.static_value
+    );
+  }
+
   static fromJson(configKey: string, config: any): OutputPin {
     return new OutputPin(
       configKey,

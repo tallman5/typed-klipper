@@ -52,6 +52,23 @@ export class Mcp4728 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Mcp4728 {
+    return new Mcp4728(
+      configKey,
+      config.i2c_address,
+      config.i2c_mcu,
+      config.i2c_bus,
+      config.i2c_software_scl_pin,
+      config.i2c_software_sda_pin,
+      config.i2c_speed,
+      config.channel_a,
+      config.channel_b,
+      config.channel_c,
+      config.channel_d,
+      config.scale
+    );
+  }
+
   static fromJson(configKey: string, config: any): Mcp4728 {
     return new Mcp4728(
       configKey,

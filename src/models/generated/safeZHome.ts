@@ -35,6 +35,17 @@ export class SafeZHome extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): SafeZHome {
+    return new SafeZHome(
+      configKey,
+      config.home_xy_position,
+      config.speed,
+      config.z_hop,
+      config.z_hop_speed,
+      config.move_to_previous
+    );
+  }
+
   static fromJson(configKey: string, config: any): SafeZHome {
     return new SafeZHome(
       configKey,

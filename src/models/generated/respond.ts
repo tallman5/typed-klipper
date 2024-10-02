@@ -25,6 +25,14 @@ export class Respond extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Respond {
+    return new Respond(
+      configKey,
+      config.default_type,
+      config.default_prefix
+    );
+  }
+
   static fromJson(configKey: string, config: any): Respond {
     return new Respond(
       configKey,

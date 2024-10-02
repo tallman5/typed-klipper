@@ -35,6 +35,17 @@ export class HomingOverride extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): HomingOverride {
+    return new HomingOverride(
+      configKey,
+      config.gcode,
+      config.axes,
+      config.set_position_x,
+      config.set_position_y,
+      config.set_position_z
+    );
+  }
+
   static fromJson(configKey: string, config: any): HomingOverride {
     return new HomingOverride(
       configKey,

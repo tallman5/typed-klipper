@@ -31,6 +31,16 @@ export class FirmwareRetraction extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): FirmwareRetraction {
+    return new FirmwareRetraction(
+      configKey,
+      config.retract_length,
+      config.retract_speed,
+      config.unretract_extra_length,
+      config.unretract_speed
+    );
+  }
+
   static fromJson(configKey: string, config: any): FirmwareRetraction {
     return new FirmwareRetraction(
       configKey,

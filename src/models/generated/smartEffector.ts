@@ -69,6 +69,28 @@ export class SmartEffector extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): SmartEffector {
+    return new SmartEffector(
+      configKey,
+      config.pin,
+      config.z_offset,
+      config.control_pin,
+      config.probe_accel,
+      config.recovery_time,
+      config.x_offset,
+      config.y_offset,
+      config.speed,
+      config.samples,
+      config.sample_retract_dist,
+      config.samples_result,
+      config.samples_tolerance,
+      config.samples_tolerance_retries,
+      config.activate_gcode,
+      config.deactivate_gcode,
+      config.deactivate_on_each_sample
+    );
+  }
+
   static fromJson(configKey: string, config: any): SmartEffector {
     return new SmartEffector(
       configKey,

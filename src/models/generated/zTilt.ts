@@ -37,6 +37,18 @@ export class ZTilt extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ZTilt {
+    return new ZTilt(
+      configKey,
+      config.z_positions,
+      config.points,
+      config.speed,
+      config.horizontal_move_z,
+      config.retries,
+      config.retry_tolerance
+    );
+  }
+
   static fromJson(configKey: string, config: any): ZTilt {
     return new ZTilt(
       configKey,

@@ -23,6 +23,13 @@ export class MultiPin extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): MultiPin {
+    return new MultiPin(
+      configKey,
+      config.pins
+    );
+  }
+
   static fromJson(configKey: string, config: any): MultiPin {
     return new MultiPin(
       configKey,

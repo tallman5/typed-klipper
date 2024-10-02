@@ -38,6 +38,18 @@ export class Servo extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Servo {
+    return new Servo(
+      configKey,
+      config.pin,
+      config.maximum_servo_angle,
+      config.minimum_pulse_width,
+      config.maximum_pulse_width,
+      config.initial_angle,
+      config.initial_pulse_width
+    );
+  }
+
   static fromJson(configKey: string, config: any): Servo {
     return new Servo(
       configKey,

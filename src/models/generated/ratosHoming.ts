@@ -35,6 +35,16 @@ export class RatosHoming extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): RatosHoming {
+    return new RatosHoming(
+      configKey,
+      config.axes,
+      config.gcode,
+      config.z_hop,
+      config.z_hop_speed
+    );
+  }
+
   static fromJson(configKey: string, config: any): RatosHoming {
     return new RatosHoming(
       configKey,

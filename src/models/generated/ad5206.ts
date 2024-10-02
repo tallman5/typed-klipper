@@ -59,6 +59,25 @@ export class Ad5206 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Ad5206 {
+    return new Ad5206(
+      configKey,
+      config.enable_pin,
+      config.spi_speed,
+      config.spi_bus,
+      config.spi_software_sclk_pin,
+      config.spi_software_mosi_pin,
+      config.spi_software_miso_pin,
+      config.channel_1,
+      config.channel_2,
+      config.channel_3,
+      config.channel_4,
+      config.channel_5,
+      config.channel_6,
+      config.scale
+    );
+  }
+
   static fromJson(configKey: string, config: any): Ad5206 {
     return new Ad5206(
       configKey,

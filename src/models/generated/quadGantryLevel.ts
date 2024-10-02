@@ -40,6 +40,19 @@ export class QuadGantryLevel extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): QuadGantryLevel {
+    return new QuadGantryLevel(
+      configKey,
+      config.gantry_corners,
+      config.points,
+      config.speed,
+      config.horizontal_move_z,
+      config.max_adjust,
+      config.retries,
+      config.retry_tolerance
+    );
+  }
+
   static fromJson(configKey: string, config: any): QuadGantryLevel {
     return new QuadGantryLevel(
       configKey,

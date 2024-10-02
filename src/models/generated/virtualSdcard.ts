@@ -26,6 +26,14 @@ export class VirtualSdcard extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): VirtualSdcard {
+    return new VirtualSdcard(
+      configKey,
+      config.path,
+      config.on_error_gcode
+    );
+  }
+
   static fromJson(configKey: string, config: any): VirtualSdcard {
     return new VirtualSdcard(
       configKey,

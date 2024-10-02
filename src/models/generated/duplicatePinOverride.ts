@@ -23,6 +23,13 @@ export class DuplicatePinOverride extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): DuplicatePinOverride {
+    return new DuplicatePinOverride(
+      configKey,
+      config.pins
+    );
+  }
+
   static fromJson(configKey: string, config: any): DuplicatePinOverride {
     return new DuplicatePinOverride(
       configKey,

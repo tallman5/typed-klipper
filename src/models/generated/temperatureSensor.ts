@@ -34,6 +34,17 @@ export class TemperatureSensor extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): TemperatureSensor {
+    return new TemperatureSensor(
+      configKey,
+      config.sensor_type,
+      config.sensor_pin,
+      config.min_temp,
+      config.max_temp,
+      config.gcode_id
+    );
+  }
+
   static fromJson(configKey: string, config: any): TemperatureSensor {
     return new TemperatureSensor(
       configKey,

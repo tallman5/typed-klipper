@@ -128,6 +128,43 @@ export class Extruder extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Extruder {
+    return new Extruder(
+      configKey,
+      config.step_pin,
+      config.dir_pin,
+      config.enable_pin,
+      config.microsteps,
+      config.rotation_distance,
+      config.nozzle_diameter,
+      config.filament_diameter,
+      config.heater_pin,
+      config.sensor_type,
+      config.sensor_pin,
+      config.control,
+      config.pid_Kp,
+      config.pid_Ki,
+      config.pid_Kd,
+      config.min_temp,
+      config.max_temp,
+      config.full_steps_per_rotation,
+      config.gear_ratio,
+      config.max_extrude_cross_section,
+      config.instantaneous_corner_velocity,
+      config.max_extrude_only_distance,
+      config.max_extrude_only_velocity,
+      config.max_extrude_only_accel,
+      config.pressure_advance,
+      config.pressure_advance_smooth_time,
+      config.max_power,
+      config.pullup_resistor,
+      config.smooth_time,
+      config.max_delta,
+      config.pwm_cycle_time,
+      config.min_extrude_temp
+    );
+  }
+
   static fromJson(configKey: string, config: any): Extruder {
     return new Extruder(
       configKey,

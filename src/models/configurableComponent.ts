@@ -1,7 +1,7 @@
 export interface IConfigurableComponent {
     configKey: string;
-    toJSON(): any;
     toCfg(): string;
+    toJSON(): any;
 }
 
 export abstract class ConfigurableComponent implements IConfigurableComponent {
@@ -9,6 +9,8 @@ export abstract class ConfigurableComponent implements IConfigurableComponent {
         public configKey: string
     ) { }
 
-    abstract toJSON(): any;
+    // abstract fromCfg(cfgContent: string): ConfigurableComponent;
+    // abstract fromJSON(config: any): ConfigurableComponent;
     abstract toCfg(): string;
+    abstract toJSON(): any;
 }

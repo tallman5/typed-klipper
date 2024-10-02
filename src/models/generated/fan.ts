@@ -53,6 +53,23 @@ export class Fan extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Fan {
+    return new Fan(
+      configKey,
+      config.pin,
+      config.max_power,
+      config.shutdown_speed,
+      config.cycle_time,
+      config.hardware_pwm,
+      config.kick_start_time,
+      config.off_below,
+      config.tachometer_pin,
+      config.tachometer_ppr,
+      config.tachometer_poll_interval,
+      config.enable_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): Fan {
     return new Fan(
       configKey,

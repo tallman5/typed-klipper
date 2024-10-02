@@ -38,6 +38,18 @@ export class Palette2 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Palette2 {
+    return new Palette2(
+      configKey,
+      config.serial,
+      config.baud,
+      config.feedrate_splice,
+      config.feedrate_normal,
+      config.auto_load_speed,
+      config.auto_cancel_variation
+    );
+  }
+
   static fromJson(configKey: string, config: any): Palette2 {
     return new Palette2(
       configKey,

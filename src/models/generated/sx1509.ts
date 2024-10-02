@@ -38,6 +38,18 @@ export class Sx1509 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Sx1509 {
+    return new Sx1509(
+      configKey,
+      config.i2c_address,
+      config.i2c_mcu,
+      config.i2c_bus,
+      config.i2c_software_scl_pin,
+      config.i2c_software_sda_pin,
+      config.i2c_speed
+    );
+  }
+
   static fromJson(configKey: string, config: any): Sx1509 {
     return new Sx1509(
       configKey,

@@ -40,6 +40,18 @@ export class Printer extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Printer {
+    return new Printer(
+      configKey,
+      config.kinematics,
+      config.max_velocity,
+      config.max_accel,
+      config.minimum_cruise_ratio,
+      config.square_corner_velocity,
+      config.max_accel_to_decel
+    );
+  }
+
   static fromJson(configKey: string, config: any): Printer {
     return new Printer(
       configKey,

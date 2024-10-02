@@ -22,6 +22,13 @@ export class ExcludeObject extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ExcludeObject {
+    return new ExcludeObject(
+      configKey,
+      
+    );
+  }
+
   static fromJson(configKey: string, config: any): ExcludeObject {
     return new ExcludeObject(
       configKey,

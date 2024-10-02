@@ -35,6 +35,17 @@ export class PwmCycleTime extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): PwmCycleTime {
+    return new PwmCycleTime(
+      configKey,
+      config.pin,
+      config.value,
+      config.shutdown_value,
+      config.cycle_time,
+      config.scale
+    );
+  }
+
   static fromJson(configKey: string, config: any): PwmCycleTime {
     return new PwmCycleTime(
       configKey,

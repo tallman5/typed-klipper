@@ -61,6 +61,26 @@ export class TemperatureProbe extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): TemperatureProbe {
+    return new TemperatureProbe(
+      configKey,
+      config.sensor_type,
+      config.sensor_pin,
+      config.min_temp,
+      config.max_temp,
+      config.smooth_time,
+      config.gcode_id,
+      config.speed,
+      config.horizontal_move_z,
+      config.resting_z,
+      config.calibration_position,
+      config.calibration_bed_temp,
+      config.calibration_extruder_temp,
+      config.extruder_heating_z,
+      config.max_validation_temp
+    );
+  }
+
   static fromJson(configKey: string, config: any): TemperatureProbe {
     return new TemperatureProbe(
       configKey,

@@ -49,6 +49,22 @@ export class BedScrews extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): BedScrews {
+    return new BedScrews(
+      configKey,
+      config.screw1,
+      config.screw1_name,
+      config.screw1_fine_adjust,
+      config.screw2,
+      config.screw2_name,
+      config.screw2_fine_adjust,
+      config.horizontal_move_z,
+      config.probe_height,
+      config.speed,
+      config.probe_speed
+    );
+  }
+
   static fromJson(configKey: string, config: any): BedScrews {
     return new BedScrews(
       configKey,

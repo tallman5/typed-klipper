@@ -25,6 +25,14 @@ export class HomingHeaters extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): HomingHeaters {
+    return new HomingHeaters(
+      configKey,
+      config.steppers,
+      config.heaters
+    );
+  }
+
   static fromJson(configKey: string, config: any): HomingHeaters {
     return new HomingHeaters(
       configKey,

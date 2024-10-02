@@ -105,6 +105,40 @@ export class Tmc2660 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Tmc2660 {
+    return new Tmc2660(
+      configKey,
+      config.cs_pin,
+      config.run_current,
+      config.spi_speed,
+      config.spi_bus,
+      config.spi_software_sclk_pin,
+      config.spi_software_mosi_pin,
+      config.spi_software_miso_pin,
+      config.interpolate,
+      config.sense_resistor,
+      config.idle_current_percent,
+      config.driver_TBL,
+      config.driver_RNDTF,
+      config.driver_HDEC,
+      config.driver_CHM,
+      config.driver_HEND,
+      config.driver_HSTRT,
+      config.driver_TOFF,
+      config.driver_SEIMIN,
+      config.driver_SEDN,
+      config.driver_SEMAX,
+      config.driver_SEUP,
+      config.driver_SEMIN,
+      config.driver_SFILT,
+      config.driver_SGT,
+      config.driver_SLPH,
+      config.driver_SLPL,
+      config.driver_DISS2G,
+      config.driver_TS2G
+    );
+  }
+
   static fromJson(configKey: string, config: any): Tmc2660 {
     return new Tmc2660(
       configKey,

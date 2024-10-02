@@ -28,6 +28,15 @@ export class GcodeMacro extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): GcodeMacro {
+    return new GcodeMacro(
+      configKey,
+      config.gcode,
+      config.rename_existing,
+      config.description
+    );
+  }
+
   static fromJson(configKey: string, config: any): GcodeMacro {
     return new GcodeMacro(
       configKey,

@@ -40,6 +40,19 @@ export class ScrewsTiltAdjust extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ScrewsTiltAdjust {
+    return new ScrewsTiltAdjust(
+      configKey,
+      config.screw1,
+      config.screw1_name,
+      config.screw2,
+      config.screw2_name,
+      config.speed,
+      config.horizontal_move_z,
+      config.screw_thread
+    );
+  }
+
   static fromJson(configKey: string, config: any): ScrewsTiltAdjust {
     return new ScrewsTiltAdjust(
       configKey,

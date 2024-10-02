@@ -63,6 +63,26 @@ export class Probe extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Probe {
+    return new Probe(
+      configKey,
+      config.pin,
+      config.z_offset,
+      config.deactivate_on_each_sample,
+      config.x_offset,
+      config.y_offset,
+      config.speed,
+      config.samples,
+      config.sample_retract_dist,
+      config.lift_speed,
+      config.samples_result,
+      config.samples_tolerance,
+      config.samples_tolerance_retries,
+      config.activate_gcode,
+      config.deactivate_gcode
+    );
+  }
+
   static fromJson(configKey: string, config: any): Probe {
     return new Probe(
       configKey,

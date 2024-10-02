@@ -74,6 +74,30 @@ export class ProbeEddyCurrent extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ProbeEddyCurrent {
+    return new ProbeEddyCurrent(
+      configKey,
+      config.sensor_type,
+      config.intb_pin,
+      config.z_offset,
+      config.i2c_address,
+      config.i2c_mcu,
+      config.i2c_bus,
+      config.i2c_software_scl_pin,
+      config.i2c_software_sda_pin,
+      config.i2c_speed,
+      config.x_offset,
+      config.y_offset,
+      config.speed,
+      config.lift_speed,
+      config.samples,
+      config.sample_retract_dist,
+      config.samples_result,
+      config.samples_tolerance,
+      config.samples_tolerance_retries
+    );
+  }
+
   static fromJson(configKey: string, config: any): ProbeEddyCurrent {
     return new ProbeEddyCurrent(
       configKey,

@@ -31,6 +31,16 @@ export class VerifyHeater extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): VerifyHeater {
+    return new VerifyHeater(
+      configKey,
+      config.max_error,
+      config.check_gain_time,
+      config.hysteresis,
+      config.heating_gain
+    );
+  }
+
   static fromJson(configKey: string, config: any): VerifyHeater {
     return new VerifyHeater(
       configKey,

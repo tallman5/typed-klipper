@@ -82,6 +82,33 @@ export class BedMesh extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): BedMesh {
+    return new BedMesh(
+      configKey,
+      config.speed,
+      config.horizontal_move_z,
+      config.mesh_radius,
+      config.mesh_origin,
+      config.mesh_min,
+      config.mesh_max,
+      config.probe_count,
+      config.round_probe_count,
+      config.fade_start,
+      config.fade_end,
+      config.fade_target,
+      config.split_delta_z,
+      config.move_check_distance,
+      config.mesh_pps,
+      config.algorithm,
+      config.bicubic_tension,
+      config.zero_reference_position,
+      config.faulty_region_1_min,
+      config.faulty_region_1_max,
+      config.adaptive_margin,
+      config.scan_overshoot
+    );
+  }
+
   static fromJson(configKey: string, config: any): BedMesh {
     return new BedMesh(
       configKey,

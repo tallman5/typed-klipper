@@ -37,6 +37,17 @@ export class AxisTwistCompensation extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): AxisTwistCompensation {
+    return new AxisTwistCompensation(
+      configKey,
+      config.calibrate_start_x,
+      config.calibrate_end_x,
+      config.calibrate_y,
+      config.speed,
+      config.horizontal_move_z
+    );
+  }
+
   static fromJson(configKey: string, config: any): AxisTwistCompensation {
     return new AxisTwistCompensation(
       configKey,

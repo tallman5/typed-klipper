@@ -38,6 +38,18 @@ export class ExtruderStepper extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ExtruderStepper {
+    return new ExtruderStepper(
+      configKey,
+      config.extruder,
+      config.step_pin,
+      config.dir_pin,
+      config.enable_pin,
+      config.microsteps,
+      config.rotation_distance
+    );
+  }
+
   static fromJson(configKey: string, config: any): ExtruderStepper {
     return new ExtruderStepper(
       configKey,

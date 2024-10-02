@@ -25,6 +25,14 @@ export class IdleTimeout extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): IdleTimeout {
+    return new IdleTimeout(
+      configKey,
+      config.gcode,
+      config.timeout
+    );
+  }
+
   static fromJson(configKey: string, config: any): IdleTimeout {
     return new IdleTimeout(
       configKey,

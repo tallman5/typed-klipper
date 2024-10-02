@@ -22,6 +22,13 @@ export class GcodeArcs extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): GcodeArcs {
+    return new GcodeArcs(
+      configKey,
+      config.resolution
+    );
+  }
+
   static fromJson(configKey: string, config: any): GcodeArcs {
     return new GcodeArcs(
       configKey,

@@ -34,6 +34,16 @@ export class SamdSercom extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): SamdSercom {
+    return new SamdSercom(
+      configKey,
+      config.sercom,
+      config.tx_pin,
+      config.clk_pin,
+      config.rx_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): SamdSercom {
     return new SamdSercom(
       configKey,

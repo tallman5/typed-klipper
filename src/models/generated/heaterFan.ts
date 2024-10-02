@@ -61,6 +61,26 @@ export class HeaterFan extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): HeaterFan {
+    return new HeaterFan(
+      configKey,
+      config.pin,
+      config.max_power,
+      config.shutdown_speed,
+      config.cycle_time,
+      config.hardware_pwm,
+      config.kick_start_time,
+      config.off_below,
+      config.tachometer_pin,
+      config.tachometer_ppr,
+      config.tachometer_poll_interval,
+      config.enable_pin,
+      config.heater,
+      config.heater_temp,
+      config.fan_speed
+    );
+  }
+
   static fromJson(configKey: string, config: any): HeaterFan {
     return new HeaterFan(
       configKey,

@@ -28,6 +28,15 @@ export class EndstopPhase extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): EndstopPhase {
+    return new EndstopPhase(
+      configKey,
+      config.endstop_accuracy,
+      config.trigger_phase,
+      config.endstop_align_zero
+    );
+  }
+
   static fromJson(configKey: string, config: any): EndstopPhase {
     return new EndstopPhase(
       configKey,

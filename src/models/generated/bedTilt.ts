@@ -37,6 +37,18 @@ export class BedTilt extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): BedTilt {
+    return new BedTilt(
+      configKey,
+      config.x_adjust,
+      config.y_adjust,
+      config.z_adjust,
+      config.points,
+      config.speed,
+      config.horizontal_move_z
+    );
+  }
+
   static fromJson(configKey: string, config: any): BedTilt {
     return new BedTilt(
       configKey,

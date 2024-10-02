@@ -37,6 +37,18 @@ export class FilamentSwitchSensor extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): FilamentSwitchSensor {
+    return new FilamentSwitchSensor(
+      configKey,
+      config.pause_on_runout,
+      config.runout_gcode,
+      config.insert_gcode,
+      config.event_delay,
+      config.pause_delay,
+      config.switch_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): FilamentSwitchSensor {
     return new FilamentSwitchSensor(
       configKey,

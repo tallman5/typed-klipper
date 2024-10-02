@@ -43,6 +43,18 @@ export class HeaterBed extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): HeaterBed {
+    return new HeaterBed(
+      configKey,
+      config.heater_pin,
+      config.sensor_type,
+      config.sensor_pin,
+      config.control,
+      config.min_temp,
+      config.max_temp
+    );
+  }
+
   static fromJson(configKey: string, config: any): HeaterBed {
     return new HeaterBed(
       configKey,

@@ -26,6 +26,14 @@ export class BoardPins extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): BoardPins {
+    return new BoardPins(
+      configKey,
+      config.aliases,
+      config.mcu
+    );
+  }
+
   static fromJson(configKey: string, config: any): BoardPins {
     return new BoardPins(
       configKey,

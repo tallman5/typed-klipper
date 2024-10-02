@@ -74,6 +74,30 @@ export class Display extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Display {
+    return new Display(
+      configKey,
+      config.lcd_type,
+      config.display_group,
+      config.menu_timeout,
+      config.menu_root,
+      config.menu_reverse_navigation,
+      config.encoder_pins,
+      config.encoder_steps_per_detent,
+      config.click_pin,
+      config.back_pin,
+      config.up_pin,
+      config.down_pin,
+      config.kill_pin,
+      config.analog_pullup_resistor,
+      config.analog_range_click_pin,
+      config.analog_range_back_pin,
+      config.analog_range_up_pin,
+      config.analog_range_down_pin,
+      config.analog_range_kill_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): Display {
     return new Display(
       configKey,

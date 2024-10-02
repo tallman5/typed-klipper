@@ -53,6 +53,23 @@ export class Mcp4451 extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Mcp4451 {
+    return new Mcp4451(
+      configKey,
+      config.i2c_address,
+      config.i2c_mcu,
+      config.i2c_bus,
+      config.i2c_software_scl_pin,
+      config.i2c_software_sda_pin,
+      config.i2c_speed,
+      config.wiper_0,
+      config.wiper_1,
+      config.wiper_2,
+      config.wiper_3,
+      config.scale
+    );
+  }
+
   static fromJson(configKey: string, config: any): Mcp4451 {
     return new Mcp4451(
       configKey,

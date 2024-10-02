@@ -41,6 +41,19 @@ export class Neopixel extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Neopixel {
+    return new Neopixel(
+      configKey,
+      config.pin,
+      config.chain_count,
+      config.color_order,
+      config.initial_RED,
+      config.initial_GREEN,
+      config.initial_BLUE,
+      config.initial_WHITE
+    );
+  }
+
   static fromJson(configKey: string, config: any): Neopixel {
     return new Neopixel(
       configKey,

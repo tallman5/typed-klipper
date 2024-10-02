@@ -40,6 +40,19 @@ export class InputShaper extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): InputShaper {
+    return new InputShaper(
+      configKey,
+      config.shaper_freq_x,
+      config.shaper_freq_y,
+      config.shaper_type,
+      config.shaper_type_x,
+      config.shaper_type_y,
+      config.damping_ratio_x,
+      config.damping_ratio_y
+    );
+  }
+
   static fromJson(configKey: string, config: any): InputShaper {
     return new InputShaper(
       configKey,

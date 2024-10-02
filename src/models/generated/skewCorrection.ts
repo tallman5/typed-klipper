@@ -22,6 +22,13 @@ export class SkewCorrection extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): SkewCorrection {
+    return new SkewCorrection(
+      configKey,
+      
+    );
+  }
+
   static fromJson(configKey: string, config: any): SkewCorrection {
     return new SkewCorrection(
       configKey,

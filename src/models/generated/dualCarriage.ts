@@ -53,6 +53,23 @@ export class DualCarriage extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): DualCarriage {
+    return new DualCarriage(
+      configKey,
+      config.axis,
+      config.safe_distance,
+      config.step_pin,
+      config.dir_pin,
+      config.enable_pin,
+      config.microsteps,
+      config.rotation_distance,
+      config.endstop_pin,
+      config.position_endstop,
+      config.position_min,
+      config.position_max
+    );
+  }
+
   static fromJson(configKey: string, config: any): DualCarriage {
     return new DualCarriage(
       configKey,

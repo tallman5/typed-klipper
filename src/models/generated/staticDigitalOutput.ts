@@ -23,6 +23,13 @@ export class StaticDigitalOutput extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): StaticDigitalOutput {
+    return new StaticDigitalOutput(
+      configKey,
+      config.pins
+    );
+  }
+
   static fromJson(configKey: string, config: any): StaticDigitalOutput {
     return new StaticDigitalOutput(
       configKey,

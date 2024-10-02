@@ -27,6 +27,14 @@ export class DisplayData extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): DisplayData {
+    return new DisplayData(
+      configKey,
+      config.position,
+      config.text
+    );
+  }
+
   static fromJson(configKey: string, config: any): DisplayData {
     return new DisplayData(
       configKey,

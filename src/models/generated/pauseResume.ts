@@ -22,6 +22,13 @@ export class PauseResume extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): PauseResume {
+    return new PauseResume(
+      configKey,
+      config.recover_velocity
+    );
+  }
+
   static fromJson(configKey: string, config: any): PauseResume {
     return new PauseResume(
       configKey,

@@ -48,6 +48,21 @@ export class Angle extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Angle {
+    return new Angle(
+      configKey,
+      config.sensor_type,
+      config.cs_pin,
+      config.sample_period,
+      config.stepper,
+      config.spi_speed,
+      config.spi_bus,
+      config.spi_software_sclk_pin,
+      config.spi_software_mosi_pin,
+      config.spi_software_miso_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): Angle {
     return new Angle(
       configKey,

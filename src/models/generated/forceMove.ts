@@ -22,6 +22,13 @@ export class ForceMove extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ForceMove {
+    return new ForceMove(
+      configKey,
+      config.enable_force_move
+    );
+  }
+
   static fromJson(configKey: string, config: any): ForceMove {
     return new ForceMove(
       configKey,

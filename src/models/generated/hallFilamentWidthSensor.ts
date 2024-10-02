@@ -81,6 +81,32 @@ export class HallFilamentWidthSensor extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): HallFilamentWidthSensor {
+    return new HallFilamentWidthSensor(
+      configKey,
+      config.adc1,
+      config.adc2,
+      config.cal_dia1,
+      config.cal_dia2,
+      config.raw_dia1,
+      config.raw_dia2,
+      config.default_nominal_filament_diameter,
+      config.max_difference,
+      config.measurement_delay,
+      config.enable,
+      config.measurement_interval,
+      config.logging,
+      config.min_diameter,
+      config.max_diameter,
+      config.use_current_dia_while_delay,
+      config.pause_on_runout,
+      config.runout_gcode,
+      config.insert_gcode,
+      config.event_delay,
+      config.pause_delay
+    );
+  }
+
   static fromJson(configKey: string, config: any): HallFilamentWidthSensor {
     return new HallFilamentWidthSensor(
       configKey,

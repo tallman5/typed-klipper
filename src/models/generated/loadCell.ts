@@ -23,6 +23,13 @@ export class LoadCell extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): LoadCell {
+    return new LoadCell(
+      configKey,
+      config.sensor_type
+    );
+  }
+
   static fromJson(configKey: string, config: any): LoadCell {
     return new LoadCell(
       configKey,

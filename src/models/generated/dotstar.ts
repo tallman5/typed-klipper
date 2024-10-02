@@ -39,6 +39,18 @@ export class Dotstar extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Dotstar {
+    return new Dotstar(
+      configKey,
+      config.data_pin,
+      config.clock_pin,
+      config.chain_count,
+      config.initial_RED,
+      config.initial_GREEN,
+      config.initial_BLUE
+    );
+  }
+
   static fromJson(configKey: string, config: any): Dotstar {
     return new Dotstar(
       configKey,

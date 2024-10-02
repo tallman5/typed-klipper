@@ -58,6 +58,25 @@ export class HeaterGeneric extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): HeaterGeneric {
+    return new HeaterGeneric(
+      configKey,
+      config.gcode_id,
+      config.heater_pin,
+      config.max_power,
+      config.sensor_type,
+      config.sensor_pin,
+      config.smooth_time,
+      config.control,
+      config.pid_Kp,
+      config.pid_Ki,
+      config.pid_Kd,
+      config.pwm_cycle_time,
+      config.min_temp,
+      config.max_temp
+    );
+  }
+
   static fromJson(configKey: string, config: any): HeaterGeneric {
     return new HeaterGeneric(
       configKey,

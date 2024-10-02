@@ -26,6 +26,14 @@ export class DelayedGcode extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): DelayedGcode {
+    return new DelayedGcode(
+      configKey,
+      config.gcode,
+      config.initial_duration
+    );
+  }
+
   static fromJson(configKey: string, config: any): DelayedGcode {
     return new DelayedGcode(
       configKey,

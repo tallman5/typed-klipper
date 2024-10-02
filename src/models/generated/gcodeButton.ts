@@ -35,6 +35,17 @@ export class GcodeButton extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): GcodeButton {
+    return new GcodeButton(
+      configKey,
+      config.pin,
+      config.analog_range,
+      config.analog_pullup_resistor,
+      config.press_gcode,
+      config.release_gcode
+    );
+  }
+
   static fromJson(configKey: string, config: any): GcodeButton {
     return new GcodeButton(
       configKey,

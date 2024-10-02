@@ -35,6 +35,17 @@ export class Mcu extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): Mcu {
+    return new Mcu(
+      configKey,
+      config.serial,
+      config.baud,
+      config.canbus_uuid,
+      config.canbus_interface,
+      config.restart_method
+    );
+  }
+
   static fromJson(configKey: string, config: any): Mcu {
     return new Mcu(
       configKey,

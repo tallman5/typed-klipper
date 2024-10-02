@@ -23,6 +23,13 @@ export class SaveVariables extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): SaveVariables {
+    return new SaveVariables(
+      configKey,
+      config.filename
+    );
+  }
+
   static fromJson(configKey: string, config: any): SaveVariables {
     return new SaveVariables(
       configKey,

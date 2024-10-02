@@ -43,6 +43,20 @@ export class ManualStepper extends ConfigurableComponent {
     return configStr.trim();
   }
 
+  static fromCfg(configKey: string, config: any): ManualStepper {
+    return new ManualStepper(
+      configKey,
+      config.step_pin,
+      config.dir_pin,
+      config.enable_pin,
+      config.microsteps,
+      config.rotation_distance,
+      config.velocity,
+      config.accel,
+      config.endstop_pin
+    );
+  }
+
   static fromJson(configKey: string, config: any): ManualStepper {
     return new ManualStepper(
       configKey,
