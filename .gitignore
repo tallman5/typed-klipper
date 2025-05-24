@@ -4,3 +4,4 @@ dist
 *.tgz
 test/output
 
+test/configs/parsed-voron-2.4.cfg

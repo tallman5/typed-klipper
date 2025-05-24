@@ -18,5 +18,7 @@ describe('CFG conversion', () => {
 
         const destinationCfgContent = klipperConfig.toCfg();
         expect(destinationCfgContent).toBeTruthy();
+        const goodPath = './test/configs/parsed-voron-2.4.cfg';
+        fs.writeFileSync(goodPath, destinationCfgContent);
     });
 });

@@ -4,26 +4,15 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Jest All",
+            "name": "Vitest Current Test",
             "runtimeExecutable": "npx",
-            "args": [
-                "jest",
-                "--runInBand"
+            "runtimeArgs": [
+                "--inspect-brk"
             ],
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Jest Current",
-            "runtimeExecutable": "npx",
             "args": [
-                "jest",
-                "${fileBasenameNoExtension}",
-                "--config",
-                "jest.config.js",
-                "--runInBand"
+                "vitest",
+                "run",
+                "${fileBasenameNoExtension}"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
